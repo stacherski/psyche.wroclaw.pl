@@ -1,15 +1,43 @@
 <div class="topbar" role="banner">
   <a aria-label="Navigate to /" href="/" accesskey="h">
-    <img
-      src="../../media/psyche-logo-horizontal-white.svg"
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
       width="220"
       height="60"
-      alt="Centrum PSYCHE logo, stylized wings and text PSYCHE"
-    />
+      viewBox="0 0 462 131.965"
+    >
+      <g
+        id="logo_horizontal"
+        data-name="logo horizontal"
+        transform="translate(-961 -158.002)"
+      >
+        <path
+          id="logo-psyche"
+          d="M631.673,44.918c17.978,15.031,41.943,74.071-1.495,95.138,30.79-24.574,13.8-51.218-6.722-60.58a39.717,39.717,0,0,0,9.359-5.615,29.325,29.325,0,0,1-12.751,4.174c-15.073-12.214-25.294-21.9-24.911-40a35.311,35.311,0,0,0,12.9,4.016c-16.008-6.178-23.945-18.887-23.274-33.96,22.347,21.408,90.892,21.382,71.415,97.978,1.763-22.612-6.99-46.795-24.5-61.151Zm59.538,0c-17.978,15.031-41.943,74.071,1.495,95.138-30.786-24.574-13.774-51.218,6.722-60.58a39.6,39.6,0,0,1-9.355-5.615,29.309,29.309,0,0,0,12.747,4.174c15.073-12.214,25.295-21.9,24.911-40a35.357,35.357,0,0,1-12.9,4.016c16.008-6.178,23.942-18.887,23.275-33.96C715.762,29.5,647.217,29.473,666.69,106.069c-1.748-22.635,7.01-46.8,24.521-61.151Z"
+          transform="translate(376.265 149.911)"
+          fill="#fff"
+          fill-rule="evenodd"
+        />
+        <text
+          id="PSYCHE"
+          transform="translate(1140 250.002)"
+          fill="#fff"
+          font-size="73"
+          font-family="Raleway"
+          font-weight="300"
+        >
+          <tspan x="0" y="0">PSYCHE</tspan>
+        </text>
+      </g>
+    </svg>
   </a>
-  <a href="tel:+48668093234" class="inlinelink">+48 668 093 234</a>
-  <button class="menu-button" accesskey="m"></button>
+  <a href="tel:+48668093234" class="phone-link">+48 668 093 234</a>
+  <button class="menu-button" accesskey="m">
+    <as-icon name="times"></as-icon>
+  </button>
 </div>
-{% include "partials/nav.njk" %}
+<nav class="navigation-panel">
+  {% include "partials/nav.njk" %}
+</nav>
 
 <div class="navigation-overlay"></div>
