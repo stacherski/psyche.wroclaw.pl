@@ -2,7 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta name="description" content="{{ description }}">
+    <link rel="shortcut icon"  type="image/svg+xml" href="/media/psyche-favicon.svg">
+    <title>{{ title }} | {{ postfix }}</title>
+    {# Google Site Verification #}
     <meta
       name="google-site-verification"
       content="DI1ldSgLOP1wL83v-NvrbF44G-SxWtnefJogD0QvC9k"
@@ -12,6 +16,7 @@
       content="21qbgMgxZtLbWwl4AMb88lnijPJL8F0oxvXJqLex2YU"
     >
 
+    {# fonts definition #}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -19,101 +24,37 @@
       rel="stylesheet"
     >
 
-    <link
-      rel="stylesheet"
-      href="../../css/reset.css"
-    >
-
+    {# Main CSS file #}
     <link
       rel="stylesheet"
       href="../../css/main.css"
     >
     <link
       rel="stylesheet"
-      href="../../css/as-root-component.css"
+      href="../../css/page-header.css"
     >
     <link
       rel="stylesheet"
-      href="../../css/as-icon-component.css"
+      href="../../css/mobile-nav-bottom.css"
     >
-
+    {# Main JS file #}
     <script src="../../script/main.js"></script>
-    <script src="../../script/as-icon-component.js"></script>
 
-    <title>{{ title }} - {{ postfix }}</title>
   </head>
 
   <body>
     {% include "partials/topbar.njk" %}
     <main>
-      {{ content | safe }}
+      {# homepage video #}
+      {% if isHomepage %}
+        {% include "partials/homepage-video.njk" %}
+      {% else %}
+        {% include "partials/page-header.njk" %}
+      {% endif %}
+
+      {% include "partials/page-content.njk" %}
+
     </main>
-    <footer>
-      <div class="calltoaction">
-        <div>
-          <a href="tel:+48668093234" class="psyche-button-link-2020">Zadzwoń</a>
-          <a
-            href="https://booksy.com/pl-pl/36093_psycholog-centrum-psyche-gabinety-psychologiczne_zdrowie_13750_wroclaw"
-            target="_blank"
-          >Zarejestruj</a>
-          <a href="/kontakt" class="psyche-button-link-2020">Przyjedź</a>
-        </div>
-      </div>
-      <div class="footer_content">
-        <div>
-          <div itemscope="" itemtype="http://schema.org/LocalBusiness">
-            <div itemprop="name">
-              <a itemprop="url" href="http://psyche.wroclaw.pl"><strong>Centrum
-                  Psyche Wrocław</strong></a>
-            </div>
-            <p>
-              T: <span itemprop="telephone"><a href="tel:+48668093234"
-                >+48 668 093 234</a></span>
-            </p>
-            <div
-              itemprop="address"
-              itemtype="http://schema.org/PostalAddress"
-            >
-              <p>
-                A: <span itemprop="streetAddress"><a href="/kontakt"
-                  >Białowieska 3a/5d</a></span>, <span
-                  itemprop="addressLocality"
-                >Wrocław <span itemprop="postalCode">54-234</span></span> (róg
-                Legnicka / Białowieska)
-              </p>
-              <p>
-                A: <span itemprop="streetAddress"><a href="/kontakt?loc=2"
-                  >Małopanewska 18/13</a></span>, <span
-                  itemprop="addressLocality"
-                >Wrocław <span itemprop="postalCode">54-212</span></span>
-                (Psyche KIDS)
-              </p>
-              <p>
-                E: <span itemprop="email"><a
-                    href="mailto:info@psyche.wroclaw.pl"
-                  >info@psyche.wroclaw.pl</a></span>
-              </p>
-              <p>
-                F: <span itemprop="url"><a
-                    href="https://fb.me/centrumpsyche"
-                    target="_blank"
-                  >fb.me/centrumpsyche</a></span>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="mobile_nav">
-        <a class="bottom-nav-item" href="/">Start</a>
-        <a class="bottom-nav-item" href="/zespół">Specjaliści</a>
-        <a
-          class="bottom-nav-item"
-          href="https://booksy.com/pl-pl/36093_psycholog-centrum-psyche-gabinety-psychologiczne_zdrowie_13750_wroclaw"
-          target="_blank"
-        >Booksy</a>
-        <a class="bottom-nav-item" href="tel:+48668093234">Zadzwoń</a>
-        <a class="bottom-nav-item" href="/kontakt">Przyjedź</a>
-      </div>
-    </footer>
+    {% include "partials/footer.njk" %}
   </body>
 </html>

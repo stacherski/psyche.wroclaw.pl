@@ -1,10 +1,15 @@
 ---
 layout: layouts/sitelayout.njk
-title: Centrum Psychoterapii we Wrocławiu - Poradnia Psychologiczna i Zdrowia Psychicznego
+title: Centrum Psychoterapii we Wrocławiu, Poradnia Psychologiczna i Zdrowia Psychicznego
 postfix: Centrum PSYCHE Wrocław
 description: Centrum PSYCHE - centrum psychoterapii we Wrocławiu. Poradnia psychologiczna i zdrowia psychicznego dla osób poszukujących pomocy.
-google-site-verification-a: DI1ldSgLOP1wL83v-NvrbF44G-SxWtnefJogD0QvC9k
-google-site-verification-b: 21qbgMgxZtLbWwl4AMb88lnijPJL8F0oxvXJqLex2YU
+isHomepage: true
 ---
-# Centrum PSYCHE - Poradnia zdrowia psychicznego i centrum psychoterapii Wrocław
-Lorem ipsum dolor sit amet
+
+## Profesjonalne usługi w zakresie zdrowia psychicznego
+
+**Centrum Psyche to położona we Wrocławiu placówka, świadcząca holistyczną pomoc psychologiczną, zarówno dla dzieci jak i dorosłych. Nasza kadra to wykwalifikowani specjaliści w zakresie psychologii klinicznej, psychologii dziecięcej oraz psychoterapii. Psyche oferuje wsparcie i skuteczne rozwiązania problemów natury psychologicznej dla pacjentów indywidualnych, par i rodzin.**
+
+**Centrum Psyche to miejsce, w którym czekają na Państwa doświadczeni profesjonaliści w zakresie psychologii i psychoterapii dzieci oraz osób dorosłych.**
+
+**To tutaj na pacjentów czeka zrozumienie i akceptacja, ale także praktyczna pomoc.**

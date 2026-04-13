@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="150"
+   height="150"
+   viewBox="0 0 150 150"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="psyche-favicon.svg"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.9047619"
+     inkscape:cx="236.25"
+     inkscape:cy="52.5"
+     inkscape:window-width="1724"
+     inkscape:window-height="973"
+     inkscape:window-x="0"
+     inkscape:window-y="30"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="logo_horizontal" />
+  <g
+     id="logo_horizontal"
+     data-name="logo horizontal"
+     transform="matrix(0.88364141,0,0,0.88364141,-841.30384,-122.48948)"
+     style="fill:#0fbdba;fill-opacity:1">
+    <path
+       id="logo-psyche"
+       d="m 1008.4142,195.43875 c 17.2412,14.41502 40.2241,71.03555 -1.4338,91.23922 29.5282,-23.56695 13.2345,-49.11907 -6.4465,-58.09742 a 38.089386,38.089386 0 0 0 8.9755,-5.38489 28.123253,28.123253 0 0 1 -12.22855,4.00295 c -14.4553,-11.71347 -24.25744,-21.00254 -23.89014,-38.36079 a 33.863945,33.863945 0 0 0 12.37136,3.85142 c -15.35199,-5.92482 -22.96373,-18.11301 -22.32023,-32.56831 21.43121,20.53069 87.16726,20.50576 68.48846,93.96283 1.6907,-21.68535 -6.7036,-44.87732 -23.496,-58.64501 z m 57.0981,0 c -17.2413,14.41502 -40.2242,71.03555 1.4337,91.23922 -29.5244,-23.56695 -13.2095,-49.11907 6.4465,-58.09742 a 37.977181,37.977181 0 0 1 -8.9716,-5.38489 28.107909,28.107909 0 0 0 12.2246,4.00295 c 14.4553,-11.71347 24.2584,-21.00254 23.8902,-38.36079 a 33.90806,33.90806 0 0 1 -12.3714,3.85142 c 15.352,-5.92482 22.9609,-18.11301 22.3212,-32.56831 -21.4283,20.53165 -87.1643,20.50576 -68.4893,93.96283 -1.6764,-21.70741 6.7227,-44.88212 23.5161,-58.64501 z"
+       fill="#fff"
+       fill-rule="evenodd"
+       style="fill:#0fbdba;fill-opacity:1;stroke-width:0.95902" />
+  </g>
+</svg>
