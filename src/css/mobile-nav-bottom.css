@@ -1,5 +1,5 @@
 .mobile_nav {
-    background-color: var(--clr-base);
+    background-color: hsl(from var(--clr-text) h s 30% / 80%);
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -8,9 +8,11 @@
     padding-block: var(--space-half);
     position: fixed;
     z-index: var(--index-modal);
+    box-shadow: 0 0 10px hsl(from var(--clr-text) h s l / 20%);
+    backdrop-filter: blur(5px);
     bottom: -200%;
-    width: 98%;
-    left: 1%;
+    width: 96%;
+    left: 2%;
     transition: all 1s ease-out;
 
     @media screen and (max-width: 37.5rem) {

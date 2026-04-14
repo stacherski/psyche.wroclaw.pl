@@ -94,14 +94,15 @@ em strong {
 
 @keyframes topbar-bg {
     to {
-        background-color: var(--clr-base);
+        background-color: hsl(from var(--clr-base) h s l / 80%);
     }
 }
 
 .topbar {
     display: flex;
     gap: var(--space-normal);
-    background-color: transparent;
+    background-color: hsl(from var(--clr-text) h s l / 20%);
+    backdrop-filter: blur(5px);
     padding: var(--space-half);
     align-items: center;
     position: fixed;
@@ -110,7 +111,7 @@ em strong {
     z-index: var(--index-topbar);
     animation-name: topbar-bg;
     animation-timeline: scroll();
-    animation-range: 0px 200px;
+    animation-range: 280px 400px;
     animation-fill-mode: both;
     transition: all .15s ease-out;
 
@@ -182,7 +183,7 @@ em strong {
 }
 
 .navigation-panel {
-    --size: calc(25 * var(--size-normal));
+    --size: calc(20 * var(--size-normal));
     width: var(--size);
     height: 100vh;
     background-color: var(--clr-base);

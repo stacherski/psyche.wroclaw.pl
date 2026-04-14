@@ -1,0 +1,71 @@
+:root {
+
+    --step--2: clamp(0.64rem, 0.6088rem + 0.1561vi, 0.72rem);
+    --step--1: clamp(0.8rem, 0.761rem + 0.1951vi, 0.9rem);
+    --font-size-paragraph: clamp(1rem, 0.9512rem + 0.2439vi, 1.125rem);
+    --font-size-h5: clamp(1.25rem, 1.189rem + 0.3049vi, 1.4063rem);
+    --font-size-h4: clamp(1.5625rem, 1.4863rem + 0.3811vi, 1.7578rem);
+    --font-size-h3: clamp(1.9531rem, 1.8579rem + 0.4764vi, 2.1973rem);
+    --font-size-h2: clamp(2.4414rem, 2.3223rem + 0.5955vi, 2.7466rem);
+    --font-size-h1: clamp(3.0518rem, 2.9029rem + 0.7443vi, 3.4332rem);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    line-height: 1.3;
+    /*margin: unset;*/
+    padding: unset;
+    margin-block-end: var(--step--1);
+}
+
+h1 {
+    font-weight: 500;
+    font-size: var(--font-size-h1);
+    margin-block-end: var(--step--1)
+}
+
+h2 {
+    font-weight: 400;
+    font-size: var(--font-size-h2);
+}
+
+h3 {
+    font-weight: 400;
+    font-size: var(--font-size-h3);
+}
+
+h4 {
+    font-weight: 400;
+    font-size: var(--font-size-h4);
+}
+
+h5 {
+    font-weight: 400;
+    font-size: var(--font-size-h5);
+}
+
+p,
+p.section,
+ul,
+ol,
+li,
+th,
+td {
+    font-weight: 400;
+    font-size: var(--font-size-paragraph);
+    line-height: var(--font-size-h4);
+}
+
+ul,
+ol {
+    list-style-position: outside;
+    margin-inline-start: var(--list-indent, 2rem)
+}
+
+.page-content>*+*,
+:where(ul, ol)>*+* {
+    margin-top: var(--flow-space, 1em);
+}
