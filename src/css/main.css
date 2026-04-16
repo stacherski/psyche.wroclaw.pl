@@ -10,8 +10,7 @@
     --clr-text: #000000;
     --clr-text-inverse: #ffffff;
     --clr-dark: #444444;
-
-
+    --clr-bg: #eeeeee;
     --clr-overlay: #00000080;
 
     --font-regular: Raleway, sans-serif;
@@ -38,6 +37,7 @@
     --border-radius-half: var(--space-half);
     --border-radius-normal: var(--space-normal);
     --border-radius-double: var(--space-double);
+    --border-radius-circle: var(50%);
 
     --index-video: 300;
     --index-topbar: 400;
@@ -64,6 +64,12 @@ body {
     line-height: var(--line-height-normal);
     font-weight: 300;
     font-size: var(--font-size-normal);
+    color: var(--clr-text);
+    background-color: var(--clr-bg);
+}
+
+a {
+    color: var(--clr-text);
 }
 
 b,
@@ -115,10 +121,9 @@ em strong {
     animation-fill-mode: both;
     transition: all .15s ease-out;
 
-    @media screen and (max-width: 37.5rem)
-    {
+    @media screen and (max-width: 37.5rem) {
         padding: var(--space-quarter);
-        
+
         svg {
             width: 120px;
             height: 30px;
@@ -155,7 +160,7 @@ em strong {
         z-index: var(--index-modal);
         cursor: pointer;
         font-size: var(--font-size-double);
-        
+
         &:before {
             content: '\2630';
             display: block;
@@ -296,9 +301,8 @@ em strong {
             z-index: 2;
             backdrop-filter: blur(5px);
         }
-        
-        .header_video_text_buttons
-        {
+
+        .header_video_text_buttons {
             position: absolute;
             z-index: 3;
             left: 0;
@@ -307,22 +311,19 @@ em strong {
             padding: 30px;
         }
 
-        .header_video_text_buttons div.buttons
-        {
+        .header_video_text_buttons div.buttons {
             display: flex;
             flex-wrap: wrap;
             gap: var(--space-normal);
             margin-block-end: var(--space-double);
         }
 
-        .header_video_text_buttons p
-        {
+        .header_video_text_buttons p {
             color: var(--clr-text-inverse);
             margin-block-end: 0;
         }
 
-        .header_video_text_buttons h1
-        {
+        .header_video_text_buttons h1 {
             color: var(--clr-text-inverse);
             max-width: 40ch;
             font-size: var(--font-size-double);
@@ -391,13 +392,13 @@ em strong {
     width: var(--size-normal);
     aspect-ratio: 1/1;
     margin-inline-end: var(--space-half);
-    background-color:currentcolor
+    background-color: currentcolor
 }
 
 .btn a:HOVER {
     background-color: var(--clr-base);
     color: var(--clr-text-inverse);
-    text-decoration:none
+    text-decoration: none
 }
 
 .page-content {
@@ -405,4 +406,33 @@ em strong {
     max-width: calc(2 * var(--padding) + var(--content-width));
     margin-inline: auto;
     padding: var(--padding);
+
+    ul {
+        margin: 0;
+        margin-inline-start: var(--space-double);
+
+        li {
+            list-style-image: url(/media/arrow-right-solid-full.svg);
+        }
+    }
+}
+
+p,
+p.section,
+ul,
+ol,
+li,
+th,
+td {
+    font-family: var(--font-regular);
+    font-weight: 400;
+    font-size: var(--font-size-paragraph);
+    line-height: var(--font-size-h4);
+    margin: 0;
+    padding: 0;
+}
+
+p+p,
+p>br {
+    margin-block-start: var(--space-normal);
 }

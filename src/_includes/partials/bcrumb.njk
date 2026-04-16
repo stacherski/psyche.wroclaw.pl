@@ -1,10 +1,38 @@
 <nav class="bcrumb" aria-label="Breadcrumb">
-    <div>
-        <ul class="breadcrumb">
-            <li>
-                <a href="/">Psyche</a>
-            </li>
-            <li>O nas</li>
-        </ul>
-    </div>
+  <div>
+    <ul class="breadcrumb">
+      <li>
+        <a href="/">Psyche</a>
+      </li>
+      {% if page.url and page.url.startsWith('/o-nas') %}
+        <li>
+          <a href="/o-nas">O nas</a>
+        </li>
+      {% endif %}
+      {% if page
+        .url and page
+        .url
+        .startsWith('/kontakt') %}
+        <li>
+          <a href="/kontakt">Kontakt</a>
+        </li>
+      {% endif %}
+      {% if page
+        .url and page
+        .url
+        .startsWith('/zespół') %}
+        <li>
+          <a href="/zespół">Zespół</a>
+        </li>
+        {% if page.url !== '/zespół' %}
+          {% for member in team %}
+            {% if ('/zespół/' + (
+            member.fullName | slugify) + '/') == page.url %}
+              <li>{{ member.fullName }}</li>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      {% endif %}
+    </ul>
+  </div>
 </nav>

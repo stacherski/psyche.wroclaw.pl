@@ -1,0 +1,57 @@
+---
+pagination:
+  data: team
+  size: 1
+  alias: member
+permalink: "/zespół/{{ member.fullName | slugify }}/index.html"
+layout: layouts/zespół.njk
+eleventyComputed:
+  title: "{{ member.fullName }}"
+  pageTitle: "{{ member.fullName }}"
+  description: "{{ member.description }} {{member.tagline}}"
+postfix: Centrum PSYCHE Wrocław
+isHomepage: false
+
+---
+
+<div class="member-single">
+  <div>
+    <h1>{{ member.fullName }}</h1>
+  </div>
+
+  <div>
+    <div
+      class="member"
+      {% if member.filterKids %}
+        kids
+      {% endif %}
+      {% if member.filterYouth %}
+        youth
+      {% endif %}
+      {% if member.filterAdult %}
+        adult
+      {% endif %}
+      {% if member.filterOnline %}
+        online
+      {% endif %}
+    >
+      <div class="bg"></div>
+      <img
+        src="/media/{{ member.photo }}"
+        eleventy:widths="300, 600"
+        alt="{{ member.fullName }}"
+      >
+      <div class="name">{{ member.fullName }}</div>
+    </div>
+    <div class="spec">{{ member.specialization | safe }}</div>
+  </div>
+  <div>
+    {{ member.bioPL | safe }}
+
+    {% if member.onlineBooking == 'Yes' and member.booksyLink %}
+      <a href="{{ member.booksyLink }}" class="booksy-btn" target="_blank">
+        Zarejestruj w Booksy
+      </a>
+    {% endif %}
+  </div>
+</div>

@@ -1,68 +1,49 @@
-<ul>
-  <li level="1" {% if page.url and page.url.startsWith('/o-nas') %} active {% endif %}>
-    <div class="l1 wrapper">
-      <a href="/">
-        <span>Start</span>
-      </a>
-    </div>
-  </li>
-
-  <li level="1" {% if page.url and page.url.startsWith('/o-nas') %} active {% endif %}>
-    <div class="l1 wrapper">
-      <a href="/o-nas/">
-        <span>O nas</span>
-      </a>
-    </div>
-  </li>
-  <li
-    level="1"
-    {% if page.url and page.url.startsWith('/components') %}
-      active
-    {% endif %}
-  >
-    <div class="l1 wrapper">
-      <a href="/components/">
-        <span>
-          <as-icon size="default" name="sliders"></as-icon>Components</span>
-      </a>
-    </div>
-    <div>
-      <ul>
-        {% for cat in components %}
-          <li
-            level="2"
-            page-url="/components/{{cat.slug | lower }}/"
-            {%
-              if page.url and page.url.startsWith('/components/{{ cat.slug | lower }}/')
-            %}
-              active
-            {% endif %}
-          >
-            <div class="l2 wrapper">
-              <a href="/components/{{ cat.slug | lower }}/">
-                <span>
-                  <as-icon name="--as-icon-arrow-right" size="m"></as-icon>
-                  {{ cat.name | replace("-", " ") }}
-                </span>
-              </a>
-            </div>
-          </li>
-        {% endfor %}
-      </ul>
-    </div>
+<ul class="main-nav">
+  <li level="1">
+    <a href="/">
+      <span>Start</span>
+    </a>
   </li>
 
   <li
     level="1"
-    {% if page.url and page.url.startsWith('/search') %}
+    {% if page.url and page.url.startsWith('/o-nas') %}
       active
     {% endif %}
   >
-    <div class="l1 wrapper">
-      <a href="/search/">
-        <span>
-          <as-icon size="default" name="search"></as-icon>Search</span>
-      </a>
-    </div>
+    <a href="/o-nas/">
+      <span>O nas</span>
+    </a>
+  </li>
+
+  <li
+    level="1"
+    {% if page.url and page.url.startsWith('/kontakt') %}
+      active
+    {% endif %}
+  >
+    <a href="/kontakt/">
+      <span>Kontakt</span>
+    </a>
+  </li>
+
+  <li
+    level="1"
+    {% if page.url and page.url.startsWith('/zespół') %}
+      active
+    {% endif %}
+  >
+    <a href="/zespół/">
+      <span>Zespół</span>
+    </a>
+    <ul class="sub-nav">
+      {% for member in team %}
+        <li>
+          <a href="/zespół/{{ member.fullName | slugify }}/">
+            <span>{{ member.fullName }}</span>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
   </li>
 </ul>

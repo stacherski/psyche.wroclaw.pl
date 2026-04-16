@@ -1,6 +1,7 @@
 ---
 layout: layouts/sitelayout.njk
 title: O nas
+pageTitle: O nas
 postfix: Centrum PSYCHE Wrocław
 description: Gabinet psychologiczny PSYCHE we Wrocławiu to miejsce dla osób poszukujących wsparcia dobrego psychologa, psychoterapeuty, seksuologa lub lekarza psychiatry.
 isHomepage: false

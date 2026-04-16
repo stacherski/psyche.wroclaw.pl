@@ -5,37 +5,38 @@ nav.bcrumb {
     z-index: 5;
     backdrop-filter: blur(5px);
 
-    @media screen and (max-width: 37.5rem)
-    {
-        top: 54px;
+    @media screen and (max-width: 37.5rem) {
+        top: 48px;
     }
-    >div{
+
+    >div {
         --padding: var(--space-normal);
         max-width: calc(2 * var(--padding) + var(--content-width));
         margin-inline: auto;
         padding-inline: var(--padding);
         padding-block: calc(.25 * var(--padding));
 
-        ul.breadcrumb{
+        ul.breadcrumb {
             padding: 0;
             margin: 0;
             display: inline-flex;
-            gap: var(--space-quarter);
+            gap: var(--space-half);
 
             li {
                 list-style: none;
                 margin-block-start: 0;
                 font-size: 0.8rem;
+                font-weight: 700;
 
-                &:not(:last-child):after{
+                &:not(:last-child):after {
                     content: '»';
-                    font-weight: 700;
+                    content: "/";
+                    margin-inline-start: var(--space-half);
                 }
 
-                a{
+                a {
                     color: var(--clr-base);
                     text-decoration: none;
-                    font-weight: 700;
                 }
             }
         }

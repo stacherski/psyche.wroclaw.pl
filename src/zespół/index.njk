@@ -1,0 +1,91 @@
+---
+layout: layouts/sitelayout.njk
+title: Zespół
+pageTitle: Nasz zespół specjalistów
+postfix: Centrum PSYCHE Wrocław
+description: W Centrum PSYCHE Wrocław przyjmują specjaliści wielu dziedzin. Wśród nich znajdziecie Psychologów dla dorosłych, Psychologów dla dzieci, Psychoterapeutów, Logopedów, specjalistów EEG Biofeedback i QEEG oraz wielu innych.
+permalink: /zespół/
+isHomepage: false
+
+---
+
+<h1>{{ title }}</h1>
+
+<div class="filters">
+  <button class="filter-btn active" data-category="all">Wszyscy</button>
+  <button class="filter-btn" data-category="kids">Spec. dziecięcy</button>
+  <button class="filter-btn" data-category="youth">Spec. młodzieży</button>
+  <button class="filter-btn" data-category="adult">Spec. dorosłych</button>
+  <button class="filter-btn" data-category="online">Spec. online</button>
+</div>
+<ul class="team">
+  {% for member in team %}
+    <li>
+      <a
+        all
+        {% if member.filterKids %}
+          kids
+        {% endif %}
+        {% if member.filterYouth %}
+          youth
+        {% endif %}
+        {% if member.filterAdult %}
+          adult
+        {% endif %}
+        {% if member.filterOnline %}
+          online
+        {% endif %}
+        class="member"
+        href="/zespół/{{ member.fullName | slugify }}/"
+      >
+        <div class="bg"></div>
+        <img
+          src="/media/{{ member.photo }}"
+          eleventy:widths="300, 600"
+          alt="{{ member.fullName }}"
+        >
+        <div class="name">{{ member.fullName }}</div>
+      </a>
+    </li>
+  {% endfor %}
+</ul>
+
+<script>
+const team = document.querySelectorAll(".member");
+const filterBtns = document.querySelectorAll(".filter-btn");
+const kids = document.querySelectorAll("[kids]");
+const youth = document.querySelectorAll("[youth]");
+const adults = document.querySelectorAll("[adults]");
+const online = document.querySelectorAll("[online]");
+
+filterBtns.forEach(btn => {
+  btn.addEventListener("click", e => {
+    if (!document.startViewTransition) {
+      setActiveButton(e.target);
+      filterEvents(e.target.dataset.category);
+    }
+    document.startViewTransition(() => {
+      setActiveButton(e.target);
+      filterEvents(e.target.dataset.category);
+    });
+  });
+});
+
+team.forEach((member, index) => {
+  member.style.viewTransitionName = `member-${index}`;
+});
+function setActiveButton(btn) {
+  document.querySelector(".filter-btn.active").classList.remove("active");
+  btn.classList.add("active");
+}
+
+function filterEvents(cat) {
+  team.forEach(member => {
+    if (member.hasAttribute(cat)) {
+      member.closest("li").removeAttribute("hidden");
+    } else {
+      member.closest("li").setAttribute("hidden", "");
+    }
+  });
+}
+</script>
