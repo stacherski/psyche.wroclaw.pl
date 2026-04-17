@@ -1,6 +1,6 @@
 ul.team {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(clamp(150px, 25%, 280px), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(clamp(150px, 25%, 280px), 1fr));
     gap: var(--space-normal);
     padding: 0;
     margin: 0;
@@ -76,6 +76,7 @@ ul.team {
             left: 10%;
             background-image: linear-gradient(90deg, var(--clr-kids, transparent), var(--clr-kids, transparent) 25%, var(--clr-youth, transparent) 25%, var(--clr-youth, transparent) 50%, var(--clr-adult, transparent) 50%, var(--clr-adult, transparent) 75%, var(--clr-online, transparent) 75%);
         }
+
     }
 
     img {
@@ -223,18 +224,19 @@ div.filters {
             background: var(--clr-base);
             color: #ffffff;
         }
+
     }
 }
 
 ::view-transition-group(root) {
-    animation-duration: .25s;
+    animation-duration: .75s;
     mix-blend-mode: none;
 }
 
 ::view-transition-group(old) {
-    animation-duration: .25s;
+    animation-duration: .75s;
 }
 
 ::view-transition-group(new) {
-    animation-duration: .25s;
+    animation-duration: .75s;
 }

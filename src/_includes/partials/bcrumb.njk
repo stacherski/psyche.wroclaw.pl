@@ -20,6 +20,22 @@
       {% if page
         .url and page
         .url
+        .startsWith('/oferta') %}
+        <li>
+          <a href="/oferta">Oferta</a>
+        </li>
+        {% if page.url !== '/oferta' %}
+          {% for service in services %}
+            {% if ('/oferta/' + (
+            service.fullName | slugify) + '/') == page.url %}
+              <li>{{ service.fullName }}</li>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      {% endif %}
+      {% if page
+        .url and page
+        .url
         .startsWith('/zespół') %}
         <li>
           <a href="/zespół">Zespół</a>

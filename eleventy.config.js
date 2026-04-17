@@ -1,7 +1,7 @@
 const { EleventyHtmlBasePlugin } = require("@11ty/eleventy");
 const eleventyNavigationPlugin = require("@11ty/eleventy-navigation");
 const { eleventyImageTransformPlugin } = require("@11ty/eleventy-img");
-// const fs = require('fs')
+const fs = require("fs");
 // const path = require('path')
 // const esbuild = require('esbuild')
 
@@ -63,7 +63,18 @@ module.exports = function (eleventyConfig) {
     return team;
   });
 
+  eleventyConfig.addCollection("servicesPages", (collectionApi) => {
+    const services = require("./src/_data/services.json");
+    return services;
+  });
+
   // ─── ELEVENTY CONFIG ──────────────────────────────────────────────────────
+
+  // eleventyConfig.on("eleventy.before", () => {
+  //   if (fs.existsSync("_site")) {
+  //     fs.rmSync("_site", { recursive: true, force: true });
+  //   }
+  // });
 
   return {
     dir: {

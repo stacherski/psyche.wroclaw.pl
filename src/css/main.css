@@ -2,9 +2,9 @@
     margin: 0;
     padding: 0;
 
-    --clr-base-hue: 179;
-    --clr-base-saturation: 85%;
-    --clr-base-luminosity: 40%;
+    --clr-base-hue: 177;
+    --clr-base-saturation: 99%;
+    --clr-base-luminosity: 28%;
     --clr-base: hsl(var(--clr-base-hue) var(--clr-base-saturation) var(--clr-base-luminosity) / 100);
 
     --clr-text: #000000;
@@ -188,7 +188,7 @@ em strong {
 }
 
 .navigation-panel {
-    --size: calc(20 * var(--size-normal));
+    --size: calc(25 * var(--size-normal));
     width: var(--size);
     height: 100vh;
     background-color: var(--clr-base);
@@ -432,7 +432,6 @@ td {
     padding: 0;
 }
 
-p+p,
-p>br {
+p+p {
     margin-block-start: var(--space-normal);
 }

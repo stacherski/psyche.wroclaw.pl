@@ -1,0 +1,138 @@
+
+ul.services {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-double);
+    margin: 0;
+    padding: 0;
+    margin-block: calc(3 * var(--space-double));
+
+    li {
+        list-style: none;
+
+        .service {
+            width: 100%;
+            aspect-ratio: 1/1;
+            background-color: #ffffff;
+            color: #333333;
+            text-decoration: none;
+            font-size: var(--font-size-h5);
+            font-weight: 700;
+            display: flex;
+            text-align: center;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-double);
+            box-shadow: var(--space-double) var(--space-double) var(--space-double) #cacaca, -2rem -2rem 6rem #ffffff;
+            transition: all .3s ease;
+            position: relative;
+            z-index: 1;
+            
+            .icon {
+                margin-block-start: var(--space-double)
+            }
+
+            &:HOVER {
+                text-decoration: none;
+                background-color: var(--clr-base);
+                color: #ffffff;
+                scale: 1.1;
+                z-index: 2;
+
+                .icon {
+                    mix-blend-mode: multiply
+                }
+            }
+
+            @media screen and (max-width: 37.5rem) {
+                .service {
+                    aspect-ratio: unset
+                }
+            }
+        }
+    }
+}
+
+.panel {
+    display: flex;
+    margin-inline: auto;
+    width: 100%;
+    max-width: 1310px;
+    padding-inline: 30px;
+    padding-block: 30px;
+    margin-block: 4rem;
+    background-color: #ffffff;
+    box-shadow: 2rem 2rem 6rem #cacaca, -2rem -2rem 6rem #ffffff;
+    border-radius: 2rem;
+    overflow: hidden;
+    position: relative;
+    z-index: 4;
+    scale: 1;
+    transition: all .3s ease;
+    
+    picture {
+        float: right;
+        margin-inline-start: 1rem;
+        margin-block-start: 2rem;
+        margin-block-end: 1rem;
+        width: 100%;
+        max-width: 300px;
+        aspect-ratio: 1/1;
+        flex-shrink: 0;
+        
+        img {
+            box-shadow: 2rem 2rem 6rem #cacaca, -2rem -2rem 6rem #ffffff;
+            object-fit: cover;
+            aspect-ratio: 1/1;
+            width: 100%;
+            max-height: 300px;
+            border-radius: 32% 68% 34% 66% / 50% 36% 64% 50%;
+            transition: all .3s ease;
+            display: block;
+        }
+    }
+}
+
+.panel .content {
+    position: relative;
+    z-index: 10
+}
+
+.panel:HOVER {
+    scale: 1.05
+}
+
+.panel:HOVER img {
+    border-radius: 30% 70% 70% 30% / 70% 70% 30% 30%
+}
+
+.panel.action {
+    background-color: var(--clr-base);
+    display: flex;
+    justify-content: center;
+    
+    a {
+        text-align: left;
+        color: #ffffff;
+        font-size: var(--font-size-h4);
+        text-transform: uppercase;
+        line-height: 1.5;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        text-decoration: none;
+        font-weight: 700;
+        
+        &:before {
+            content: '';
+            mask-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNTguOTY5IiBoZWlnaHQ9IjExNS4zOTMiIHZpZXdCb3g9IjAgMCAxNTguOTY5IDExNS4zOTMiPgogIDxwYXRoIGlkPSJTaGFwZSIgZD0iTTExNy4xLDI4My43YTM1Ljg4NCwzNS44ODQsMCwwLDEsMTkuOC01LjJjMTQuNi42LDI2LjIsNy4yLDMzLjksMTkuOSw0LjUsNy41LDYuMSwxNS43LDYsMjQuNS0uMSw5LjgtMi45LDE4LjYtOS4zLDI2LjEtOCw5LjQtMTguMywxNC0zMC43LDE1LTE4LjMsMS41LTMzLjEtNS45LTQ3LjEtMTYuMy02LjktNS4xLTEzLjgtMTAuMS0yMS4xLTE0LjdhMzUuMDgzLDM1LjA4MywwLDAsMC0xMC4zLTQuNSwxOC4wNjMsMTguMDYzLDAsMCwwLTIwLjYsOC4yLDEyLjgxLDEyLjgxLDAsMCwwLTEuMSwyLDQuNDMsNC40MywwLDAsMS00LjcsMi44Yy0zLjMtLjEtNi42LDAtMTAsMC0zLjktLjEtNC45LTEuNS0zLjQtNS4xLDUuMi0xMi4xLDE0LjQtMTkuOCwyNy4zLTIyLjcsMTItMi43LDIzLS4zLDMyLjksNi45LDUuOCw0LjMsMTEuNSw4LjcsMTcuNCwxMi45LDgsNS42LDE2LjIsMTEuMSwyNS44LDEzLjcsMTAuMSwyLjgsMjAsMi40LDI4LjktNCw1LjItMy44LDguNy04LjcsOS43LTE1LjEsMS4zLTguNS40LTE2LjctNS0yMy45YTIzLjcsMjMuNywwLDAsMC0zOS4zLDEuNGMtMi42LDQuMS00LjMsOC41LTQsMTMuNWE0NC4xNzMsNDQuMTczLDAsMCwxLS4xLDYuM2MtLjIsMi40LTEuNywzLjQtMy43LDIuM2E2NS41NDMsNjUuNTQzLDAsMCwxLTEwLjUtNi45Yy0xLjctMS4zLTEuNC0zLjItMS40LTV2LTYyYzAtNC43LjMtNSw1LjItNWg0LjVjNS4xLjEsNS45LjgsNS45LDYuMVYyODFDMTEyLjQsMjg2LjQsMTEyLjQsMjg2LjQsMTE3LjEsMjgzLjdaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTcuODM1IC0yNDguOCkiIGZpbGw9IiMxNjE3MTgiLz4KPC9zdmc+);
+            mask-size: contain;
+            mask-repeat: no-repeat;
+            display: block;
+            width: 6rem;
+            aspect-ratio: 6/4.5;
+            background-color: currentcolor
+        }
+    }
+}

@@ -1,8 +1,10 @@
 <ul class="main-nav">
   <li level="1">
-    <a href="/">
-      <span>Start</span>
-    </a>
+    <div class="l1 wrapper">
+      <a href="/">
+        <span>Start</span>
+      </a>
+    </div>
   </li>
 
   <li
@@ -11,39 +13,77 @@
       active
     {% endif %}
   >
-    <a href="/o-nas/">
-      <span>O nas</span>
-    </a>
+    <div class="l1 wrapper">
+      <a href="/o-nas/">
+        <span>O nas</span>
+      </a>
+    </div>
   </li>
 
   <li
     level="1"
-    {% if page.url and page.url.startsWith('/kontakt') %}
+    {% if page.url and page.url.startsWith('/oferta') %}
       active
     {% endif %}
   >
-    <a href="/kontakt/">
-      <span>Kontakt</span>
+    <div class="l1 wrapper">
+      <a href="/oferta/">
+        <span>Oferta<button class="subnav-btn" aria-label="Otwórz Ofertę">&#10132;</button>
+        </span>
+      </span>
     </a>
-  </li>
+  </div>
+  <div>
+    <ul>
+      {% for service in services %}
+        <li>
+          <div class="l2 wrapper">
+            <a href="/oferta/{{ service.fullName | slugify }}/">
+              <span>{{ service.fullName }}</span>
+            </a>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</li>
 
-  <li
+<li
     level="1"
     {% if page.url and page.url.startsWith('/zespół') %}
       active
     {% endif %}
   >
+  <div class="l1 wrapper">
     <a href="/zespół/">
-      <span>Zespół</span>
+      <span>Zespół<span class="subnav-btn" aria-label="Otwórz Zespół">&#10132;</span>
+      </span>
     </a>
-    <ul class="sub-nav">
+  </div>
+  <div>
+    <ul>
       {% for member in team %}
         <li>
-          <a href="/zespół/{{ member.fullName | slugify }}/">
-            <span>{{ member.fullName }}</span>
-          </a>
+          <div class="l2 wrapper">
+            <a href="/zespół/{{ member.fullName | slugify }}/">
+              <span>{{ member.fullName }}</span>
+            </a>
+          </div>
         </li>
       {% endfor %}
     </ul>
-  </li>
+  </div>
+</li>
+<li
+    level="1"
+    {% if page.url and page.url.startsWith('/kontakt') %}
+      active
+    {% endif %}
+  >
+  <div class="l1 wrapper">
+    <a href="/kontakt/">
+      <span>Kontakt</span>
+    </a>
+  </div>
+</li>
 </ul>

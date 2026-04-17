@@ -1,0 +1,100 @@
+---
+pagination:
+  data: services
+  size: 1
+  alias: service
+permalink: "/oferta/{{ service.fullName | slugify }}/index.html"
+layout: layouts/oferta.njk
+eleventyComputed:
+  title: "{{ service.fullName }}"
+  pageTitle: "{{ service.title }}"
+  description: "{{ service.metaDescription }}"
+postfix: Centrum PSYCHE Wrocław
+isHomepage: false
+
+---
+
+<h1>{{ pageTitle }}</h1>
+
+{% if service.desc01 %}
+  <article class="panel">
+    <div class="content">
+      {{service.desc01 | safe}}
+    </div>
+    {% if service.poster01 %}
+      <img eleventy:optional="placeholder" eleventy:widths="300, 600" src="/media/{{service.poster01}}" alt="{{service.poster01}}" class="panel-image">
+    {% endif %}
+  </article>
+{% endif %}
+
+<div class="panel action" >
+  <a href="https://booksy.com/pl-pl/36093_psycholog-centrum-psyche-gabinety-psychologiczne_zdrowie_13750_wroclaw" target="_blank">
+Zarejestruj w Booksy do<br>{{service.fullName}}
+  </a>
+</div>
+
+{% if service.desc02 %}
+  <article class="panel">
+    <div class="content">
+      {{service.desc02 | safe}}
+    </div>
+    {% if service.poster02 %}
+      <img eleventy:optional="placeholder" eleventy:widths="300, 600" src="/media/{{service.poster02}}" alt="{{service.poster02}}" class="panel-image"/>
+    {% endif %}
+  </article>
+{% endif %}
+
+{% if service.desc03 %}
+  <article class="panel">
+    <div class="content">
+      {{service.desc03 | safe}}
+    </div>
+    {% if service.poster03 %}
+      <img eleventy:optional="placeholder" eleventy:widths="300, 600" src="/media/{{service.poster03}}" alt="{{service.poster03}}" class="panel-image"/>
+    {% endif %}
+  </article>
+{% endif %}
+
+{% if service.desc04 %}
+  <article class="panel">
+    <div class="content">
+      {{service.desc04 | safe}}
+    </div>
+    {% if service.poster04 %}
+      <img eleventy:optional="placeholder" eleventy:widths="300, 600" src="/media/{{service.poster04}}" alt="{{service.poster04}}" class="panel-image"/>
+    {% endif %}
+  </article>
+{% endif %}
+
+{% if service.desc05 %}
+  <article class="panel">
+    <div class="content">
+      {{service.desc05 | safe}}
+    </div>
+    {% if service.poster05 %}
+      <img eleventy:optional="placeholder" eleventy:widths="300, 600" src="/media/{{service.poster05}}" alt="{{service.poster05}}" class="panel-image"/>
+    {% endif %}
+  </article>
+{% endif %}
+
+{% if service.desc06 %}
+  <article class="panel">
+    <div class="content">
+      {{service.desc06 | safe}}
+    </div>
+    {% if service.poster06 %}
+      <img eleventy:optional="placeholder" eleventy:widths="300, 600" src="/media/{{service.poster06}}" alt="{{service.poster06}}" class="panel-image"/>
+    {% endif %}
+  </article>
+{% endif %}
+
+{% if service.desc07 %}
+  <article class="panel">
+    <div class="content">
+      {{service.desc07 | safe}}
+    </div>
+    {% if service.poster07 %}
+      <img eleventy:optional="placeholder" eleventy:widths="300, 600" src="/media/{{service.poster07}}" alt="{{service.poster07}}" class="panel-image"/>
+    {% endif %}
+  </article>
+{% endif %}
