@@ -4,16 +4,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const navPanel = document.querySelector("nav.navigation-panel");
   const closeButton = document.querySelector("button.menu-close");
 
-  // const subNavBtns = document.querySelectorAll(".subnav-btn");
-  // if (subNavBtns) {
-  //   subNavBtns.forEach((btn) => {
-  //     console.log(btn);
-  //     addEventListener("click", (e) => {
-  //       e.preventDefault();
-  //       openSubNav(btn);
-  //     });
-  //   });
-  // }
+  const subNavBtns = document.querySelectorAll(".subnav-btn");
+  if (subNavBtns) {
+    subNavBtns.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        openSubNav(btn);
+      });
+    });
+  }
 
   if (navButton) {
     navButton.addEventListener("click", () => toggleNav([overlay, navPanel]));
@@ -37,5 +36,6 @@ function toggleNav(elements) {
 }
 
 function openSubNav(btn) {
-  btn.closest("li").toggleAttribute("active");
+  const isOpen = btn.closest("li").hasAttribute("active");
+  isOpen ? btn.closest("li").removeAttribute("active") : btn.closest("li").setAttribute("active", '')
 }

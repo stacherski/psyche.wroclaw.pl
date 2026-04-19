@@ -3,38 +3,64 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    border-radius: var(--border-radius-normal);
     padding-inline: var(--space-half);
-    padding-block: var(--space-half);
+    padding-block-start: var(--space-half);
+    padding-block-end: var(--space-normal);
     position: fixed;
     z-index: var(--index-modal);
     box-shadow: 0 0 10px hsl(from var(--clr-text) h s l / 20%);
     backdrop-filter: blur(5px);
     bottom: -200%;
-    width: 96%;
-    left: 2%;
+    width: 100%;
+    left: 0%;
     transition: all 1s ease-out;
 
     @media screen and (max-width: 37.5rem) {
-        bottom: var(--space-half);
+        bottom: 0;
     }
-    
+
     a {
         font-size: var(--font-size-small);
         text-decoration: none;
         display: flex;
         flex-direction: column;
+        align-items: center;
         gap: var(--space-quarter);
         /* aspect-ratio: 3/2;
         width: calc(3.75 * var(--size-normal)); */
         color: #ffffff;
 
-        :before {
-            content:'';
+        &:before {
+            content: '';
             display: block;
             aspect-ratio: 1/1;
             background-color: #fff;
             width: var(--size-normal);
+            mask-position: center;
+            mask-size: contain;
+            mask-image: var(--icon);
+            mask-repeat: no-repeat;
+            background-color: currentColor;
+        }
+
+        &.start:before {
+            --icon: var(--icon-star);
+        }
+
+        &.team:before {
+            --icon: var(--icon-team);
+        }
+
+        &.booksy:before {
+            --icon: var(--icon-booksy);
+        }
+
+        &.phone:before {
+            --icon: var(--icon-phone);
+        }
+
+        &.marker:before {
+            --icon: var(--icon-marker);
         }
     }
 }

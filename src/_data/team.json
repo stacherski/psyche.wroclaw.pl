@@ -66,7 +66,7 @@
     "filterKids": false,
     "filterYouth": false,
     "filterAdult": true,
-    "filterOnline": true
+    "filterOnline": false
   },
   {
     "locations": "Małopanewska",
@@ -142,7 +142,7 @@
     "filterKids": false,
     "filterYouth": false,
     "filterAdult": true,
-    "filterOnline": false
+    "filterOnline": true
   },
   {
     "locations": "Białowieska",
@@ -256,7 +256,7 @@
     "filterKids": true,
     "filterYouth": true,
     "filterAdult": true,
-    "filterOnline": false
+    "filterOnline": true
   },
   {
     "locations": "Małopanewska",
@@ -370,7 +370,7 @@
     "filterKids": false,
     "filterYouth": true,
     "filterAdult": true,
-    "filterOnline": false
+    "filterOnline": true
   },
   {
     "locations": "Małopanewska",
@@ -408,7 +408,7 @@
     "filterKids": true,
     "filterYouth": true,
     "filterAdult": false,
-    "filterOnline": false
+    "filterOnline": true
   },
   {
     "locations": "Małopanewska",
@@ -446,7 +446,7 @@
     "filterKids": true,
     "filterYouth": true,
     "filterAdult": false,
-    "filterOnline": false
+    "filterOnline": true
   },
   {
     "locations": "Białowieska",
@@ -636,7 +636,7 @@
     "filterKids": true,
     "filterYouth": true,
     "filterAdult": false,
-    "filterOnline": false
+    "filterOnline": true
   },
   {
     "locations": "Białowieska",
@@ -674,7 +674,7 @@
     "filterKids": false,
     "filterYouth": true,
     "filterAdult": true,
-    "filterOnline": false
+    "filterOnline": true
   },
   {
     "locations": "Białowieska;Małopanewska",

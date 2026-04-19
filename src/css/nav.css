@@ -1,14 +1,13 @@
-nav.navigation-panel
-{
+nav.navigation-panel {
     height: 100vh;
     overflow-y: auto;
     padding-block-end: var(--space-double);
 
     &>div {
         display: flex;
-        padding-inline: var(--space-normal);
+        /* padding-inline: var(--space-normal); */
         padding-block-start: var(--space-normal);
-        
+
         .menu-close {
             margin-inline-start: auto;
             appearance: none;
@@ -18,7 +17,7 @@ nav.navigation-panel
             aspect-ratio: 1/1;
             cursor: pointer;
             font-size: var(--font-size-double);
-    
+
             &:before {
                 content: '\00D7';
                 display: block;
@@ -28,29 +27,36 @@ nav.navigation-panel
             }
         }
     }
-    
+
     ul.main-nav {
         display: grid;
         gap: var(--space-quarter);
         transition: all 1s ease-in-out;
         margin: 0;
         padding: 0;
-    
+
         li {
             display: block;
             margin: 0;
-            padding-inline: var(--space-normal);
-            padding-block: var(--space-half);
+            /* padding-block: var(--space-half); */
             list-style: none;
-    
+
             color: var(--clr-text-inverse);
             text-transform: uppercase;
             font-weight: 700;
-            
+
+            li {
+                .wrapper {
+                    padding-inline-start: var(--space-double);
+                }
+            }
+
             .wrapper {
                 position: relative;
                 display: flex;
                 gap: var(--space-quarter);
+                padding-block: var(--space-quarter);
+                padding-inline: var(--space-normal);
 
                 a {
                     text-decoration: none;
@@ -66,7 +72,7 @@ nav.navigation-panel
                         display: flex;
                         align-items: center;
                         width: 100%;
-                        
+
                         button {
                             font-size: var(--font-size-h6);
                             margin-inline-start: auto;
@@ -86,21 +92,29 @@ nav.navigation-panel
                 display: grid;
                 grid-template-rows: 0fr;
                 transition: all .3s ease-out;
+
                 ul {
                     overflow: hidden;
                     margin: 0;
                 }
             }
 
+            &[level="1"][active],
+            [level="2"][active] {
+
+                >div:last-child {
+                    grid-template-rows: 1fr;
+                }
+
+                >.wrapper {
+                    background-color: hsl(from var(--clr-text-inverse) h s l / 20%);
+                }
+
+                .wrapper a span button {
+                    rotate: -90deg;
+                }
+            }
         }
 
-        li:is([active],[open]) {
-            >div:last-child {
-                grid-template-rows: 1fr;
-            }
-            .wrapper a span button {
-                rotate: -90deg;
-            }
-        }
     }
 }

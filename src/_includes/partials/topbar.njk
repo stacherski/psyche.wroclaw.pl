@@ -1,5 +1,5 @@
 <div class="topbar" role="banner">
-  <a aria-label="Navigate to /" href="/" accesskey="h">
+  <a aria-label="Przejdź do strony głównej" href="/" accesskey="h">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="220"
@@ -17,7 +17,7 @@
           transform="translate(376.265 149.911)"
           fill="#fff"
           fill-rule="evenodd"
-/>
+        />
         <text
           id="PSYCHE"
           transform="translate(1140 250.002)"
@@ -31,14 +31,19 @@
       </g>
     </svg>
   </a>
-  <a href="tel:+48668093234" class="phone-link">+48 668 093 234</a>
-  <button class="menu-button" accesskey="m"></button>
+  <a
+    href="tel:+48668093234"
+    class="phone-link"
+    role="button"
+    aria-label="Zadzwoń do Centrum PSYCHE"
+  >+48 668 093 234</a>
+  <button class="menu-button" accesskey="m" aria-label="Otwórz menu"></button>
 </div>
 <nav class="navigation-panel">
   <div>
-    <button class="menu-close" accesskey="c"></button>
+    <button class="menu-close" accesskey="c" aria-label="Zamknij menu"></button>
   </div>
   {% include "partials/nav.njk" %}
 </nav>
 
-<div class="navigation-overlay"></div>
+<div class="navigation-overlay" role="button" aria-label="Zamknij menu"></div>

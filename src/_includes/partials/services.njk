@@ -1,1 +1,31 @@
-Usługi w Centrum Psyche
+{% set servicesPublished = services | byPublished %}
+{% if location %}
+  {%
+    set servicesToDisplay = servicesPublished | byLocationTeam(location.team)
+  %}
+{% elif teamMember %}
+  {% set servicesToDisplay = servicesPublished | byTeamMember(teamMember) %}
+{% else %}
+  {% set servicesToDisplay = servicesPublished %}
+{% endif %}
+
+<ul class="services">
+  {% for service in servicesToDisplay %}
+    <li>
+      <a class="service" href="/oferta/{{ service.fullName | slugify }}/">
+        {% if service.icon %}
+          <img
+            eleventy:optional="placeholder"
+            eleventy:widths="100, 200"
+            src="/media/{{service.icon}}"
+            alt="{{service.icon}}"
+            width="100"
+            height="100"
+            class="icon"
+          >
+        {% endif %}
+        <div class="name">{{ service.fullName }}</div>
+      </a>
+    </li>
+  {% endfor %}
+</ul>

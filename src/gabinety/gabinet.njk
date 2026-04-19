@@ -1,0 +1,35 @@
+---
+pagination:
+  data: locations
+  size: 1
+  alias: location
+permalink: "/gabinety/{{ location.fullName | slugify }}/index.html"
+layout: layouts/oferta.njk
+eleventyComputed:
+  title: "{{ location.fullName }}"
+  pageTitle: "Gabinet {{ location.fullName }}"
+  description: "Gabinet {{ location.fullName }}, {{ location.address }}, {{ location.postalcode }} {{ location.city }}"
+postfix: Centrum PSYCHE Wrocław
+isHomepage: false
+
+---
+
+<h1>{{ pageTitle }}</h1>
+
+<article class="article">
+  <h3 style="margin: 0;">
+    Gabinet {{ location.fullName }}, {{ location.address }}, {{
+      location.postalcode
+    }} {{ location.city }}
+  </h3>
+  <p>
+    <a href="{{ location.maplink }}" target="_blank"
+    >Sprawdź lokalizację gabinetu na mapie.</a>
+  </p>
+</article>
+
+<h3>Specjaliści przyjmujący w gabinecie</h3>
+{% include "partials/team.njk" %}
+
+<h3>Usługi oferowane w gabinecie</h3>
+{% include "partials/services.njk" %}

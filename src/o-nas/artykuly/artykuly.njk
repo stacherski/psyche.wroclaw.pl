@@ -1,0 +1,23 @@
+---
+pagination:
+  data: articles
+  size: 1
+  alias: article
+  addAllPagesToCollections: true
+  filter: (item) => item.published === true
+permalink: "/o-nas/artykuly/@{{ article.id }}/{{ article.urlTitle | slugify }}/index.html"
+layout: layouts/articles.njk
+eleventyComputed:
+  title: "{{ article.title }}"
+  pageTitle: "{{ article.title }}"
+  description: "{{ article.textShort }}"
+postfix: Centrum PSYCHE Wrocław
+isHomepage: false
+
+---
+
+<h1>{{ pageTitle }}</h1>
+
+<article class="article-single">
+  {{ article.textLong | safe }}
+</article>

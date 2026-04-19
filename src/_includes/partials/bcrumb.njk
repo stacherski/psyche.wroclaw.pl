@@ -8,43 +8,81 @@
         <li>
           <a href="/o-nas">O nas</a>
         </li>
+        {% if page.url.startsWith('/o-nas/artykuly') %}
+          <li>
+            <a href="/o-nas/artykuly">Artykuły</a>
+          </li>
+          {% if page.url !== '/o-nas/artykuly/' and article %}
+            <li>{{ article.title }}</li>
+          {% endif %}
+        {% endif %}
       {% endif %}
-      {% if page
+      {%
+        if page
         .url and page
         .url
-        .startsWith('/kontakt') %}
+        .startsWith('/kontakt')
+      %}
         <li>
           <a href="/kontakt">Kontakt</a>
         </li>
       {% endif %}
-      {% if page
+      {%
+        if page
         .url and page
         .url
-        .startsWith('/oferta') %}
+        .startsWith('/oferta')
+      %}
         <li>
           <a href="/oferta">Oferta</a>
         </li>
         {% if page.url !== '/oferta' %}
           {% for service in services %}
-            {% if ('/oferta/' + (
-            service.fullName | slugify) + '/') == page.url %}
+            {%
+              if ('/oferta/' + (
+              service.fullName | slugify) + '/') == page.url
+            %}
               <li>{{ service.fullName }}</li>
             {% endif %}
           {% endfor %}
         {% endif %}
       {% endif %}
-      {% if page
+      {%
+        if page
         .url and page
         .url
-        .startsWith('/zespół') %}
+        .startsWith('/zespół')
+      %}
         <li>
           <a href="/zespół">Zespół</a>
         </li>
         {% if page.url !== '/zespół' %}
           {% for member in team %}
-            {% if ('/zespół/' + (
-            member.fullName | slugify) + '/') == page.url %}
+            {%
+              if ('/zespół/' + (
+              member.fullName | slugify) + '/') == page.url
+            %}
               <li>{{ member.fullName }}</li>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      {% endif %}
+      {%
+        if page
+        .url and page
+        .url
+        .startsWith('/gabinety')
+      %}
+        <li>
+          <a href="/gabinety">Gabinety</a>
+        </li>
+        {% if page.url !== '/gabinety/' %}
+          {% for location in locations %}
+            {%
+              if ('/gabinety/' + (
+              location.fullName | slugify) + '/') == page.url
+            %}
+              <li>{{ location.fullName }}</li>
             {% endif %}
           {% endfor %}
         {% endif %}

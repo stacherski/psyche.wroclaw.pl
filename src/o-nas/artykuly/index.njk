@@ -1,0 +1,58 @@
+---
+title: Artykuły
+pageTitle: Artykuły
+postfix: Centrum PSYCHE Wrocław
+description: Psychologia w mediach, media w psychologii
+pagination:
+  data: articles
+  size: 15
+  filter: (item) => item.published === true
+  addAllPagesToCollections: true
+permalink: /o-nas/artykuly/{% if pagination.pageNumber %}{{ pagination.pageNumber + 1 }}/{% endif %}index.html
+isHomepage: false
+
+---
+
+{% extends "layouts/articles.njk" %}
+
+{% block content %}
+  <div class="page-content">
+    <h1>{{ pageTitle }}</h1>
+
+    {% set articlesToDisplay = pagination.items %}
+    {% include "partials/articles.njk" %}
+
+    <nav class="pagination" aria-label="Pagination">
+      <ul>
+        {% if pagination.previousPageHref %}
+          <li>
+            <a href="{{ pagination.previousPageHref }}">← Poprzednia</a>
+          </li>
+        {% endif %}
+
+        {% for page_item in pagination.pages %}
+          <li>
+            {% set page_url = '/' %}
+            {% if loop.index0 > 0 %}
+              {% set page_url = '/o-nas/artykuly/' + (loop.index0 + 1) + '/' %}
+            {% else %}
+              {% set page_url = '/o-nas/artykuly/' %}
+            {% endif %}
+
+            {% if loop.index0 == pagination.pageNumber %}
+              <strong>{{ loop.index }}</strong>
+            {% else %}
+              <a href="{{ page_url }}">{{ loop.index }}</a>
+            {% endif %}
+          </li>
+        {% endfor %}
+
+        {% if pagination.nextPageHref %}
+          <li>
+            <a href="{{ pagination.nextPageHref }}">Następna →</a>
+          </li>
+        {% endif %}
+      </ul>
+    </nav>
+  </div>
+{% endblock %}

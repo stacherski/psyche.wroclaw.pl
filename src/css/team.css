@@ -1,6 +1,52 @@
+.filters {
+    button {
+        position: relative;
+        overflow: hidden;
+
+        &[data-category="kids"] {
+            --clr: orange;
+        }
+
+        &[data-category="youth"] {
+            --clr: blue;
+        }
+
+        &[data-category="adult"] {
+            --clr: red;
+        }
+
+        &[data-category="online"] {
+            --clr: green;
+        }
+
+        &:after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: calc(.5 * var(--size-half));
+            position: absolute;
+            bottom: 0;
+            left: 0%;
+            background-color: var(--clr, transparent);
+        }
+
+        &.active:after {
+            display: none;
+        }
+
+        @media screen and (max-width: 37.5rem) {
+            &:first-of-type {
+                grid-column: 1/-1;
+            }
+        }
+
+    }
+
+}
+
 ul.team {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(clamp(150px, 25%, 280px), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(clamp(180px, 25%, 280px), 1fr));
     gap: var(--space-normal);
     padding: 0;
     margin: 0;
@@ -13,13 +59,15 @@ ul.team {
         /* transition: blur .15s ease-out; */
     }
 
-    /* &:is(:HOVER,:FOCUS){
-        
+    /* &:is(:HOVER, :FOCUS) {
+
         li {
-            filter: blur(5px);
+            filter: blur(5px) grayscale(100%);
+            opacity: .7;
 
             &:HOVER {
                 filter: blur(0);
+                opacity: 1;
             }
         }
     } */
@@ -33,7 +81,6 @@ ul.team {
     width: 100%;
     aspect-ratio: 2/3;
     position: relative;
-    /* margin-inline: var(--space-normal); */
 
     &[kids] {
         --clr-kids: orange;
@@ -100,7 +147,7 @@ ul.team {
         font-weight: 700;
         text-transform: uppercase;
         text-align: center;
-        width: fit-content;
+        width: 100%;
         max-width: 80%;
         position: absolute;
         bottom: 18%;
@@ -109,7 +156,7 @@ ul.team {
         color: var(--clr-base);
         transition: all .15s ease-out;
         transition-delay: .15s;
-        padding-inline: var(--space-normal);
+        padding-inline: var(--space-half);
         padding-block: var(--space-half);
         border-radius: var(--border-radius-double);
 
@@ -133,6 +180,7 @@ ul.team {
 
     }
 }
+
 
 div.member-single {
     display: grid;
@@ -198,7 +246,7 @@ div.filters {
         display: block;
         width: 100%;
         padding: var(--space-normal);
-        margin-block: var(--space-double);
+        /* margin-block: var(--space-double); */
         border-radius: 50px;
         background: linear-gradient(145deg, #e6e6e6, #ffffff);
         box-shadow: 20px 20px 60px #d9d9d9, -20px -20px 60px #ffffff;

@@ -1,7 +1,7 @@
 ---
 layout: layouts/sitelayout.njk
-title: Zespół
-pageTitle: Nasz zespół specjalistów
+title: Nasz zespół specjalistów
+pageTitle: Zespół
 postfix: Centrum PSYCHE Wrocław
 description: W Centrum PSYCHE Wrocław przyjmują specjaliści wielu dziedzin. Wśród nich znajdziecie Psychologów dla dorosłych, Psychologów dla dzieci, Psychoterapeutów, Logopedów, specjalistów EEG Biofeedback i QEEG oraz wielu innych.
 permalink: /zespół/
@@ -9,7 +9,7 @@ isHomepage: false
 
 ---
 
-<h1>{{ title }}</h1>
+<h1>{{ pageTitle }}</h1>
 
 <div class="filters">
   <button class="filter-btn active" data-category="all">Wszyscy</button>
@@ -42,7 +42,7 @@ isHomepage: false
         <img
           src="/media/{{ member.photo }}"
           eleventy:widths="300, 600"
-          alt="{{ member.fullName }}"
+          alt="Zdjęcie specjalisty PSYCHE: {{ member.fullName }}"
         >
         <div class="name">{{ member.fullName }}</div>
       </a>

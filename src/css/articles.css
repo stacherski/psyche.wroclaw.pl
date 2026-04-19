@@ -1,0 +1,105 @@
+:is(.article, .article-single) {
+    display: block;
+
+    margin-inline: auto;
+    width: 100%;
+    max-width: 1310px;
+    padding-inline: 30px;
+    padding-block: 30px;
+    margin-block: 4rem;
+    background-color: #ffffff;
+    box-shadow: 2rem 2rem 6rem #cacaca, -2rem -2rem 6rem #ffffff;
+    border-radius: 2rem;
+    overflow: hidden;
+    position: relative;
+    z-index: 4;
+    scale: 1;
+    transition: all .3s ease;
+
+    h3 {
+        margin-block: 0;
+        margin-block-end: var(--space-normal);
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    &:HOVER,
+    &:has(a:FOCUS) {
+        scale: 1.05
+    }
+}
+
+nav.pagination {
+    width: fit-content;
+    margin-inline: auto;
+    margin-block-end: var(--space-double);
+
+    ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-half);
+
+        li {
+            list-style: none;
+
+            display: block;
+            padding-inline: var(--space-half);
+
+            background-color: var(--clr-text-inverse);
+            border-radius: var(--border-radius-quarter);
+
+            &:has(>:not(a)),
+            &:is(:HOVER, :FOCUS, :FOCUS),
+            &:has(a:FOCUS) {
+                color: var(--clr-text-inverse);
+                background-color: var(--clr-base);
+
+                a {
+                    color: currentColor;
+                }
+            }
+
+            a {
+                text-decoration: none
+            }
+        }
+    }
+}
+
+.knowledge-base {
+    background-color: hsl(from var(--clr-base) h 50% 60%);
+    padding-block: var(--space-double);
+
+    h2 {
+        width: fit-content;
+        margin-inline: auto;
+        margin-block: var(--space-double);
+        color: var(--clr-text-inverse);
+        font-weight: 700;
+    }
+
+    >div {
+        --padding: var(--space-normal);
+        max-width: calc(2 * var(--padding) + var(--content-width));
+        margin-inline: auto;
+        padding: var(--padding);
+
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-normal);
+
+        article {
+            width: fit-content;
+            padding-block: var(--space-half);
+            margin: 0;
+            box-shadow: unset;
+
+            h3 {
+                font-size: var(--font-size-paragraph);
+                margin: 0;
+            }
+        }
+    }
+}

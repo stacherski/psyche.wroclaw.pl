@@ -33,6 +33,80 @@ module.exports = function (eleventyConfig) {
 
   // ─── FILTERS ──────────────────────────────────────────────────────────────
 
+  eleventyConfig.addFilter("firstBatch", collection => {
+    return collection.reverse().slice(0, 15)
+  })
+
+  eleventyConfig.addFilter("byMember", (collection, members) => {
+    const displayMembers = members
+      .split(';')
+      .map(s => s.trim().toLowerCase())
+
+    return collection.filter(item =>
+      displayMembers.includes(item.fullName.toLowerCase())
+    )
+  })
+
+  eleventyConfig.addFilter("byTeamMember", (collection, fullName) => {
+    if (!fullName) return collection;
+
+    const normalizedName = fullName.toLowerCase();
+
+    return collection.filter(item => {
+      if (!item.team) return false;
+      const teamMembers = item.team.split(';').map(s => s.trim().toLowerCase());
+      return teamMembers.includes(normalizedName);
+    });
+  });
+
+  eleventyConfig.addFilter("byLocationTeam", (collection, locationTeam) => {
+    if (!locationTeam) return collection;
+
+    const locationMembers = locationTeam
+      .split(';')
+      .map(s => s.trim().toLowerCase());
+
+    return collection.filter(item => {
+      if (!item.team) return false;
+      const itemTeamMembers = item.team.split(';').map(s => s.trim().toLowerCase());
+      return itemTeamMembers.some(member => locationMembers.includes(member));
+    });
+  });
+
+  eleventyConfig.addFilter("byService", (locations, serviceName) => {
+    if (!serviceName) return locations;
+
+    const normalizedService = serviceName.toLowerCase();
+
+    return locations.filter(location => {
+      if (!location.services) return false;
+      const locationServices = location.services.split(';').map(s => s.trim().toLowerCase());
+      return locationServices.includes(normalizedService);
+    });
+  });
+
+  eleventyConfig.addFilter("byTeamMemberLocation", (locations, fullName) => {
+    if (!fullName) return locations;
+
+    const normalizedName = fullName.toLowerCase();
+
+    return locations.filter(location => {
+      if (!location.team) return false;
+      const locationTeam = location.team.split(';').map(s => s.trim().toLowerCase());
+      return locationTeam.includes(normalizedName);
+    });
+  });
+
+  eleventyConfig.addFilter("byPublished", (collection) => {
+    return collection.filter((item) => item.published);
+  });
+
+  eleventyConfig.addFilter("bySorting", (collection) => {
+    return collection.sort((a, b) => {
+      return b.sorting - a.sorting;
+    });
+  });
+
   const map = {
     ą: "a",
     ć: "c",
@@ -53,9 +127,7 @@ module.exports = function (eleventyConfig) {
       .replace(/^-|-$/g, "");
   });
 
-  eleventyConfig.addFilter("byPublished", (collection, published) => {
-    return collection.filter((item) => item.published === published);
-  });
+
   // ─── COLLECTIONS ──────────────────────────────────────────────────────────
 
   eleventyConfig.addCollection("teamPages", (collectionApi) => {
@@ -68,6 +140,20 @@ module.exports = function (eleventyConfig) {
     return services;
   });
 
+  eleventyConfig.addCollection("locationsPages", (collectionApi) => {
+    const locations = require("./src/_data/locations.json");
+    return locations;
+  });
+
+  eleventyConfig.addCollection("pricesPages", (collectionApi) => {
+    const prices = require("./src/_data/prices.json");
+    return prices;
+  });
+
+  eleventyConfig.addCollection("articlesPages", (collectionApi) => {
+    const articles = require("./src/_data/articles.json");
+    return articles;
+  });
   // ─── ELEVENTY CONFIG ──────────────────────────────────────────────────────
 
   // eleventyConfig.on("eleventy.before", () => {

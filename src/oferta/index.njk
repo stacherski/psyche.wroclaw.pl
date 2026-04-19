@@ -9,27 +9,21 @@ isHomepage: false
 
 ---
 
+{% set servicesSorted = services | bySorting | byPublished %}
+
 <h1>{{ pageTitle }}</h1>
 
 <p>
   <b>Nasza pomoc skierowana jest do osób dorosłych, dzieci oraz młodzieży.</b>
 </p>
 <p>
-  <b>Proponujemy naszym pacjentom szeroki wachlarz usług psychologicznych, psychoterapeutycznych oraz seksuologicznych.</b>
+  <b>Proponujemy naszym pacjentom szeroki wachlarz usług psychologicznych,
+    psychoterapeutycznych oraz seksuologicznych.</b>
 </p>
-<p>Pierwsza wizyta w Centrum PSYCHE jest bardzo ważna i służy przede wszystkim rozpoznaniu problemu z jakim przychodzi do nas pacjent oraz zaproponowanie najkorzystniejszej ścieżki dalszego leczenia.</p>
+<p>
+  Pierwsza wizyta w Centrum PSYCHE jest bardzo ważna i służy przede wszystkim
+  rozpoznaniu problemu z jakim przychodzi do nas pacjent oraz zaproponowanie
+  najkorzystniejszej ścieżki dalszego leczenia.
+</p>
 
-<ul class="services">
-  {% for service in services %}
-    {% if service.published %}
-      <li>
-        <a class="service" href="/oferta/{{ service.fullName | slugify }}/">
-          {% if service.icon %}
-            <img eleventy:optional="placeholder" eleventy:widths="100, 200" src="/media/{{service.icon}}" alt="{{service.icon}}" class="icon">
-          {% endif %}
-          <div class="name">{{ service.fullName }}</div>
-        </a>
-      </li>
-    {% endif %}
-  {% endfor %}
-</ul>
+{% include "partials/services.njk" %}

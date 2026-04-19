@@ -1,3 +1,5 @@
+{% set servicesSorted = services | bySorting | byPublished %}
+
 <ul class="main-nav">
   <li level="1">
     <div class="l1 wrapper">
@@ -15,8 +17,27 @@
   >
     <div class="l1 wrapper">
       <a href="/o-nas/">
-        <span>O nas</span>
+        <span>O nas<button class="subnav-btn" aria-label="Otwórz O Nas">
+            &#10132;
+          </button>
+        </span>
       </a>
+    </div>
+    <div>
+      <ul>
+        <li
+          level="2"
+          {% if page.url and page.url.includes('artykuly/') %}
+            active
+          {% endif %}
+        >
+          <div class="l2 wrapper">
+            <a href="/o-nas/artykuly/">
+              <span>Artykuły</span>
+            </a>
+          </div>
+        </li>
+      </ul>
     </div>
   </li>
 
@@ -28,62 +49,111 @@
   >
     <div class="l1 wrapper">
       <a href="/oferta/">
-        <span>Oferta<button class="subnav-btn" aria-label="Otwórz Ofertę">&#10132;</button>
+        <span>Oferta<button class="subnav-btn" aria-label="Otwórz Ofertę">
+            &#10132;
+          </button>
         </span>
-      </span>
-    </a>
-  </div>
-  <div>
-    <ul>
-      {% for service in services %}
-        <li>
-          <div class="l2 wrapper">
-            <a href="/oferta/{{ service.fullName | slugify }}/">
-              <span>{{ service.fullName }}</span>
-            </a>
-          </div>
-        </li>
-      {% endfor %}
-    </ul>
-  </div>
-</li>
+      </a>
+    </div>
+    <div>
+      <ul>
+        {% set servicesSorted = services | byPublished %}
 
-<li
+        {% for service in servicesSorted %}
+          <li
+            level="2"
+            {% if page.url and page.url.includes(service.fullName | slugify) %}
+              active
+            {% endif %}
+          >
+            <div class="l2 wrapper">
+              <a href="/oferta/{{ service.fullName | slugify }}/">
+                <span>{{ service.fullName }}</span>
+              </a>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </li>
+
+  <li
     level="1"
     {% if page.url and page.url.startsWith('/zespół') %}
       active
     {% endif %}
   >
-  <div class="l1 wrapper">
-    <a href="/zespół/">
-      <span>Zespół<span class="subnav-btn" aria-label="Otwórz Zespół">&#10132;</span>
-      </span>
-    </a>
-  </div>
-  <div>
-    <ul>
-      {% for member in team %}
-        <li>
-          <div class="l2 wrapper">
-            <a href="/zespół/{{ member.fullName | slugify }}/">
-              <span>{{ member.fullName }}</span>
-            </a>
-          </div>
-        </li>
-      {% endfor %}
-    </ul>
-  </div>
-</li>
-<li
+    <div class="l1 wrapper">
+      <a href="/zespół/">
+        <span>Zespół<button class="subnav-btn" aria-label="Otwórz Zespół">
+            &#10132;
+          </button>
+        </span>
+      </a>
+    </div>
+    <div>
+      <ul>
+        {% for member in team %}
+          <li
+            level="2"
+            {% if page.url and page.url.includes(member.fullName | slugify) %}
+              active
+            {% endif %}
+          >
+            <div class="l2 wrapper">
+              <a href="/zespół/{{ member.fullName | slugify }}/">
+                <span>{{ member.fullName }}</span>
+              </a>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </li>
+  <li
+    level="1"
+    {% if page.url and page.url.startsWith('/gabinety') %}
+      active
+    {% endif %}
+  >
+    <div class="l1 wrapper">
+      <a href="/gabinety/">
+        <span>Gabinety<button class="subnav-btn" aria-label="Otwórz Gabinety">
+            &#10132;
+          </button>
+        </span>
+      </a>
+    </div>
+    <div>
+      <ul>
+        {% for location in locations %}
+          <li
+            level="2"
+            {% if page.url and page.url.includes(location.fullName | slugify) %}
+              active
+            {% endif %}
+          >
+            <div class="l2 wrapper">
+              <a href="/gabinety/{{ location.fullName | slugify }}/">
+                <span>{{ location.fullName }}</span>
+              </a>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </li>
+
+  <li
     level="1"
     {% if page.url and page.url.startsWith('/kontakt') %}
       active
     {% endif %}
   >
-  <div class="l1 wrapper">
-    <a href="/kontakt/">
-      <span>Kontakt</span>
-    </a>
-  </div>
-</li>
+    <div class="l1 wrapper">
+      <a href="/kontakt/">
+        <span>Kontakt</span>
+      </a>
+    </div>
+  </li>
 </ul>

@@ -1,0 +1,14 @@
+{% for article in articlesToDisplay %}
+  <article class="article">
+    <a
+      href="/o-nas/artykuly/@{{ article.id }}/{{ article.urlTitle | slugify }}/"
+      role="button"
+      aria-label="Przeczytaj artykuł {{ article.title }}"
+    >
+      <h3>{{ article.title }}</h3>
+      {% if isHomepage == false %}
+        {{ article.textShort | safe }}
+      {% endif %}
+    </a>
+  </article>
+{% endfor %}

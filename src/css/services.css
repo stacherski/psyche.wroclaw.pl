@@ -1,4 +1,3 @@
-
 ul.services {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -28,8 +27,11 @@ ul.services {
             transition: all .3s ease;
             position: relative;
             z-index: 1;
-            
+
+
             .icon {
+                aspect-ratio: 1/1;
+                width: 100%;
                 margin-block-start: var(--space-double)
             }
 
@@ -45,10 +47,12 @@ ul.services {
                 }
             }
 
-            @media screen and (max-width: 37.5rem) {
-                .service {
-                    aspect-ratio: unset
-                }
+
+        }
+
+        @media screen and (max-width: 37.5rem) {
+            .service {
+                aspect-ratio: unset
             }
         }
     }
@@ -70,7 +74,12 @@ ul.services {
     z-index: 4;
     scale: 1;
     transition: all .3s ease;
-    
+
+    .content {
+        position: relative;
+        z-index: 10;
+    }
+
     picture {
         float: right;
         margin-inline-start: 1rem;
@@ -80,8 +89,8 @@ ul.services {
         max-width: 300px;
         aspect-ratio: 1/1;
         flex-shrink: 0;
-        
-        img {
+
+        img.panel-image {
             box-shadow: 2rem 2rem 6rem #cacaca, -2rem -2rem 6rem #ffffff;
             object-fit: cover;
             aspect-ratio: 1/1;
@@ -91,6 +100,10 @@ ul.services {
             transition: all .3s ease;
             display: block;
         }
+    }
+
+    @media screen and (max-width: 37.5rem) {
+        flex-direction: column;
     }
 }
 
@@ -103,7 +116,7 @@ ul.services {
     scale: 1.05
 }
 
-.panel:HOVER img {
+.panel:HOVER img.panel-image {
     border-radius: 30% 70% 70% 30% / 70% 70% 30% 30%
 }
 
@@ -111,7 +124,7 @@ ul.services {
     background-color: var(--clr-base);
     display: flex;
     justify-content: center;
-    
+
     a {
         text-align: left;
         color: #ffffff;
@@ -123,7 +136,7 @@ ul.services {
         gap: 1rem;
         text-decoration: none;
         font-weight: 700;
-        
+
         &:before {
             content: '';
             mask-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNTguOTY5IiBoZWlnaHQ9IjExNS4zOTMiIHZpZXdCb3g9IjAgMCAxNTguOTY5IDExNS4zOTMiPgogIDxwYXRoIGlkPSJTaGFwZSIgZD0iTTExNy4xLDI4My43YTM1Ljg4NCwzNS44ODQsMCwwLDEsMTkuOC01LjJjMTQuNi42LDI2LjIsNy4yLDMzLjksMTkuOSw0LjUsNy41LDYuMSwxNS43LDYsMjQuNS0uMSw5LjgtMi45LDE4LjYtOS4zLDI2LjEtOCw5LjQtMTguMywxNC0zMC43LDE1LTE4LjMsMS41LTMzLjEtNS45LTQ3LjEtMTYuMy02LjktNS4xLTEzLjgtMTAuMS0yMS4xLTE0LjdhMzUuMDgzLDM1LjA4MywwLDAsMC0xMC4zLTQuNSwxOC4wNjMsMTguMDYzLDAsMCwwLTIwLjYsOC4yLDEyLjgxLDEyLjgxLDAsMCwwLTEuMSwyLDQuNDMsNC40MywwLDAsMS00LjcsMi44Yy0zLjMtLjEtNi42LDAtMTAsMC0zLjktLjEtNC45LTEuNS0zLjQtNS4xLDUuMi0xMi4xLDE0LjQtMTkuOCwyNy4zLTIyLjcsMTItMi43LDIzLS4zLDMyLjksNi45LDUuOCw0LjMsMTEuNSw4LjcsMTcuNCwxMi45LDgsNS42LDE2LjIsMTEuMSwyNS44LDEzLjcsMTAuMSwyLjgsMjAsMi40LDI4LjktNCw1LjItMy44LDguNy04LjcsOS43LTE1LjEsMS4zLTguNS40LTE2LjctNS0yMy45YTIzLjcsMjMuNywwLDAsMC0zOS4zLDEuNGMtMi42LDQuMS00LjMsOC41LTQsMTMuNWE0NC4xNzMsNDQuMTczLDAsMCwxLS4xLDYuM2MtLjIsMi40LTEuNywzLjQtMy43LDIuM2E2NS41NDMsNjUuNTQzLDAsMCwxLTEwLjUtNi45Yy0xLjctMS4zLTEuNC0zLjItMS40LTV2LTYyYzAtNC43LjMtNSw1LjItNWg0LjVjNS4xLjEsNS45LjgsNS45LDYuMVYyODFDMTEyLjQsMjg2LjQsMTEyLjQsMjg2LjQsMTE3LjEsMjgzLjdaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTcuODM1IC0yNDguOCkiIGZpbGw9IiMxNjE3MTgiLz4KPC9zdmc+);

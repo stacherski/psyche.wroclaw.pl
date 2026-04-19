@@ -43,7 +43,7 @@ isHomepage: false
       >
       <div class="name">{{ member.fullName }}</div>
     </div>
-    <div class="spec">{{ member.specialization | safe }}</div>
+    <div class="spec"><h5>{{ member.specialization | safe }}</h5></div>
   </div>
   <div>
     {{ member.bioPL | safe }}
@@ -55,3 +55,14 @@ isHomepage: false
     {% endif %}
   </div>
 </div>
+
+<article>
+  <h3>Moje usługi w Centrum PSYCHE</h3>
+  {% set teamMember = member.fullName %}
+  {% include "partials/services.njk" %}
+</article>
+
+<article>
+  <h3>Przyjmuję pacjentów w gabinecie:</h3>
+  {% include "partials/locations.njk" %}
+</article>

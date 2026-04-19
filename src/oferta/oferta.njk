@@ -19,27 +19,47 @@ isHomepage: false
 {% if service.desc01 %}
   <article class="panel">
     <div class="content">
-      {{service.desc01 | safe}}
+      {{ service.desc01 | safe }}
     </div>
     {% if service.poster01 %}
-      <img eleventy:optional="placeholder" eleventy:widths="300, 600" src="/media/{{service.poster01}}" alt="{{service.poster01}}" class="panel-image">
+      <img
+        eleventy:optional="placeholder"
+        eleventy:widths="300, 600"
+        src="/media/{{service.poster01}}"
+        alt="{{service.poster01}}"
+        class="panel-image"
+      >
     {% endif %}
   </article>
 {% endif %}
 
-<div class="panel action" >
-  <a href="https://booksy.com/pl-pl/36093_psycholog-centrum-psyche-gabinety-psychologiczne_zdrowie_13750_wroclaw" target="_blank">
-Zarejestruj w Booksy do<br>{{service.fullName}}
+<div class="panel action">
+  <a
+    href="https://booksy.com/pl-pl/36093_psycholog-centrum-psyche-gabinety-psychologiczne_zdrowie_13750_wroclaw"
+    target="_blank"
+  >
+    Zarejestruj w Booksy do<br>{{ service.fullName }}
   </a>
 </div>
+
+<article class="_panel" style="display: grid; gap: var(--space-normal);">
+  <h2>Specjaliści {{ title }}</h2>
+  {% include "partials/team.njk" %}
+</article>
 
 {% if service.desc02 %}
   <article class="panel">
     <div class="content">
-      {{service.desc02 | safe}}
+      {{ service.desc02 | safe }}
     </div>
     {% if service.poster02 %}
-      <img eleventy:optional="placeholder" eleventy:widths="300, 600" src="/media/{{service.poster02}}" alt="{{service.poster02}}" class="panel-image"/>
+      <img
+        eleventy:optional="placeholder"
+        eleventy:widths="300, 600"
+        src="/media/{{service.poster02}}"
+        alt="{{service.poster02}}"
+        class="panel-image"
+      />
     {% endif %}
   </article>
 {% endif %}
@@ -47,10 +67,16 @@ Zarejestruj w Booksy do<br>{{service.fullName}}
 {% if service.desc03 %}
   <article class="panel">
     <div class="content">
-      {{service.desc03 | safe}}
+      {{ service.desc03 | safe }}
     </div>
     {% if service.poster03 %}
-      <img eleventy:optional="placeholder" eleventy:widths="300, 600" src="/media/{{service.poster03}}" alt="{{service.poster03}}" class="panel-image"/>
+      <img
+        eleventy:optional="placeholder"
+        eleventy:widths="300, 600"
+        src="/media/{{service.poster03}}"
+        alt="{{service.poster03}}"
+        class="panel-image"
+      />
     {% endif %}
   </article>
 {% endif %}
@@ -58,10 +84,16 @@ Zarejestruj w Booksy do<br>{{service.fullName}}
 {% if service.desc04 %}
   <article class="panel">
     <div class="content">
-      {{service.desc04 | safe}}
+      {{ service.desc04 | safe }}
     </div>
     {% if service.poster04 %}
-      <img eleventy:optional="placeholder" eleventy:widths="300, 600" src="/media/{{service.poster04}}" alt="{{service.poster04}}" class="panel-image"/>
+      <img
+        eleventy:optional="placeholder"
+        eleventy:widths="300, 600"
+        src="/media/{{service.poster04}}"
+        alt="{{service.poster04}}"
+        class="panel-image"
+      />
     {% endif %}
   </article>
 {% endif %}
@@ -69,10 +101,16 @@ Zarejestruj w Booksy do<br>{{service.fullName}}
 {% if service.desc05 %}
   <article class="panel">
     <div class="content">
-      {{service.desc05 | safe}}
+      {{ service.desc05 | safe }}
     </div>
     {% if service.poster05 %}
-      <img eleventy:optional="placeholder" eleventy:widths="300, 600" src="/media/{{service.poster05}}" alt="{{service.poster05}}" class="panel-image"/>
+      <img
+        eleventy:optional="placeholder"
+        eleventy:widths="300, 600"
+        src="/media/{{service.poster05}}"
+        alt="{{service.poster05}}"
+        class="panel-image"
+      />
     {% endif %}
   </article>
 {% endif %}
@@ -80,10 +118,16 @@ Zarejestruj w Booksy do<br>{{service.fullName}}
 {% if service.desc06 %}
   <article class="panel">
     <div class="content">
-      {{service.desc06 | safe}}
+      {{ service.desc06 | safe }}
     </div>
     {% if service.poster06 %}
-      <img eleventy:optional="placeholder" eleventy:widths="300, 600" src="/media/{{service.poster06}}" alt="{{service.poster06}}" class="panel-image"/>
+      <img
+        eleventy:optional="placeholder"
+        eleventy:widths="300, 600"
+        src="/media/{{service.poster06}}"
+        alt="{{service.poster06}}"
+        class="panel-image"
+      />
     {% endif %}
   </article>
 {% endif %}
@@ -91,10 +135,21 @@ Zarejestruj w Booksy do<br>{{service.fullName}}
 {% if service.desc07 %}
   <article class="panel">
     <div class="content">
-      {{service.desc07 | safe}}
+      {{ service.desc07 | safe }}
     </div>
     {% if service.poster07 %}
-      <img eleventy:optional="placeholder" eleventy:widths="300, 600" src="/media/{{service.poster07}}" alt="{{service.poster07}}" class="panel-image"/>
+      <img
+        eleventy:optional="placeholder"
+        eleventy:widths="300, 600"
+        src="/media/{{service.poster07}}"
+        alt="{{service.poster07}}"
+        class="panel-image"
+      />
     {% endif %}
   </article>
 {% endif %}
+
+<article class="_panel" style="display: grid; gap: var(--space-normal);">
+  <h2>Usługa {{ title }} dostępna jest w gabinetach:</h2>
+  {% include "partials/locations.njk" %}
+</article>

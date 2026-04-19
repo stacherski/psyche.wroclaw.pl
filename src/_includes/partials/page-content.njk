@@ -2,6 +2,26 @@
   {{ content | safe }}
 
   {% if isHomepage %}
+    <h2>Usługi w Centrum PSYCHE</h2>
     {% include "partials/services.njk" %}
   {% endif %}
 </div>
+
+{% if isHomepage %}
+  {% set articlesToDisplay = articles | firstBatch %}
+  <div class="knowledge-base">
+    <h2>Artykuły i Baza Wiedzy</h2>
+    <div>
+      {% include "partials/articles.njk" %}
+      <article class="article">
+        <a
+          href="/o-nas/artykuly/"
+          role="button"
+          aria-label="Przeczytaj więcej artykułów"
+        >
+          <h3>Wszystkie arytkuły</h3>
+        </a>
+      </article>
+    </div>
+  </div>
+{% endif %}

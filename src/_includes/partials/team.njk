@@ -1,0 +1,39 @@
+{% if service %}
+  {% set teamData = service.team | lower %}
+{% elif location %}
+  {% set teamData = location.team | lower %}
+{% endif %}
+
+{% set teamFiltered = team | byMember(teamData) %}
+
+<ul class="team">
+  {% for member in teamFiltered %}
+    <li>
+      <a
+        all
+        {% if member.filterKids %}
+          kids
+        {% endif %}
+        {% if member.filterYouth %}
+          youth
+        {% endif %}
+        {% if member.filterAdult %}
+          adult
+        {% endif %}
+        {% if member.filterOnline %}
+          online
+        {% endif %}
+        class="member"
+        href="/zespół/{{ member.fullName | slugify }}/"
+      >
+        <div class="bg"></div>
+        <img
+          src="/media/{{ member.photo }}"
+          eleventy:widths="300, 600"
+          alt="Zdjęcie specjalisty PSYCHE: {{ member.fullName }}"
+        >
+        <div class="name">{{ member.fullName }}</div>
+      </a>
+    </li>
+  {% endfor %}
+</ul>

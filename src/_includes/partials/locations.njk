@@ -1,0 +1,31 @@
+{% set locationsPublished = locations | byPublished %}
+{% if service %}
+  {%
+    set locationsToDisplay = locationsPublished | byService(service.fullName)
+  %}
+{% elif member %}
+  {%
+    set locationsToDisplay = locationsPublished | byTeamMemberLocation(member.fullName)
+  %}
+{% else %}
+  {% set locationsToDisplay = locationsPublished %}
+{% endif %}
+
+<ul class="locations">
+  {%- for location in locationsToDisplay -%}
+    <li>
+      <a
+        class="location"
+        href="/gabinety/{{ location.fullName | slugify }}/"
+      ><div>{{ location.address }}<br />{{ location.city }}</div>
+        <img
+          eleventy:optional="placeholder"
+          eleventy:widths="600"
+          src="/media/{{location.coverimage}}"
+          alt="Zdjęcie wnetrza gabinetu {{location.fullName}}"
+          class="cover"
+        />
+      </a>
+    </li>
+  {%- endfor -%}
+</ul>
