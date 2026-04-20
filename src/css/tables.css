@@ -1,0 +1,88 @@
+.table {
+    --padding-inline: var(--space-half);
+    --padding-block: var(--space-half);
+    --highlight: var(--clr-base);
+    --border-color: var(--clr-base);
+    --border-width: 1px;
+    --heading-font-size: var(--font-size-paragraph);
+    --cell-font-size: var(--font-size-paragraph);
+    --font-family: var(--font-regular);
+    width: 100%;
+    border-collapse: collapse;
+
+    thead {
+        th {
+            padding-inline: var(--padding-inline);
+            padding-block: var(--padding-block);
+            text-align: left;
+            border-block-end-width: var(--border-width);
+            border-block-end-color: var(--border-color);
+            border-block-end-style: solid;
+            font-size: var(--heading-font-size);
+            font-weight: 700;
+            vertical-align: center;
+            background-color: var(--clr-base);
+            color: var(--clr-text-inverse);
+        }
+    }
+
+    tbody {
+        td {
+            padding-inline: var(--padding-inline);
+            padding-block: var(--padding-block);
+            text-align: left;
+            font-size: var(--cell-font-size);
+            font-family: var(--font-family);
+            line-height: var(--as-line-height-tight);
+            border-block-end-width: var(--border-width);
+            border-block-end-color: var(--border-color);
+            border-block-end-style: solid;
+            transition: all var(--as-time-xs) ease-out;
+            vertical-align: top;
+
+            * {
+                /*font-size: inherit;*/
+                line-height: inherit;
+            }
+        }
+    }
+
+    &.prices {
+        :is(td,th) {
+            width: 10%;
+
+            &:first-of-type {
+                width: 70%;
+                font-weight: 700;
+            }
+
+            &.right {
+                text-align: right;
+            }
+        }
+    }
+
+
+    @media screen and (max-width: 37.5rem) {
+        min-width: unset;
+
+        thead {
+            display: none;
+        }
+
+        tr {
+            display: flex;
+            flex-direction: column;
+            gap: var(--as-space-xxs);
+            
+            td {
+                width: 100% !important;
+            }
+
+            td:not(:last-child) {
+                border: unset;
+            }
+        }
+    }
+
+}

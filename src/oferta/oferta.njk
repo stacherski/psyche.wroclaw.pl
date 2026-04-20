@@ -59,7 +59,7 @@ isHomepage: false
         src="/media/{{service.poster02}}"
         alt="{{service.poster02}}"
         class="panel-image"
-      />
+/>
     {% endif %}
   </article>
 {% endif %}
@@ -76,7 +76,7 @@ isHomepage: false
         src="/media/{{service.poster03}}"
         alt="{{service.poster03}}"
         class="panel-image"
-      />
+/>
     {% endif %}
   </article>
 {% endif %}
@@ -93,7 +93,7 @@ isHomepage: false
         src="/media/{{service.poster04}}"
         alt="{{service.poster04}}"
         class="panel-image"
-      />
+/>
     {% endif %}
   </article>
 {% endif %}
@@ -110,7 +110,7 @@ isHomepage: false
         src="/media/{{service.poster05}}"
         alt="{{service.poster05}}"
         class="panel-image"
-      />
+/>
     {% endif %}
   </article>
 {% endif %}
@@ -127,7 +127,7 @@ isHomepage: false
         src="/media/{{service.poster06}}"
         alt="{{service.poster06}}"
         class="panel-image"
-      />
+/>
     {% endif %}
   </article>
 {% endif %}
@@ -144,7 +144,7 @@ isHomepage: false
         src="/media/{{service.poster07}}"
         alt="{{service.poster07}}"
         class="panel-image"
-      />
+/>
     {% endif %}
   </article>
 {% endif %}
@@ -152,4 +152,9 @@ isHomepage: false
 <article class="_panel" style="display: grid; gap: var(--space-normal);">
   <h2>Usługa {{ title }} dostępna jest w gabinetach:</h2>
   {% include "partials/locations.njk" %}
+</article>
+
+<article class="_panel" style="display: grid; gap: var(--space-normal);">
+  <h2>Cennik</h2>
+  {% include "partials/prices.njk" %}
 </article>

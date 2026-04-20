@@ -33,28 +33,34 @@ module.exports = function (eleventyConfig) {
 
   // ─── FILTERS ──────────────────────────────────────────────────────────────
 
-  eleventyConfig.addFilter("firstBatch", collection => {
-    return collection.reverse().slice(0, 15)
-  })
+  // limit reversed array to 15 records only
+  eleventyConfig.addFilter("firstBatch", (collection) => {
+    return collection.reverse().slice(0, 15);
+  });
 
+  // filter used with partials/team.njk for when it is being used
+  // on services page details to display only those team members offering current service
   eleventyConfig.addFilter("byMember", (collection, members) => {
     const displayMembers = members
-      .split(';')
-      .map(s => s.trim().toLowerCase())
+      .split(";")
+      .map((s) => s.trim().toLowerCase());
 
-    return collection.filter(item =>
-      displayMembers.includes(item.fullName.toLowerCase())
-    )
-  })
+    return collection.filter((item) =>
+      displayMembers.includes(item.fullName.toLowerCase()),
+    );
+  });
 
+  // filer used with partials/service.njk when services are displayed on team member detail page
   eleventyConfig.addFilter("byTeamMember", (collection, fullName) => {
     if (!fullName) return collection;
 
     const normalizedName = fullName.toLowerCase();
 
-    return collection.filter(item => {
+    return collection.filter((item) => {
       if (!item.team) return false;
-      const teamMembers = item.team.split(';').map(s => s.trim().toLowerCase());
+      const teamMembers = item.team
+        .split(";")
+        .map((s) => s.trim().toLowerCase());
       return teamMembers.includes(normalizedName);
     });
   });
@@ -63,44 +69,54 @@ module.exports = function (eleventyConfig) {
     if (!locationTeam) return collection;
 
     const locationMembers = locationTeam
-      .split(';')
-      .map(s => s.trim().toLowerCase());
+      .split(";")
+      .map((s) => s.trim().toLowerCase());
 
-    return collection.filter(item => {
+    return collection.filter((item) => {
       if (!item.team) return false;
-      const itemTeamMembers = item.team.split(';').map(s => s.trim().toLowerCase());
-      return itemTeamMembers.some(member => locationMembers.includes(member));
+      const itemTeamMembers = item.team
+        .split(";")
+        .map((s) => s.trim().toLowerCase());
+      return itemTeamMembers.some((member) => locationMembers.includes(member));
     });
   });
 
+  // filter used on location detail page to show which services are available at that location
   eleventyConfig.addFilter("byService", (locations, serviceName) => {
     if (!serviceName) return locations;
 
     const normalizedService = serviceName.toLowerCase();
 
-    return locations.filter(location => {
+    return locations.filter((location) => {
       if (!location.services) return false;
-      const locationServices = location.services.split(';').map(s => s.trim().toLowerCase());
+      const locationServices = location.services
+        .split(";")
+        .map((s) => s.trim().toLowerCase());
       return locationServices.includes(normalizedService);
     });
   });
 
+  // filter used on location detail page to show which team members are available at that location
   eleventyConfig.addFilter("byTeamMemberLocation", (locations, fullName) => {
     if (!fullName) return locations;
 
     const normalizedName = fullName.toLowerCase();
 
-    return locations.filter(location => {
+    return locations.filter((location) => {
       if (!location.team) return false;
-      const locationTeam = location.team.split(';').map(s => s.trim().toLowerCase());
+      const locationTeam = location.team
+        .split(";")
+        .map((s) => s.trim().toLowerCase());
       return locationTeam.includes(normalizedName);
     });
   });
 
+  // general filter for published key
   eleventyConfig.addFilter("byPublished", (collection) => {
     return collection.filter((item) => item.published);
   });
 
+  // general filter for sorting key
   eleventyConfig.addFilter("bySorting", (collection) => {
     return collection.sort((a, b) => {
       return b.sorting - a.sorting;
@@ -126,7 +142,6 @@ module.exports = function (eleventyConfig) {
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/^-|-$/g, "");
   });
-
 
   // ─── COLLECTIONS ──────────────────────────────────────────────────────────
 

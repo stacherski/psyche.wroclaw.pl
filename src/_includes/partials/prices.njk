@@ -1,0 +1,23 @@
+<table class="table prices">
+  <thead>
+    <tr>
+      <th>Usługa</th>
+      <th>Czas trwania</th>
+      <th class="right">Cena</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    {%- for price in prices -%}
+      <tr>
+        <td>{{ price.fullName }}
+          {% if price.description %}
+            <span>{{price.description}}</span>{%endif%}</td>
+          <td>
+            {%if price.duration%}{{price.duration}} minut{%endif%}</td>
+            <td class="right">{{price.price}} zł</td>
+          </tr>
+
+        {%- endfor -%}
+      </tbody>
+    </table>
