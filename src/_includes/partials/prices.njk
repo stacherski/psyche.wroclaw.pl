@@ -1,3 +1,7 @@
+{% if service and service.prices %}
+  {% set prices = collections.pricesPages | byServicePrices(service.prices) %}
+{% endif %}
+
 <table class="table prices">
   <thead>
     <tr>
@@ -7,17 +11,18 @@
     </tr>
   </thead>
   <tbody>
-
     {%- for price in prices -%}
       <tr>
-        <td>{{ price.fullName }}
+        <td>
+          {{ price.fullName }}
           {% if price.description %}
-            <span>{{price.description}}</span>{%endif%}</td>
-          <td>
-            {%if price.duration%}{{price.duration}} minut{%endif%}</td>
-            <td class="right">{{price.price}} zł</td>
-          </tr>
-
-        {%- endfor -%}
-      </tbody>
-    </table>
+            <span>{{ price.description }}</span>{% endif %}
+        </td>
+        <td>
+          {% if price.duration %}{{ price.duration }} minut{% endif %}
+        </td>
+        <td class="right">{{ price.price }} zł</td>
+      </tr>
+    {%- endfor -%}
+  </tbody>
+</table>

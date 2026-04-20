@@ -38,6 +38,11 @@ module.exports = function (eleventyConfig) {
     return collection.reverse().slice(0, 15);
   });
 
+  eleventyConfig.addFilter("reverse", (collection) => {
+    return collection.reverse();
+  });
+
+
   // filter used with partials/team.njk for when it is being used
   // on services page details to display only those team members offering current service
   eleventyConfig.addFilter("byMember", (collection, members) => {
@@ -81,6 +86,19 @@ module.exports = function (eleventyConfig) {
     });
   });
 
+  // filter used on service detail page to show only prices applicable to that service
+  eleventyConfig.addFilter("byServicePrices", (collection, priceNames) => {
+    if (!priceNames) return collection;
+
+    const priceList = priceNames
+      .split(";")
+      .map((s) => s.trim().toLowerCase());
+
+    return collection.filter((item) =>
+      priceList.includes(item.fullName.toLowerCase()),
+    );
+  });
+
   // filter used on location detail page to show which services are available at that location
   eleventyConfig.addFilter("byService", (locations, serviceName) => {
     if (!serviceName) return locations;
@@ -120,6 +138,13 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter("bySorting", (collection) => {
     return collection.sort((a, b) => {
       return b.sorting - a.sorting;
+    });
+  });
+
+  // general filter for sorting by date descending (newest first)
+  eleventyConfig.addFilter("byDateDesc", (collection) => {
+    return collection.sort((a, b) => {
+      return new Date(b.date) - new Date(a.date);
     });
   });
 
@@ -166,9 +191,11 @@ module.exports = function (eleventyConfig) {
   });
 
   eleventyConfig.addCollection("articlesPages", (collectionApi) => {
-    const articles = require("./src/_data/articles.json");
-    return articles;
+    const articles = require("./src/_data/articles.json").reverse();
+    return articles
   });
+
+
   // ─── ELEVENTY CONFIG ──────────────────────────────────────────────────────
 
   // eleventyConfig.on("eleventy.before", () => {

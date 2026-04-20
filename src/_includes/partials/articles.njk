@@ -7,6 +7,7 @@
     >
       <h3>{{ article.title }}</h3>
       {% if isHomepage == false %}
+        <div>{{ article.date }}</div>
         {{ article.textShort | safe }}
       {% endif %}
     </a>
