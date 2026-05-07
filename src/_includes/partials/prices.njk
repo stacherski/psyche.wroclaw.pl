@@ -16,7 +16,9 @@
         <td>
           {{ price.fullName }}
           {% if price.description %}
-            <span>{{ price.description }}</span>{% endif %}
+            <br /><span style="font-weight: 400;">{{
+              price.description
+            }}</span>{% endif %}
         </td>
         <td>
           {% if price.duration %}{{ price.duration }} minut{% endif %}

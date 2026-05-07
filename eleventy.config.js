@@ -30,6 +30,8 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/css");
   eleventyConfig.addPassthroughCopy("src/media");
   eleventyConfig.addPassthroughCopy("src/script");
+  eleventyConfig.addPassthroughCopy("src/llms.txt");
+  eleventyConfig.addPassthroughCopy("src/llms-full.txt");
 
   // ─── FILTERS ──────────────────────────────────────────────────────────────
 
@@ -195,6 +197,19 @@ module.exports = function (eleventyConfig) {
     return articles
   });
 
+
+  // ─── DEV SERVER ───────────────────────────────────────────────────────────
+
+  eleventyConfig.setServerOptions({
+    middleware: [
+      function (req, res, next) {
+        if (req.url.endsWith(".txt")) {
+          res.setHeader("Content-Type", "text/plain; charset=utf-8");
+        }
+        next();
+      },
+    ],
+  });
 
   // ─── ELEVENTY CONFIG ──────────────────────────────────────────────────────
 

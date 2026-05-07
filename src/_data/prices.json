@@ -198,6 +198,33 @@
     "description": "Wywiad, diagnoza, raport"
   },
   {
+    "fullName": "Diagnoza rozwoju dziecka KORP",
+    "price": "550,00",
+    "duration": 170,
+    "type": "KORP",
+    "sorting": 1200,
+    "published": "Yes",
+    "description": "Wywiad, diagnoza, raport"
+  },
+  {
+    "fullName": "Kompleksowa diagnoza rozwoju dziecka KORP + KOZE",
+    "price": "750,00",
+    "duration": 180,
+    "type": "KOZE",
+    "sorting": 1210,
+    "published": "Yes",
+    "description": "Wywiad, diagnoza, raport"
+  },
+  {
+    "fullName": "Diagnoza ADHD u dzieci",
+    "price": "950,00",
+    "duration": 180,
+    "type": "KOZE",
+    "sorting": 1220,
+    "published": "Yes",
+    "description": "Wywiad, diagnoza, raport"
+  },
+  {
     "fullName": "Minnesota Multiphasic Personality Inventory-2 (MMPI-2)",
     "price": "800,00",
     "duration": 120,
