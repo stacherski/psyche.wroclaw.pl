@@ -16,6 +16,10 @@ module.exports = function (eleventyConfig) {
     // output image widths
     widths: ["auto"],
 
+    // write generated images as static files into _site/media/
+    outputDir: "./_site/media/",
+    urlPath: "/media/",
+
     // optional, attributes assigned on <img> nodes override these values
     htmlOptions: {
       imgAttributes: {
@@ -32,6 +36,8 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/script");
   eleventyConfig.addPassthroughCopy("src/llms.txt");
   eleventyConfig.addPassthroughCopy("src/llms-full.txt");
+  eleventyConfig.addPassthroughCopy("src/robots.txt");
+
 
   // ─── FILTERS ──────────────────────────────────────────────────────────────
 

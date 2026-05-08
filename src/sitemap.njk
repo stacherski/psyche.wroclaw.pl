@@ -1,0 +1,109 @@
+---
+permalink: /sitemap.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  {# ── Static pages ──────────────────────────────────────────────────────── #}
+  <url>
+    <loc>https://psyche.wroclaw.pl/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://psyche.wroclaw.pl/o-nas/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://psyche.wroclaw.pl/oferta/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://psyche.wroclaw.pl/zesp%C3%B3%C5%82/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://psyche.wroclaw.pl/gabinety/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://psyche.wroclaw.pl/cennik/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://psyche.wroclaw.pl/kontakt/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://psyche.wroclaw.pl/o-nas/artykuly/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://psyche.wroclaw.pl/pracuj-z-nami/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://psyche.wroclaw.pl/regulamin/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://psyche.wroclaw.pl/polityka-ochrony-ma%C5%82oletnich/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  {# ── Services ──────────────────────────────────────────────────────────── #}
+  {%- for service in services %}
+    {%- if service.published %}
+  <url>
+    <loc>https://psyche.wroclaw.pl/oferta/{{ service.fullName | slugify }}/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+    {%- endif %}
+  {%- endfor %}
+
+  {# ── Team members ──────────────────────────────────────────────────────── #}
+  {%- for member in team %}
+    {%- if member.published == 'Yes' %}
+  <url>
+    <loc>https://psyche.wroclaw.pl/zesp%C3%B3%C5%82/{{ member.fullName | slugify }}/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+    {%- endif %}
+  {%- endfor %}
+
+  {# ── Locations ─────────────────────────────────────────────────────────── #}
+  {%- for location in locations %}
+    {%- if location.published %}
+  <url>
+    <loc>https://psyche.wroclaw.pl/gabinety/{{ location.fullName | slugify }}/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+    {%- endif %}
+  {%- endfor %}
+
+  {# ── Articles ──────────────────────────────────────────────────────────── #}
+  {%- for article in articles %}
+    {%- if article.published %}
+  <url>
+    <loc>https://psyche.wroclaw.pl/o-nas/artykuly/@{{ article.id }}/{{ article.urlTitle | slugify }}/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+    {%- endif %}
+  {%- endfor %}
+
+</urlset>
