@@ -188,7 +188,7 @@ em strong {
 }
 
 .navigation-panel {
-    --size: calc(25 * var(--size-normal));
+    --size: calc(23 * var(--size-normal));
     width: var(--size);
     height: 100vh;
     background-color: var(--clr-base);
