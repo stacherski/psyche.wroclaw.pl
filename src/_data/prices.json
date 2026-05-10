@@ -198,15 +198,6 @@
     "description": "Wywiad, diagnoza, raport"
   },
   {
-    "fullName": "Diagnoza rozwoju dziecka KORP",
-    "price": "550,00",
-    "duration": 170,
-    "type": "KORP",
-    "sorting": 1200,
-    "published": "Yes",
-    "description": "Wywiad, diagnoza, raport"
-  },
-  {
     "fullName": "Kompleksowa diagnoza rozwoju dziecka KORP + KOZE",
     "price": "750,00",
     "duration": 180,

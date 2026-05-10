@@ -32,6 +32,7 @@ ul.services {
             .icon {
                 aspect-ratio: 1/1;
                 width: 100%;
+                max-width: 100px;
                 margin-block-start: var(--space-double)
             }
 
