@@ -47,3 +47,7 @@ Dane przetwarzamy w celu realizacji usług terapeutycznych/diagnostycznych oraz 
 ## Dokumenty
 
 Pełna Polityka Ochrony Małoletnich oraz wzory oświadczeń i procedur są dostępne w siedzibie Fundacji przy ulicy Małopanewskiej 18/13 we Wrocławiu.
+
+## Do pobrania
+
+[Polityka Ochrony Małoletnich](/media/polityka-ochrony-dzieci-w-centrum-psyche.pdf)
