@@ -58,8 +58,10 @@ module.exports = function (eleventyConfig) {
       .split(";")
       .map((s) => s.trim().toLowerCase());
 
-    return collection.filter((item) =>
-      displayMembers.includes(item.fullName.toLowerCase()),
+    return collection.filter(
+      (item) =>
+        item.published?.toLowerCase() === "yes" &&
+        displayMembers.includes(item.fullName.toLowerCase()),
     );
   });
 
