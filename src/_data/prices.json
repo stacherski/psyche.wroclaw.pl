@@ -63,6 +63,15 @@
     "description": ""
   },
   {
+    "fullName": "Sesja wsparcia dla rodziców",
+    "price": "200,00",
+    "duration": 50,
+    "type": "Psychologia",
+    "sorting": 1010,
+    "published": "Yes",
+    "description": ""
+  },
+  {
     "fullName": "Konsultacja logopedyczna",
     "price": "200,00",
     "duration": 50,
