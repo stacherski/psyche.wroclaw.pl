@@ -440,3 +440,8 @@ td {
 p+p {
     margin-block-start: var(--space-normal);
 }
+
+/* Netlify badge injected on free-tier sites */
+#nl-badge-frame {
+    display: none !important;
+}
