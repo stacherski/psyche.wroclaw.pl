@@ -283,5 +283,20 @@
     "filterYouth": true,
     "filterAdult": false,
     "filterOnline": false
+  },
+  {
+    "tagline": "W Centrum Psyche jako psycholog dziecięcy przyjmuję dzieci od 7 roku życia, a jako diagnosta ADOS-2 i ADHD – dzieci oraz osoby dorosłe",
+    "booksyLink": "",
+    "fullName": "Dorota Rycak",
+    "specialization": "ADOS 2, Psycholog, Psycholog dziecięcy, Psycholog młodzieży",
+    "photo": "psyche-psycholog-dorota-rycak.jpg",
+    "bioPL": "<p><b>W Centrum Psyche jako psycholog dziecięcy przyjmuję dzieci od 7 roku życia, a jako diagnosta ADOS-2 i ADHD – dzieci oraz osoby dorosłe</b></p><p>Jestem psychologiem zajmującym się diagnozą oraz wsparciem psychologicznym dzieci, młodzieży i ich rodzin. Ukończyłam psychologię na Uniwersytecie SWPS we Wrocławiu, a swoją wiedzę stale rozwijam poprzez specjalistyczne szkolenia oraz studia podyplomowe z zakresu kryzysu i interwencji kryzysowej.</p><p>Na co dzień pracuję z dziećmi i młodzieżą w spektrum autyzmu, z ADHD oraz z trudnościami emocjonalnymi. Prowadzę procesy diagnostyczne z wykorzystaniem wystandaryzowanych narzędzi, takich jak ADOS-2 oraz Skala Inteligencji Stanford-Binet 5, a także tworzę indywidualne plany wsparcia dostosowane do potrzeb i możliwości każdego pacjenta.</p><p>W swojej pracy kieruję się przekonaniem, że diagnoza kliniczna i funkcjonalna nie definiuje człowieka. Diagnoza nie jest etykietą, lecz źródłem wiedzy, które pomaga lepiej zrozumieć sposób funkcjonowania danej osoby oraz dobrać najbardziej adekwatne formy wsparcia jej rozwoju. Wierzę, że za każdą diagnozą stoi człowiek ze swoją historią, zasobami, potencjałem i indywidualnymi potrzebami.</p><p>Szczególnie ważne jest dla mnie budowanie relacji opartej na zaufaniu, poczuciu bezpieczeństwa i wzajemnym szacunku. W pracy z dziećmi i młodzieżą koncentruję się nie tylko na trudnościach, ale również na mocnych stronach, które mogą stać się fundamentem dalszego rozwoju. Wspieram pacjentów w rozwijaniu kompetencji społecznych, regulacji emocji, budowaniu poczucia własnej wartości oraz radzeniu sobie z wyzwaniami codziennego życia.</p><p>Doświadczenie zawodowe zdobywałam zarówno w placówkach diagnostyczno-terapeutycznych, przedszkolach, projektach psychoedukacyjnych i interwencyjnych, jak również we współpracy z osobami doświadczającymi kryzysów emocjonalnych. Dzięki temu mogę spojrzeć na potrzeby pacjenta w sposób całościowy i indywidualny.</p><p>Zapraszam do współpracy dzieci, młodzież oraz rodziców poszukujących profesjonalnej diagnozy, wsparcia psychologicznego i wspólnego poszukiwania najlepszych rozwiązań sprzyjających rozwojowi i dobrostanowi dziecka.</p>",
+    "description": "Dorota Rycak - przyjmuje pacjentów w Centrum PSYCHE we Wrocławiu. Umów się na wizytę: 📱 +48 668 093 234 lub ✉️ info@psyche.wroclaw.pl",
+    "published": "Yes",
+    "onlineBooking": "No",
+    "filterKids": true,
+    "filterYouth": true,
+    "filterAdult": true,
+    "filterOnline": false
   }
 ]
