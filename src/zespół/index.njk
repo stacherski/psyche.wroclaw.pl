@@ -63,6 +63,7 @@ filterBtns.forEach(btn => {
     if (!document.startViewTransition) {
       setActiveButton(e.target);
       filterEvents(e.target.dataset.category);
+      return;
     }
     document.startViewTransition(() => {
       setActiveButton(e.target);

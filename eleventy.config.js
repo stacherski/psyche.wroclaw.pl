@@ -158,6 +158,43 @@ module.exports = function (eleventyConfig) {
     });
   });
 
+  // FAQ entries for one service page (partials/faq.njk), with the answer split into
+  // paragraphs and the sources of web-researched answers shortened to their domain
+  eleventyConfig.addFilter("faqFor", (faq, slug) => {
+    return faq
+      .filter((item) => item.service === slug)
+      .map((item) => ({
+        question: item.question,
+        answer: item.answer,
+        paragraphs: item.answer.split("\n").map((p) => p.trim()).filter(Boolean),
+        sources:
+          item.origin === "web"
+            ? (item.sources || []).map((url) => ({
+                url,
+                domain: new URL(url).hostname.replace(/^www\./, ""),
+              }))
+            : [],
+      }));
+  });
+
+  // schema.org FAQPage structured data for the same entries
+  eleventyConfig.addFilter("faqJsonLd", (faqs) => {
+    const data = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: faqs.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.answer.split(/\s+/).join(" "),
+        },
+      })),
+    };
+    // escape "<" so an answer can never close the surrounding <script> tag
+    return JSON.stringify(data).replace(/</g, "\\u003c");
+  });
+
   const map = {
     ą: "a",
     ć: "c",
