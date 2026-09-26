@@ -1,8 +1,23 @@
-{% set faqs = faq | faqFor(service.fullName | slugify) %}
+{#
+  FAQ accordion for one service. Used on the service page (heading "Najczęstsze pytania")
+  and, with faqIndex set, once per service on /najczestsze-pytania/ (heading = service name).
+#}
+{% set slug = service.fullName | slugify %}
+{% set faqs = faq | faqFor(slug) %}
 {% if faqs.length %}
-  {% set slug = service.fullName | slugify %}
-  <section class="faq" aria-labelledby="faq-{{ slug }}-title">
-    <h2 id="faq-{{ slug }}-title">Najczęstsze pytania</h2>
+  <section
+    class="faq"
+    {% if faqIndex %}id="{{ slug }}"{% endif %}
+    aria-labelledby="faq-{{ slug }}-title"
+  >
+    <h2 id="faq-{{ slug }}-title">
+      {% if faqIndex %}{{ service.fullName }}{% else %}Najczęstsze pytania{% endif %}
+    </h2>
+    {% if faqIndex %}
+      <p class="faq-service-link">
+        <a href="/oferta/{{ slug }}/">Przejdź do opisu usługi</a>
+      </p>
+    {% endif %}
     <div class="faq-list">
       {% for item in faqs %}
         <details class="faq-item" name="faq-{{ slug }}">
@@ -18,5 +33,10 @@
         </details>
       {% endfor %}
     </div>
+    {% if not faqIndex %}
+      <p class="faq-all-link">
+        <a href="/najczestsze-pytania/">Zobacz pytania dotyczące wszystkich usług</a>
+      </p>
+    {% endif %}
   </section>
 {% endif %}

@@ -1,0 +1,37 @@
+---
+layout: layouts/sitelayout.njk
+title: Najczęstsze pytania
+pageTitle: Najczęstsze pytania o usługi Centrum PSYCHE we Wrocławiu
+postfix: Centrum PSYCHE Wrocław
+description: Odpowiedzi na najczęstsze pytania pacjentów Centrum PSYCHE we Wrocławiu – o konsultacje psychologiczne, psychoterapię, diagnozę, logopedię i EEG Biofeedback, pogrupowane według usług.
+permalink: /najczestsze-pytania/
+isHomepage: false
+faqIndex: true
+---
+
+{% set servicesWithFaq = services | byPublished | withFaq(faq) %}
+
+<h1>{{ pageTitle }}</h1>
+
+<p>
+  Zebraliśmy odpowiedzi na pytania, które pacjenci najczęściej zadają przed
+  wizytą w Centrum PSYCHE. Pytania są pogrupowane według usług – wybierz usługę,
+  aby przejść do jej sekcji.
+</p>
+
+<nav class="faq-toc" aria-label="Usługi">
+  <ul>
+    {% for s in servicesWithFaq %}
+      <li>
+        <a href="#{{ s.fullName | slugify }}">
+          {{ s.fullName }}
+          <span class="count">{{ (faq | faqFor(s.fullName | slugify)).length }}</span>
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+</nav>
+
+{% for service in servicesWithFaq %}
+  {% include "partials/faq.njk" %}
+{% endfor %}

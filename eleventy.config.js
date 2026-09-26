@@ -177,6 +177,14 @@ module.exports = function (eleventyConfig) {
       }));
   });
 
+  // services that have at least one FAQ entry (sections of /najczestsze-pytania/)
+  eleventyConfig.addFilter("withFaq", (services, faq) => {
+    const slugs = new Set(faq.map((item) => item.service));
+    return services.filter((service) =>
+      slugs.has(eleventyConfig.getFilter("slugify")(service.fullName)),
+    );
+  });
+
   // schema.org FAQPage structured data for the same entries
   eleventyConfig.addFilter("faqJsonLd", (faqs) => {
     const data = {
