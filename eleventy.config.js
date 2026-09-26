@@ -246,7 +246,7 @@ module.exports = function (eleventyConfig) {
       description:
         "Prywatna poradnia zdrowia psychicznego i centrum psychoterapii we Wrocławiu: psycholog, psychoterapeuta, psycholog dziecięcy, logopeda, diagnoza (ADOS-2, DIVA-5, MMPI-2, QEEG) i EEG Biofeedback dla dzieci, młodzieży i dorosłych.",
       url: SITE,
-      logo: `${SITE}/media/psyche-favicon.svg`,
+      logo: `${SITE}/media/psyche-logo-square.png`,
       telephone: "+48 668 093 234",
       email: "info@psyche.wroclaw.pl",
       sameAs: ["https://fb.me/centrumpsyche"],
@@ -271,6 +271,7 @@ module.exports = function (eleventyConfig) {
         url: `${SITE}/gabinety/${eleventyConfig.getFilter("slugify")(location.fullName)}/`,
         telephone: "+48 668 093 234",
         ...place(location),
+        openingHoursSpecification: openingHours,
       })),
     };
     return JSON.stringify(data).replace(/</g, "\\u003c");
