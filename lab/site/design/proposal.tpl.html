@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Psyche Design Tokens</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400..700&family=IBM+Plex+Mono:wght@400;500&family=Raleway:wght@300..700&family=Fraunces:opsz,wght,SOFT@9..144,300..700,0..100&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F8F7; --panel:#FFFFFF; --ink:#152120; --ink-2:#3F4D4C; --muted:#5E6B6A; --line:#DCE4E3;
+  --accent:#007A74; --ok-bg:#E3F3EC; --ok:#17613F; --bad-bg:#FBE6E3; --bad:#9B2C1F; --new:#E6EEFB; --new-ink:#2B4A86; --fix-bg:#FFF1D6; --fix:#7A4B00;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace; --sans:Onest, system-ui, sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0E1515; --panel:#152020; --ink:#E3ECEB; --ink-2:#BCC9C8; --muted:#93A3A2; --line:#263434;
+  --accent:#5CC6BE; --ok-bg:#133326; --ok:#8FE0B5; --bad-bg:#3A1914; --bad:#FFB4A6; --new:#1B2742; --new-ink:#B4C8F5; --fix-bg:#3A2A0B; --fix:#FFD48A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1515; --panel:#152020; --ink:#E3ECEB; --ink-2:#BCC9C8; --muted:#93A3A2; --line:#263434;
+  --accent:#5CC6BE; --ok-bg:#133326; --ok:#8FE0B5; --bad-bg:#3A1914; --bad:#FFB4A6; --new:#1B2742; --new-ink:#B4C8F5; --fix-bg:#3A2A0B; --fix:#FFD48A; color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--sans);padding-inline:16px}
+main{max-width:72rem;margin:0 auto;padding-block:3rem 5rem}
+h1,h2,h3{line-height:1.2;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,1.6rem + 1.6vw,2.75rem);font-weight:650;letter-spacing:-.02em}
+h2{font-size:1.5rem;font-weight:600;letter-spacing:-.01em;margin-top:3.5rem;margin-bottom:.75rem}
+h3{font-size:1.0625rem;font-weight:600}
+p{max-width:68ch;margin:.5rem 0;color:var(--ink-2)}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.lede{font-size:1.125rem}
+a{color:var(--accent)}
+code{font:400 12.5px/1.45 var(--mono);color:var(--ink);word-break:break-word}
+.actions{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.25rem}
+.actions a{display:inline-flex;padding:.6rem 1rem;border-radius:999px;border:1px solid var(--line);background:var(--panel);text-decoration:none;color:var(--ink);font-weight:500}
+.actions a:first-child{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.actions a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,20rem),1fr));gap:1rem;margin-top:1rem}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:1.25rem}
+.card ul{margin:.5rem 0 0;padding-left:1.1rem;color:var(--ink-2)}
+.card li+li{margin-top:.35rem}
+.dir{display:grid;gap:.75rem}
+.dir .specimen{border-radius:10px;padding:1.25rem;color:#fff}
+.dir .specimen .t{font-size:1.9rem;line-height:1.15;margin:0 0 .5rem}
+.dir .specimen .b{font-size:.95rem;line-height:1.6;opacity:.92;margin:0;max-width:40ch;color:inherit}
+.dir .specimen .num{margin-top:.75rem;font-size:.95rem}
+.spec-a{background:#0B5E59;font-family:Raleway,sans-serif;font-variant-numeric:lining-nums}
+.spec-a .t{font-weight:600;letter-spacing:-.01em}
+.spec-b{background:#2F3A6E;font-family:Onest,sans-serif}
+.spec-b .t{font-family:Fraunces,Georgia,serif;font-weight:500;font-variation-settings:"SOFT" 100}
+.spec-cur{background:#018E87;font-family:Raleway,sans-serif}
+.spec-cur .t{font-weight:500}
+.swatches{display:flex;flex-wrap:wrap;gap:.35rem}
+.swatches i{width:2rem;height:2rem;border-radius:6px;border:1px solid var(--line)}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--panel);margin-top:1rem}
+table{border-collapse:collapse;width:100%;min-width:52rem;font-size:14px}
+th,td{text-align:left;vertical-align:top;padding:.6rem .8rem;border-top:1px solid var(--line)}
+thead th{border-top:0;font:500 12px/1.2 var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted);position:sticky;top:0;background:var(--panel)}
+tbody th{font-weight:500;width:26%}
+tbody th small{display:block;color:var(--muted);font-weight:400;font-size:12.5px;margin-top:.2rem;line-height:1.4}
+tr.grp th{background:var(--bg);font:600 12px/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--accent);padding-block:.7rem}
+.sw{display:inline-block;width:.9rem;height:.9rem;border-radius:3px;vertical-align:-2px;margin-right:.4rem;border:1px solid rgb(0 0 0 / .15)}
+.tag{display:inline-block;margin-left:.4rem;font:500 10.5px/1 var(--mono);padding:.2rem .35rem;border-radius:4px;text-transform:uppercase;letter-spacing:.05em;vertical-align:1px}
+.tag.new{background:var(--new);color:var(--new-ink)}
+.tag.fix{background:var(--fix-bg);color:var(--fix)}
+.pair{display:inline-grid;place-items:center;width:2.2rem;height:2.2rem;border-radius:6px;font:600 15px/1 Raleway,sans-serif;margin-right:.5rem;border:1px solid var(--line);vertical-align:middle}
+.cr{font:500 12px/1 var(--mono);padding:.3rem .45rem;border-radius:4px;white-space:nowrap}
+.cr.ok{background:var(--ok-bg);color:var(--ok)}
+.cr.bad{background:var(--bad-bg);color:var(--bad)}
+ol.steps{padding-left:1.25rem;color:var(--ink-2)}
+ol.steps li+li{margin-top:.5rem}
+pre{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:1rem;overflow-x:auto}
+</style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">psyche.wroclaw.pl · homepage</div>
+  <h1>Design tokens &amp; two directions</h1>
+  <p class="lede">I built a token system from the fonts, colours, sizes and effects the live CSS already uses, and fixed the variables that are broken. On top of it are two directions. Both restyle only through CSS layered after the existing stylesheets, so the HTML and page structure stay the same.</p>
+  <div class="actions">
+    <a href="/?dir=refine">Open homepage · A Refine</a>
+    <a href="/?dir=fresh">Open homepage · B Fresh</a>
+    <a href="/?dir=current">Open homepage · Current</a>
+  </div>
+
+  <h2>What the current CSS does</h2>
+  <div class="grid">
+    <div class="card"><h3>Type</h3><ul>
+      <li>There are two scales. <code>main.css</code> uses fixed sizes (.75, 1, 1.5, 2rem) and <code>typographies.css</code> uses fluid <code>clamp()</code> sizes. Because the hero h1 uses the 2rem one, it renders at 32px while each h2 is 43px.</li>
+      <li>Body line-height is set to <code>var(--font-size-h4)</code>, a size variable rather than a line-height.</li>
+      <li>The intro paragraphs are wrapped in <code>&lt;strong&gt;</code>, so the whole block is bold. Prose lines run to about 120 characters.</li>
+      <li>Raleway uses old-style figures by default, which makes <code>+48 668 093 234</code> look uneven.</li>
+    </ul></div>
+    <div class="card"><h3>Colour</h3><ul>
+      <li>White on the brand teal <code>#018E87</code> is 4.0:1, below the AA minimum for normal text. That covers the buttons, CTA bar and top bar.</li>
+      <li>The white "Artykuły i Baza Wiedzy" heading on <code>#66CCC7</code> is 1.9:1.</li>
+      <li>Colours are hard-coded outside the variables: <code>#333</code>, <code>#cacaca</code>, <code>#fff</code>, and on sub-pages two more teals (<code>#3FA299</code>, <code>#3F8378</code>).</li>
+    </ul></div>
+    <div class="card"><h3>Shape, space, effects</h3><ul>
+      <li>Four variables are used but never defined: <code>--space-small</code>, <code>--border-radius-small</code> and <code>--font-size-h6</code>. <code>--border-radius-circle: var(50%)</code> is invalid.</li>
+      <li>Service cards are square-cornered, while panels use 2rem corners and the pills are fully rounded.</li>
+      <li>The two-sided "neumorphic" shadow on a grey page makes the cards look hazy. On hover, cards grow to 1.1× and fill with teal.</li>
+      <li>Stray values sit outside the spacing scale: 30px, 4rem, 6rem, and 1310px next to 80rem.</li>
+    </ul></div>
+  </div>
+
+  <h2>The two directions</h2>
+  <div class="grid">
+    <div class="card dir">
+      <h3>Current</h3>
+      <div class="specimen spec-cur"><p class="t">Centrum Psychoterapii</p><p class="b">Psycholog dzieci i dorosłych, psychoterapeuta, badanie ADOS 2, QEEG.</p><p class="num">+48 668 093 234 · pn–pt 9:00–18:00</p></div>
+      <div class="swatches"><i style="background:#018E87"></i><i style="background:#66CCC7"></i><i style="background:#EEEEEE"></i><i style="background:#333333"></i><i style="background:#444444"></i></div>
+    </div>
+    <div class="card dir">
+      <h3>A · Refine</h3>
+      <div class="specimen spec-a"><p class="t">Centrum Psychoterapii</p><p class="b">Psycholog dzieci i dorosłych, psychoterapeuta, badanie ADOS 2, QEEG.</p><p class="num">+48 668 093 234 · pn–pt 9:00–18:00</p></div>
+      <div class="swatches"><i style="background:#007A74"></i><i style="background:#0B5E59"></i><i style="background:#E6F2F1"></i><i style="background:#F2F5F4"></i><i style="background:#3A4948"></i><i style="background:#12302E"></i></div>
+      <p>Same teal and the same Raleway. The action teal is darkened one step to pass AA. Neutrals are tinted toward teal. Real weights: 400 for text, 600 for UI. Cards get soft elevation and lift on hover instead of growing.</p>
+    </div>
+    <div class="card dir">
+      <h3>B · Fresh</h3>
+      <div class="specimen spec-b"><p class="t">Centrum Psychoterapii</p><p class="b">Psycholog dzieci i dorosłych, psychoterapeuta, badanie ADOS 2, QEEG.</p><p class="num">+48 668 093 234 · pn–pt 9:00–18:00</p></div>
+      <div class="swatches"><i style="background:#3E4C8A"></i><i style="background:#2F3A6E"></i><i style="background:#C9BDF0"></i><i style="background:#EEEBFA"></i><i style="background:#F3F4F8"></i><i style="background:#1E2530"></i></div>
+      <p>An evening palette of dusk indigo and a butterfly lilac, a nod to the psyche butterfly in the logo. Headings are in Fraunces with its soft axis, and text is in Onest. Both fonts cover Polish diacritics. The logo itself is unchanged.</p>
+    </div>
+  </div>
+
+  <h2>Contrast, pair by pair</h2>
+  <p>WCAG 2.2 ratios, computed from the token values. "Large" pairs (≥24px, or ≥19px bold) need 3:1; all others need 4.5:1.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Pair</th><th>Current</th><th>A · Refine</th><th>B · Fresh</th></tr></thead>
+    <tbody>{{CONTRAST}}</tbody>
+  </table></div>
+
+  <h2>Token reference</h2>
+  <p>Existing token names are kept, so <code>main.css</code> picks up new values without edits. <span class="tag new">new</span> marks tokens added for values that are hard-coded today. <span class="tag fix">fix</span> marks tokens the site uses but never defined, or defined in a broken way.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Token</th><th>Current</th><th>A · Refine</th><th>B · Fresh</th></tr></thead>
+    <tbody>{{TOKENS}}</tbody>
+  </table></div>
+
+  <h2>What the component layer changes</h2>
+  <div class="grid">
+    <div class="card"><h3>Hero</h3><ul>
+      <li>The h1 uses <code>--font-size-h1</code>, so it is the largest heading on the page again.</li>
+      <li>The flat 50% black overlay and blur become a bottom-weighted scrim, so the photo stays visible and the text stays readable.</li>
+      <li>Buttons become pills with a darker hover and a visible focus ring.</li>
+    </ul></div>
+    <div class="card"><h3>Content &amp; services</h3><ul>
+      <li>Prose is capped at a comfortable line length, and the <code>&lt;strong&gt;</code> wrapper is neutralised with CSS.</li>
+      <li>Cards get rounded corners, a hairline border and a soft shadow. Hover lifts a card 4px and turns the title teal/indigo instead of filling the whole card.</li>
+    </ul></div>
+    <div class="card"><h3>Knowledge base, CTA, footer</h3><ul>
+      <li>The band becomes a pale tint with a dark heading (1.9:1 becomes 7:1 or more).</li>
+      <li>Chips fill with the brand colour on hover and focus.</li>
+      <li>The CTA bar uses <code>--clr-base-strong</code> and the footer uses a deep brand neutral instead of <code>#444</code>.</li>
+      <li>Hover movement is switched off when the visitor has <code>prefers-reduced-motion</code> set.</li>
+    </ul></div>
+  </div>
+
+  <h2>Applying it to the live site</h2>
+  <ol class="steps">
+    <li>Pick a direction and add one stylesheet after <code>tables.css</code>: <code>&lt;link rel="stylesheet" href="/css/tokens.refine.css"&gt;</code>. Each file holds the tokens and the component layer.</li>
+    <li>Optional clean-up: move the <code>typographies.css</code> scale into the token file and delete the duplicate <code>p, li, td…</code> block from <code>main.css</code>.</li>
+    <li>Content fixes outside CSS: the link text "Wszystkie <b>arytkuły</b>" has a typo, and the empty <code>psyche-video.webm</code> on the server is 0 bytes, so browsers have to fall back to the MP4.</li>
+  </ol>
+</main>
+</body>
+</html>

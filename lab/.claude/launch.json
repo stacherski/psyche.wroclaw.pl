@@ -1,0 +1,1 @@
+{"version":"0.0.1","configurations":[{"name":"psyche-local","runtimeExecutable":"python3","runtimeArgs":["/Users/stacherski/Desktop/My Projects/psyche.wroclaw.pl/lab/design/serve.py","8765"],"port":8765}]}

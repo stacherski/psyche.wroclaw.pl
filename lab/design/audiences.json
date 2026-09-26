@@ -1,0 +1,23 @@
+{
+ "_note": "Who each homepage service is for. Curated by hand (2026-09-24) — deriving it from the specialists' filter flags overstates audiences. Keys are /oferta/<slug>/. Values: kids, youth, adult, online.",
+ "psycholog-wroclaw": ["youth", "adult"],
+ "psychoterapeuta-wroclaw": ["youth", "adult"],
+ "psycholog-dzieciecy-wroclaw": ["kids", "youth"],
+ "terapia-par-wroclaw": ["adult"],
+ "terapia-rodzin-psychoterapia-rodzinna-wroclaw": ["kids", "youth", "adult"],
+ "sesje-wsparcia-dla-rodzicow-wroclaw": ["adult"],
+ "logopeda-ze-specjalnoscia-kliniczna-wroclaw": ["kids", "youth", "adult"],
+ "psychodietetyk-wroclaw": ["youth", "adult"],
+ "konsultacje-psychologiczne-on-line-wroclaw": ["youth", "adult", "online"],
+ "qeeg-wroclaw": ["kids", "youth", "adult"],
+ "eeg-biofeedback-wroclaw": ["kids", "youth", "adult"],
+ "eeg-biofeedback-z-coachingiem-wroclaw": ["youth", "adult"],
+ "terapia-metoda-warnkego-wroclaw": ["kids", "youth"],
+ "terapia-dysleksji-i-afazji-wroclaw": ["kids", "youth", "adult"],
+ "diagnoza-autyzmu-ados-2-wroclaw": ["kids", "youth", "adult"],
+ "terapia-czaszkowo-krzyzowa-cst-wroclaw": ["kids", "youth", "adult"],
+ "kompleksowa-diagnoza-rozwoju-dziecka-korp-koze-wroclaw": ["kids"],
+ "diagnoza-adhd-u-dzieci-wroclaw": ["kids", "youth"],
+ "mmpi-2-test-oceny-osobowosci-wroclaw": ["adult"],
+ "diva-5-diagnoza-adhd-u-doroslych-wroclaw": ["adult"]
+}
