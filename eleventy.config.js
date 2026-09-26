@@ -34,8 +34,6 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/css");
   eleventyConfig.addPassthroughCopy("src/media");
   eleventyConfig.addPassthroughCopy("src/script");
-  eleventyConfig.addPassthroughCopy("src/llms.txt");
-  eleventyConfig.addPassthroughCopy("src/llms-full.txt");
   eleventyConfig.addPassthroughCopy("src/robots.txt");
 
 
@@ -45,6 +43,9 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter("firstBatch", (collection) => {
     return collection.reverse().slice(0, 15);
   });
+
+  // first n items (llms-full.txt article list)
+  eleventyConfig.addFilter("head", (collection, n) => collection.slice(0, n));
 
   eleventyConfig.addFilter("reverse", (collection) => {
     return collection.reverse();
@@ -151,10 +152,10 @@ module.exports = function (eleventyConfig) {
     });
   });
 
-  // general filter for sorting by date descending (newest first)
+  // general filter for sorting by date descending (newest first); same date → higher id first
   eleventyConfig.addFilter("byDateDesc", (collection) => {
     return collection.sort((a, b) => {
-      return new Date(b.date) - new Date(a.date);
+      return new Date(b.date) - new Date(a.date) || (b.id || 0) - (a.id || 0);
     });
   });
 
@@ -164,6 +165,7 @@ module.exports = function (eleventyConfig) {
     return faq
       .filter((item) => item.service === slug)
       .map((item) => ({
+        id: `${slug}-${eleventyConfig.getFilter("slugify")(item.question)}`,
         question: item.question,
         answer: item.answer,
         paragraphs: item.answer.split("\n").map((p) => p.trim()).filter(Boolean),
@@ -200,6 +202,117 @@ module.exports = function (eleventyConfig) {
       })),
     };
     // escape "<" so an answer can never close the surrounding <script> tag
+    return JSON.stringify(data).replace(/</g, "\\u003c");
+  });
+
+  // ─── STRUCTURED DATA (schema.org JSON-LD) ────────────────────────────────
+
+  const SITE = "https://psyche.wroclaw.pl";
+
+  // the clinic, both locations, opening hours and the phone registration hours
+  eleventyConfig.addFilter("clinicJsonLd", (locations) => {
+    const day = (days, opens, closes) => ({
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: days,
+      opens,
+      closes,
+    });
+    const weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+    const openingHours = [day(weekdays, "09:00", "21:00"), day(["Saturday"], "09:00", "15:00")];
+    const place = (location) => ({
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: location.address,
+        postalCode: location.postalcode,
+        addressLocality: location.city,
+        addressCountry: "PL",
+      },
+      // locations.json has lat/lon the wrong way round (lat 16.99 is Wrocław's longitude)
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: location.lon,
+        longitude: location.lat,
+      },
+      image: `${SITE}/media/${location.coverimage}`,
+    });
+    const published = locations.filter((location) => location.published);
+    const [main, ...others] = published;
+
+    const data = {
+      "@context": "https://schema.org",
+      "@type": "MedicalClinic",
+      "@id": `${SITE}/#organization`,
+      name: "Centrum PSYCHE Wrocław",
+      description:
+        "Prywatna poradnia zdrowia psychicznego i centrum psychoterapii we Wrocławiu: psycholog, psychoterapeuta, psycholog dziecięcy, logopeda, diagnoza (ADOS-2, DIVA-5, MMPI-2, QEEG) i EEG Biofeedback dla dzieci, młodzieży i dorosłych.",
+      url: SITE,
+      logo: `${SITE}/media/psyche-favicon.svg`,
+      telephone: "+48 668 093 234",
+      email: "info@psyche.wroclaw.pl",
+      sameAs: ["https://fb.me/centrumpsyche"],
+      areaServed: { "@type": "City", name: "Wrocław" },
+      currenciesAccepted: "PLN",
+      paymentAccepted: "Gotówka, karta płatnicza, przelew",
+      ...place(main),
+      openingHoursSpecification: openingHours,
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "rejestracja",
+        telephone: "+48 668 093 234",
+        email: "info@psyche.wroclaw.pl",
+        availableLanguage: "pl",
+        hoursAvailable: day(weekdays, "09:00", "18:00"),
+      },
+      department: others.map((location) => ({
+        "@type": "MedicalClinic",
+        name: /małopanewska/i.test(location.fullName)
+          ? "Psyche KIDS – Centrum PSYCHE Wrocław"
+          : `Centrum PSYCHE Wrocław – ${location.fullName}`,
+        url: `${SITE}/gabinety/${eleventyConfig.getFilter("slugify")(location.fullName)}/`,
+        telephone: "+48 668 093 234",
+        ...place(location),
+      })),
+    };
+    return JSON.stringify(data).replace(/</g, "\\u003c");
+  });
+
+  // breadcrumb trail for the current page, following the URL; section names match bcrumb.njk
+  const SECTION_NAMES = {
+    "o-nas": "O nas",
+    artykuly: "Artykuły",
+    oferta: "Oferta",
+    "zespół": "Zespół",
+    gabinety: "Gabinety",
+    cennik: "Cennik",
+    kontakt: "Kontakt",
+    "pracuj-z-nami": "Pracuj z nami",
+    regulamin: "Regulamin",
+    "polityka-ochrony-małoletnich": "Polityka Ochrony Małoletnich",
+    "najczestsze-pytania": "Najczęstsze pytania",
+  };
+
+  eleventyConfig.addFilter("breadcrumbJsonLd", (url, title) => {
+    const segments = decodeURI(url).split("/").filter(Boolean);
+    const items = [{ name: "Psyche", url: `${SITE}/` }];
+    let path = "";
+    segments.forEach((segment, i) => {
+      path += `/${segment}`;
+      if (segment.startsWith("@")) return; // article id, not a page of its own
+      const last = i === segments.length - 1;
+      let name = SECTION_NAMES[segment];
+      if (last) name = /^\d+$/.test(segment) ? `${title} – strona ${segment}` : name || title;
+      if (name) items.push({ name, url: SITE + encodeURI(`${path}/`) });
+    });
+    const data = {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: items.map((item, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: item.name,
+        item: item.url,
+      })),
+    };
     return JSON.stringify(data).replace(/</g, "\\u003c");
   });
 

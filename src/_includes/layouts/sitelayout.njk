@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-aud-style="pill">
+<html lang="pl" data-aud-style="pill">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="initial-scale=1.0">
@@ -50,25 +50,19 @@
     {# Main JS file #}
     <script src="/script/main.js"></script>
 
-    <script type="application/ld+json">
-    {
-      "@context": "http://schema.org",
-      "@type": "Organization",
-      "url": "https://psyche.wroclaw.pl",
-      "logo": "https://psyche.wroclaw.pl/media/sitelayouts/78/psyche-logo.png",
-      "contactPoint": [{
-        "@type": "ContactPoint",
-        "telephone": "+48-668-093-234",
-        "contactType": "customer service"
-      }]
-    }
-    </script>
+    <script type="application/ld+json">{{ locations | clinicJsonLd | safe }}</script>
+    {% if not isHomepage %}
+      <script type="application/ld+json">{{ page.url | breadcrumbJsonLd(title) | safe }}</script>
+    {% endif %}
 
     {% if service %}
       {% set faqs = faq | faqFor(service.fullName | slugify) %}
       {% if faqs.length %}
         <script type="application/ld+json">{{ faqs | faqJsonLd | safe }}</script>
       {% endif %}
+    {% endif %}
+    {% if service or faqIndex %}
+      <script src="/script/faq.js" defer></script>
     {% endif %}
 
     <!-- Google Tag Manager -->

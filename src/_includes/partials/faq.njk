@@ -20,7 +20,7 @@
     {% endif %}
     <div class="faq-list">
       {% for item in faqs %}
-        <details class="faq-item" name="faq-{{ slug }}">
+        <details class="faq-item" id="{{ item.id }}" name="faq-{{ slug }}">
           <summary>{{ item.question }}</summary>
           <div class="faq-answer">
             {% for p in item.paragraphs %}<p>{{ p }}</p>{% endfor %}

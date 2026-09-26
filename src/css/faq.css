@@ -53,8 +53,9 @@
     }
 }
 
-/* Sections on the index page: keep the heading clear of the fixed top bar when jumped to */
-section.faq[id] {
+/* Sections and questions linked by anchor: keep them clear of the fixed top bar + breadcrumb */
+section.faq[id],
+details.faq-item[id] {
     scroll-margin-top: 8.5rem;
 }
 
