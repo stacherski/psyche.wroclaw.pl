@@ -86,7 +86,10 @@ Odpowiedzi na pytania pacjentów, pogrupowane według usług. Wszystkie pytania 
 {% for service in services | byPublished | withFaq(faq) %}
 {%- set slug = service.fullName | slugify %}
 ### {{ service.fullName }}
-{% for item in faq | faqFor(slug) %}
+{% if slug not in faqReview.notReviewed %}
+Odpowiedzi sprawdzone przez: {{ faqReview.reviewer }} ({{ faqReview.date }})
+{% endif %}
+{%- for item in faq | faqFor(slug) %}
 #### {{ item.question | safe }}
 
 {% for p in item.paragraphs %}{{ p | safe }}

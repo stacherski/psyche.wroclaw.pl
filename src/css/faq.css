@@ -63,8 +63,10 @@ section.faq > h2:has(+ .faq-service-link) {
     margin-block-end: var(--space-quarter);
 }
 
-.faq-service-link,
-.faq-all-link {
+/* the long selectors outrank the prose rule in tokens.blend.css, which sets
+   every .page-content paragraph in the serif text face */
+.page-content section.faq p.faq-service-link,
+.page-content section.faq p.faq-all-link {
     font-family: var(--font-regular);
     font-size: var(--font-size-small);
 
@@ -80,4 +82,17 @@ section.faq > h2:has(+ .faq-service-link) {
 
 .faq-all-link {
     margin-block-start: var(--space-normal);
+}
+
+/* "Odpowiedzi sprawdzone przez" line under each service's questions */
+.page-content section.faq p.faq-reviewed {
+    margin-block-start: var(--space-normal);
+    font-family: var(--font-regular);
+    font-size: var(--font-size-small);
+    color: var(--clr-text-muted);
+
+    a {
+        color: var(--clr-base-strong);
+        text-underline-offset: 3px;
+    }
 }

@@ -1,0 +1,7 @@
+{
+  "_note": "Who checked the FAQ answers (src/_data/faq.json) and when. Services listed in notReviewed show no reviewer line until they are checked.",
+  "reviewer": "Paulina Stacherska",
+  "date": "2026-09-26",
+  "dateLabel": "wrzesień 2026",
+  "notReviewed": ["terapia-czaszkowo-krzyzowa-cst-wroclaw"]
+}

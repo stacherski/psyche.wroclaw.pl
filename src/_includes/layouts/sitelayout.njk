@@ -58,7 +58,7 @@
     {% if service %}
       {% set faqs = faq | faqFor(service.fullName | slugify) %}
       {% if faqs.length %}
-        <script type="application/ld+json">{{ faqs | faqJsonLd | safe }}</script>
+        <script type="application/ld+json">{{ faqs | faqJsonLd(faqReview, service.fullName | slugify, team) | safe }}</script>
       {% endif %}
     {% endif %}
     {% if service or faqIndex %}

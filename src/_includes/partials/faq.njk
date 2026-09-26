@@ -33,6 +33,14 @@
         </details>
       {% endfor %}
     </div>
+    {% if slug not in faqReview.notReviewed %}
+      {% set reviewer = team | byMember(faqReview.reviewer | lower) | first %}
+      <p class="faq-reviewed">
+        Odpowiedzi sprawdzone przez:
+        {% if reviewer %}<a href="/zespół/{{ reviewer.fullName | slugify }}/">{{ reviewer.fullName }}</a>, {{ reviewer.specialization }}{% else %}{{ faqReview.reviewer }}{% endif %}
+        · <time datetime="{{ faqReview.date }}">{{ faqReview.dateLabel }}</time>
+      </p>
+    {% endif %}
     {% if not faqIndex %}
       <p class="faq-all-link">
         <a href="/najczestsze-pytania/">Zobacz pytania dotyczące wszystkich usług</a>

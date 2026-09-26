@@ -188,10 +188,23 @@ module.exports = function (eleventyConfig) {
   });
 
   // schema.org FAQPage structured data for the same entries
-  eleventyConfig.addFilter("faqJsonLd", (faqs) => {
+  eleventyConfig.addFilter("faqJsonLd", (faqs, review, slug, team) => {
+    const reviewed = review && !review.notReviewed.includes(slug);
+    const reviewer = reviewed && team.find((member) => member.fullName === review.reviewer);
     const data = {
       "@context": "https://schema.org",
       "@type": "FAQPage",
+      ...(reviewed && {
+        reviewedBy: {
+          "@type": "Person",
+          name: review.reviewer,
+          ...(reviewer && {
+            jobTitle: reviewer.specialization,
+            url: `https://psyche.wroclaw.pl/zespół/${eleventyConfig.getFilter("slugify")(reviewer.fullName)}/`,
+          }),
+        },
+        lastReviewed: review.date,
+      }),
       mainEntity: faqs.map((item) => ({
         "@type": "Question",
         name: item.question,
