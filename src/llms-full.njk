@@ -1,0 +1,112 @@
+---
+permalink: /llms-full.txt
+eleventyExcludeFromCollections: true
+site: https://psyche.wroclaw.pl
+audienceNames:
+  kids: dzieci
+  youth: młodzież
+  adult: dorośli
+  online: on-line
+---
+{% include "llms/intro.njk" %}
+---
+
+## Pełna oferta usług
+
+Pomoc skierowana jest do osób dorosłych, dzieci oraz młodzieży. Pierwsza wizyta służy przede wszystkim rozpoznaniu problemu i zaproponowaniu najkorzystniejszej ścieżki leczenia.
+{% for service in services | byPublished %}
+{%- set slug = service.fullName | slugify %}
+### {{ service.fullName }}
+
+{{ service.metaDescription | striptags | safe }}
+
+- Strona: {{ site }}/oferta/{{ slug }}/
+{%- if audiences[slug] %}
+- Dla kogo: {% for group in audiences[slug] %}{{ audienceNames[group] }}{% if not loop.last %}, {% endif %}{% endfor %}
+{%- endif %}
+{%- set specialists = team | byMember(service.team | lower) %}
+{%- if specialists.length %}
+- Specjaliści: {% for member in specialists %}{{ member.fullName }}{% if not loop.last %}, {% endif %}{% endfor %}
+{%- endif %}
+{%- if service.prices %}
+- Cennik: {% for price in prices | byServicePrices(service.prices) %}{{ price.fullName }}{% if price.duration %} ({{ price.duration }} min){% endif %} – {{ price.price | replace(",00", "") }} zł{% if not loop.last %}; {% endif %}{% endfor %}
+{%- endif %}
+{% endfor %}
+---
+
+## Obszary pomocy
+
+Centrum PSYCHE oferuje profesjonalną pomoc osobom cierpiącym z powodu:
+
+- Trudności w relacjach z innymi
+- Poczucia zagubienia, niskiego poczucia własnej wartości, braku celów w życiu
+- Zaburzeń osobowości
+- Uczucia lęku, napięcia, natręctw, obniżonego nastroju
+- Depresji oraz innych problemów emocjonalnych
+- Doświadczenia urazu (przeszłego lub teraźniejszego)
+- Doświadczenia przemocy (fizycznej, psychicznej), mobbingu
+- Dolegliwości somatycznych (chroniczne zmęczenie, bóle głowy, żołądka, duszności)
+- Zaburzeń odżywiania
+- Uzależnień
+- Problemów wychowawczych
+- Zaburzeń seksualnych
+- Zaburzeń lękowych i nerwic
+- Psychoz
+
+---
+
+## Cennik usług
+
+Płatność możliwa gotówką, kartą lub przelewem.
+Dane do przelewu: Fundacja „Świadomi", ul. Przednia 50a/7, 54-518 Wrocław
+Nr konta: 15 1090 2516 0000 0001 3722 3425
+W tytule przelewu: imię i nazwisko, data wizyty, nazwisko specjalisty.
+Odwołanie wizyty: najpóźniej 24 godziny przed umówionym terminem.
+Aktualny cennik: {{ site }}/cennik/
+
+| Usługa | Czas | Cena |
+|---|---|---|
+{% for price in prices -%}
+| {{ price.fullName }} | {% if price.duration %}{{ price.duration }} min{% else %}–{% endif %} | {{ price.price | replace(",00", "") }} zł |
+{% endfor %}
+---
+
+## Zespół specjalistów
+
+{% for member in team -%}
+{%- if member.published == "Yes" -%}
+- {{ member.fullName }} – {{ member.specialization }} – {{ site }}/zespół/{{ member.fullName | slugify }}/
+{% endif -%}
+{%- endfor %}
+---
+
+## Najczęstsze pytania
+
+Odpowiedzi na pytania pacjentów, pogrupowane według usług. Wszystkie pytania na jednej stronie: {{ site }}/najczestsze-pytania/
+{% for service in services | byPublished | withFaq(faq) %}
+{%- set slug = service.fullName | slugify %}
+### {{ service.fullName }}
+{% for item in faq | faqFor(slug) %}
+#### {{ item.question | safe }}
+
+{% for p in item.paragraphs %}{{ p | safe }}
+
+{% endfor -%}
+{%- if item.sources.length %}Źródła: {% for s in item.sources %}{{ s.url }}{% if not loop.last %}, {% endif %}{% endfor %}
+
+{% endif -%}
+Link: {{ site }}/oferta/{{ slug }}/#{{ item.id }}
+{% endfor %}
+{%- endfor %}
+---
+
+## Artykuły – najnowsze
+
+{% for article in articles | byPublished | byDateDesc | head(15) -%}
+- [{{ article.title | safe }}]({{ site }}/o-nas/artykuly/@{{ article.id }}/{{ article.urlTitle | slugify }}/)
+{% endfor %}
+Wszystkie artykuły: {{ site }}/o-nas/artykuly/
+
+---
+
+{% include "llms/pages.njk" %}

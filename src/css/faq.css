@@ -1,0 +1,83 @@
+/* FAQ index page (/najczestsze-pytania/) and the links around the service-page FAQ.
+   Uses the tokens from tokens.blend.css. */
+
+/* Jump list: one chip per service, with its question count */
+.faq-toc ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-half);
+    margin: var(--space-double) 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* main.css gives every .page-content li an arrow image marker */
+.faq-toc ul li {
+    list-style: none;
+}
+
+.faq-toc a {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .5rem .875rem;
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-pill);
+    background-color: var(--clr-surface-raised);
+    font-family: var(--font-regular);
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-ui);
+    color: var(--clr-base-strong);
+    text-decoration: none;
+    transition: border-color var(--duration-fast) var(--ease-out),
+                box-shadow var(--duration-fast) var(--ease-out);
+
+    &:hover {
+        border-color: var(--card-hover-border);
+        box-shadow: var(--shadow-1);
+    }
+
+    &:focus-visible {
+        outline: 3px solid var(--clr-focus);
+        outline-offset: 2px;
+    }
+
+    .count {
+        min-inline-size: 1.5rem;
+        padding: .0625rem .375rem;
+        border-radius: var(--radius-pill);
+        background-color: var(--clr-tint);
+        font-size: .75rem;
+        text-align: center;
+        color: var(--clr-text-2);
+    }
+}
+
+/* Sections and questions linked by anchor: keep them clear of the fixed top bar + breadcrumb */
+section.faq[id],
+details.faq-item[id] {
+    scroll-margin-top: 8.5rem;
+}
+
+section.faq > h2:has(+ .faq-service-link) {
+    margin-block-end: var(--space-quarter);
+}
+
+.faq-service-link,
+.faq-all-link {
+    font-family: var(--font-regular);
+    font-size: var(--font-size-small);
+
+    a {
+        color: var(--clr-base-strong);
+        text-underline-offset: 3px;
+    }
+}
+
+.faq-service-link {
+    margin-block-end: var(--space-normal);
+}
+
+.faq-all-link {
+    margin-block-start: var(--space-normal);
+}

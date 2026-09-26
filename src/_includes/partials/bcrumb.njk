@@ -53,6 +53,11 @@
           <a href="/cennik">Cennik</a>
         </li>
       {% endif %}
+      {% if page.url and page.url.startsWith('/najczestsze-pytania') %}
+        <li>
+          <a href="/najczestsze-pytania">Najczęstsze pytania</a>
+        </li>
+      {% endif %}
       {% if page
         .url and page
         .url

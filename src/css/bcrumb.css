@@ -20,7 +20,8 @@ nav.bcrumb {
             padding: 0;
             margin: 0;
             display: inline-flex;
-            gap: var(--space-half);
+            flex-wrap: wrap;
+            gap: var(--space-quarter) var(--space-half);
 
             li {
                 list-style: none;

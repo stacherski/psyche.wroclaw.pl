@@ -1,0 +1,1569 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..700,0..100,0..1&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&display=swap');
+/* Direction C — Blend. Refine's teal system + Fraunces headings,
+   Newsreader paragraphs, Instrument Sans navigation & UI + coral, teal's complementary colour,
+   reserved for the booking actions, the article band and focus. */
+
+:root {
+
+    /* Colour */
+    --clr-base: #007A74;
+    --clr-base-strong: #0B5E59;
+    --clr-brand: #018E87;
+    --clr-accent: #E8836B;
+    --clr-text: #1B2B2A;
+    --clr-text-2: #3A4948;
+    --clr-text-muted: #5C6B6A;
+    --clr-text-inverse: #FFFFFF;
+    --clr-bg: #F2F5F4;
+    --clr-surface: #F2F5F4;
+    --clr-surface-raised: #FFFFFF;
+    --clr-border: #D9E2E1;
+    --clr-tint: #FBEDE6;
+    --clr-on-tint: #0B5E59;
+    --clr-dark: #12302E;
+    --clr-footer-bg: #12302E;
+    --clr-footer-link: #F6B39F;
+    --clr-focus: #B34A36;
+    --clr-overlay: #12302EB3;
+    --hero-scrim: linear-gradient(180deg, rgb(18 48 46 / .15) 0%, rgb(18 48 46 / .35) 45%, rgb(18 48 46 / .85) 100%);
+    --clr-accent-soft: #F6B39F;
+    --clr-accent-strong: #B34A36;
+    --clr-focus-on-dark: #F6B39F;
+
+    /* Type */
+    --font-regular: "Instrument Sans", system-ui, sans-serif;
+    --font-display: Fraunces, Georgia, serif;
+    --font-text: Newsreader, Georgia, serif;
+    --text-size-adjust: 0.5;
+    --display-variation: "SOFT" 100, "WONK" 0;
+    --numerals: lining-nums;
+    --font-weight-body: 400;
+    --font-weight-h1: 500;
+    --font-weight-h2: 400;
+    --font-weight-card: 500;
+    --font-weight-ui: 600;
+    --font-size-small: 0.875rem;
+    --font-size-paragraph: clamp(1rem, .95rem + .25vi, 1.125rem);
+    --font-size-h5: clamp(1.125rem, 1.08rem + .2vi, 1.25rem);
+    --font-size-h4: clamp(1.25rem, 1.17rem + .35vi, 1.5rem);
+    --font-size-h3: clamp(1.5rem, 1.38rem + .5vi, 1.875rem);
+    --font-size-h2: clamp(1.875rem, 1.6rem + 1.2vi, 2.625rem);
+    --font-size-h1: clamp(2.375rem, 1.9rem + 2vi, 3.5rem);
+    --font-size-h6: 1rem;  /* was undefined */
+    --line-height-body: 1.6;
+    --line-height-heading: 1.15;
+    --tracking-heading: -0.015em;
+    --measure: 66ch;
+
+    /* Space */
+    --space-quarter: 0.25rem;
+    --space-small: 0.5rem;  /* was undefined */
+    --space-half: 0.5rem;
+    --space-normal: 1rem;
+    --space-double: 2rem;
+    --space-triple: 3rem;
+    --space-section: clamp(3rem, 2rem + 4vi, 6rem);
+
+    /* Shape */
+    --border-radius-small: 0.5rem;  /* was undefined */
+    --border-radius-circle: 50%;  /* was undefined */
+    --radius-card: 1rem;
+    --radius-panel: 1.5rem;
+    --radius-pill: 999px;
+    --shadow-1: 0 1px 2px rgb(18 48 46 / .06), 0 4px 16px rgb(18 48 46 / .06);
+    --shadow-2: 0 2px 4px rgb(18 48 46 / .08), 0 14px 32px rgb(18 48 46 / .12);
+
+    /* Motion */
+    --duration-fast: 150ms;
+    --duration-base: 250ms;
+    --ease-out: cubic-bezier(.2, .8, .2, 1);
+    --ease-in-out: cubic-bezier(.65, 0, .35, 1);
+
+    /* Navigation */
+    --nav-left: var(--nav-gap);
+    --nav-right: auto;
+    --nav-gap: clamp(1.25rem, 3vw, 1.5rem);
+    --nav-width: 400px;
+    --nav-pad: .5rem;
+    --nav-radius: 1.25rem;
+    --nav-bg: rgb(38 42 46 / .72);
+    --nav-backdrop: blur(18px) saturate(140%);
+    --nav-border: rgb(255 255 255 / .12);
+    --nav-shadow: 0 24px 60px rgb(0 0 0 / .28);
+    --nav-hidden-x: calc(-100% - 2 * var(--nav-gap));
+    --nav-duration: 350ms;
+    --nav-z: 850;
+    --nav-overlay-z: 840;
+    --nav-overlay-bg: rgb(20 24 27 / .28);
+    --nav-weight: 600;
+    --nav-tracking: .06em;
+    --nav-size: .9375rem;
+    --nav-sub-case: none;
+    --nav-sub-weight: 500;
+    --nav-close-size: 2.25rem;
+    --nav-close-inset: .75rem;
+    --nav-close-top: 1rem;
+    --mnav-gap: var(--nav-gap);
+    --mnav-radius: var(--nav-radius);
+    --mnav-bg: var(--nav-bg);
+    --mnav-backdrop: var(--nav-backdrop);
+    --mnav-border: var(--nav-border);
+    --mnav-shadow: var(--nav-shadow);
+    --mnav-pad-block: .375rem;
+    --mnav-pad-inline: .375rem;
+    --nav-item-radius: .75rem;
+    --nav-avatar-display: block;
+    --nav-avatar-size: 2rem;
+    --nav-avatar-pad: .375rem;
+    --nav-avatar-row-radius: 999px;
+    --nav-avatar-fallback: rgb(255 255 255 / .12);
+    --nav-avatar-ring: rgb(255 255 255 / .16);
+    --nav-avatar-ring-hover: var(--clr-accent-soft);
+    --nav-item-hover: rgb(255 255 255 / .08);
+
+    /* Page header */
+    --color-bg1: #0B5E59;
+    --color-bg2: #12302E;
+    --color1: 1, 142, 135;
+    --color2: 232, 131, 107;
+    --color3: 121, 168, 87;
+    --color4: 246, 179, 159;
+    --color5: 104, 161, 202;
+    --blending: screen;
+    --ph-height: clamp(10rem, 24vh, 15rem);
+    --ph-title-offset: 1.5rem;
+    --ph-title-size: .8125rem;
+    --ph-title-tracking: .18em;
+    --ph-title-weight: 600;
+
+    /* Layout */
+    --index-bcrumb: 390;
+    --content-width: 80rem;
+    --bp-small: 37.5rem;
+
+    /* Component */
+    --btn-emph-bg: var(--clr-accent);
+    --btn-emph-fg: #12302E;
+    --btn-emph-hover-bg: var(--clr-accent-soft);
+    --btn-emph-hover-fg: #12302E;
+    --cta-emph-bg: var(--clr-accent);
+    --cta-emph-fg: #12302E;
+    --cta-emph-border: var(--clr-accent);
+    --cta-emph-fill: var(--clr-accent-soft);
+    --cta-emph-hover-bg: var(--clr-accent);
+    --cta-hover-bg: transparent;
+    --card-hover-border: var(--clr-accent);
+    --card-hover-bg: var(--clr-surface-raised);
+    --card-hover-fg: #12302E;
+    --card-hover-scale: 1.1;
+    --card-hover-transform: none;
+    --panel-rail-gap: clamp(2rem, 4vw, 4rem);
+    --faq-pad-block: 1.125rem;
+    --faq-pad-inline: 1.25rem;
+    --action-panel-bg: var(--clr-accent);
+    --action-panel-fg: #12302E;
+    --card-fill-mask: none;
+    --card-fill-final: var(--clr-accent);
+    --card-fill-dx: 0;
+    --card-fill-w: 100%;
+    --card-fill-h: 100%;
+    --card-fill-entry: 100%;
+    --card-fill-exit: -100%;
+    --card-fill-travel: -100%;
+    --card-fill-duration: 400ms;
+    --member-name-gap: 0.5rem;
+    --member-name-pad: 0.75rem;
+    --location-scrim: linear-gradient(180deg, rgb(18 48 46 / 0) 35%, rgb(18 48 46 / .78) 100%);
+    --table-head-bg: var(--clr-surface);
+    --table-row-hover: var(--clr-tint);
+    --member-reveal: 350ms;
+    --member-ring: var(--clr-accent);
+    --member-pill-bg: var(--nav-bg);
+    --member-pill-backdrop: var(--nav-backdrop);
+    --filter-hover-scale: 1.05;
+    --filter-pad-block: 1rem;
+    --filter-pad-inline: 1.25rem;
+    --filter-bar-offset: .375rem;
+    --aud-display: block;
+    --card-pad-bottom: 3.75rem;
+    --card-icon-offset: .75rem;
+    --aud-bottom: 1rem;
+    --aud-size: 0.75rem;
+    --aud-bar-w: 3.5rem;
+    --aud-key-w: 1.5rem;
+    --aud-key-h: 6px;
+    --aud-pill-neutral: var(--clr-surface);
+    --aud-bar-h: 4px;
+    --card-icon-blend: multiply;
+    --card-hover-icon-blend: multiply;
+
+    /* Tertiary */
+    --clr-ochre-soft: #FCF3E3;
+    --clr-ochre-base: #CE8F22;
+    --clr-ochre-strong: #885E16;
+    --clr-sage-soft: #EFF6E9;
+    --clr-sage-base: #79A857;
+    --clr-sage-strong: #4D6C37;
+    --clr-berry-soft: #F8E8F0;
+    --clr-berry-base: #CD84AB;
+    --clr-berry-strong: #9C4071;
+    --clr-sky-soft: #E7F1F9;
+    --clr-sky-base: #68A1CA;
+    --clr-sky-strong: #31668C;
+    --clr-cat-kids: var(--clr-ochre-base);
+    --clr-cat-youth: var(--clr-sky-base);
+    --clr-cat-adult: var(--clr-berry-base);
+    --clr-cat-kids-tint: color-mix(in oklab, var(--clr-cat-kids) 40%, white);
+    --clr-cat-youth-tint: color-mix(in oklab, var(--clr-cat-youth) 40%, white);
+    --clr-cat-adult-tint: color-mix(in oklab, var(--clr-cat-adult) 40%, white);
+    --clr-cat-online-tint: color-mix(in oklab, var(--clr-cat-online) 40%, white);
+    --clr-cat-online: var(--clr-sage-base);
+}
+
+/* Alternative card fill: diagonal sweep. Add data-card-fill="sweep" to <html>,
+   or copy these values into :root above to make it the default. */
+:root[data-card-fill="sweep"] {
+    --card-fill-mask: linear-gradient(135deg, transparent 33.333%, #000 33.333% 66.667%, transparent 66.667%);
+    --card-fill-dx: 1;
+    --card-fill-w: 300%;
+    --card-fill-h: auto;
+    --card-fill-entry: 0%;
+    --card-fill-exit: -66.667%;
+    --card-fill-travel: -33.333%;
+    --card-fill-duration: 500ms;
+}
+
+/* ------------------------------------------------------------------
+   Component layer — restyles existing selectors through tokens only.
+   Load AFTER the site's own CSS. No HTML changes required.
+   ------------------------------------------------------------------ */
+
+body {
+    background-color: var(--clr-surface);
+    color: var(--clr-text);
+    font-family: var(--font-regular);
+    font-weight: var(--font-weight-body);
+    font-variant-numeric: var(--numerals);
+}
+
+/* Body copy: real line-height instead of borrowing --font-size-h4 */
+p, p.section, ul, ol, li, th, td {
+    line-height: var(--line-height-body);
+}
+
+.page-content > p {
+    max-inline-size: var(--measure);
+    color: var(--clr-text-2);
+}
+
+/* Running text (paragraphs + prose lists) uses --font-text; navigation and UI stay
+   on --font-regular. font-size-adjust evens out the x-height of a swapped-in serif. */
+.page-content :is(p, :is(ul:not(.team, .services, .locations, .breadcrumb), ol) > li) {
+    font-family: var(--font-text);
+    font-size-adjust: var(--text-size-adjust);
+}
+
+/* main.css pins b/strong/i/em to --font-regular; let them follow the text font */
+.page-content :is(p, :is(ul:not(.team, .services, .locations, .breadcrumb), ol) > li) :is(b, strong, i, em) {
+    font-family: inherit;
+}
+
+/* Bold words inside headings stay in the heading face (main.css pins b/strong) */
+:is(h1, h2, h3, h4, h5) :is(b, strong) {
+    font-family: inherit;
+    font-variation-settings: inherit;
+    font-weight: 600;
+}
+
+/* Intro copy is wrapped in <strong> in the CMS — neutralise it in CSS */
+.page-content > p > strong:only-child {
+    font-weight: inherit;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: var(--font-display);
+    font-variation-settings: var(--display-variation);
+    line-height: var(--line-height-heading);
+    letter-spacing: var(--tracking-heading);
+    text-wrap: balance;
+}
+
+h1 { font-weight: var(--font-weight-h1); }
+h2 { font-weight: var(--font-weight-h2); color: var(--clr-text); }
+
+.page-content > h2 {
+    margin-block-start: var(--space-section);
+}
+
+/* ---------- Navigation drawer
+   A & B: full-height panel on the right, as today (tokens reproduce it).
+   C: detached, rounded, frosted anthracite drawer floating on the left. */
+.navigation-overlay {
+    right: 0;
+    background-color: var(--nav-overlay-bg);
+    z-index: var(--nav-overlay-z);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--duration-base) var(--ease-out),
+                visibility 0s linear var(--duration-base);
+
+    &.open {
+        opacity: 1;
+        visibility: visible;
+        transition: opacity var(--duration-base) var(--ease-out), visibility 0s;
+    }
+}
+
+nav.navigation-panel {
+    top: var(--nav-gap);
+    bottom: var(--nav-gap);
+    left: var(--nav-left);
+    right: var(--nav-right);
+    width: min(var(--nav-width), calc(100vw - 2 * var(--nav-gap)));
+    z-index: var(--nav-z);
+    height: auto;
+    padding-inline: var(--nav-pad);
+    border-radius: var(--nav-radius);
+    border: 1px solid var(--nav-border);
+    background-color: var(--nav-bg);
+    -webkit-backdrop-filter: var(--nav-backdrop);
+    backdrop-filter: var(--nav-backdrop);
+    box-shadow: var(--nav-shadow);
+    font-family: var(--font-regular);
+    overscroll-behavior: contain;
+    translate: var(--nav-hidden-x) 0;
+    visibility: hidden;
+    transition: translate var(--nav-duration) var(--ease-out),
+                visibility 0s linear var(--nav-duration);
+}
+
+nav.navigation-panel.open {
+    left: var(--nav-left);
+    right: var(--nav-right);
+    translate: 0 0;
+    visibility: visible;
+    transition: translate var(--nav-duration) var(--ease-out), visibility 0s;
+}
+
+nav.navigation-panel ul.main-nav li {
+    font-weight: var(--nav-weight);
+    letter-spacing: var(--nav-tracking);
+    font-size: var(--nav-size);
+}
+
+nav.navigation-panel ul.main-nav li li {
+    text-transform: var(--nav-sub-case);
+    font-weight: var(--nav-sub-weight);
+    letter-spacing: 0;
+}
+
+nav.navigation-panel ul.main-nav li .wrapper {
+    border-radius: var(--nav-item-radius);
+    transition: background-color var(--duration-fast) var(--ease-out);
+}
+
+nav.navigation-panel ul.main-nav li .wrapper:hover {
+    background-color: var(--nav-item-hover);
+}
+
+/* Specialist avatars in the Zespół sub-menu (C). Each profile link gets --avatar
+   from generated rules (avatars.json → build.py), scoped to the OPEN drawer so
+   the photos are only fetched once someone opens the menu. */
+nav.navigation-panel a[href^="/zespół/"]:not([href="/zespół/"]) > span::before {
+    content: "";
+    display: var(--nav-avatar-display);
+    flex: none;
+    width: var(--nav-avatar-size);
+    aspect-ratio: 1;
+    margin-inline-end: .75rem;
+    border-radius: 50%;
+    background: var(--avatar, none) center / cover no-repeat, var(--nav-avatar-fallback);
+    box-shadow: 0 0 0 2px var(--nav-avatar-ring);
+    transition: box-shadow var(--duration-fast) var(--ease-out);
+}
+
+/* Member rows: pad around the avatar and use a pill hover, so the hover shape is
+   concentric with the avatar (pill radius = avatar radius + padding). The sub-menu
+   indent moves from padding to margin so the left inset matches too. */
+nav.navigation-panel ul.main-nav li li .wrapper:has(> a[href^="/zespół/"]:not([href="/zespół/"])) {
+    margin-inline-start: calc(var(--space-double) - var(--nav-avatar-pad));
+    padding-block: var(--nav-avatar-pad);
+    padding-inline-start: var(--nav-avatar-pad);
+    border-radius: var(--nav-avatar-row-radius);
+}
+
+nav.navigation-panel .wrapper:hover a[href^="/zespół/"] > span::before,
+nav.navigation-panel a[href^="/zespół/"]:focus-visible > span::before {
+    box-shadow: 0 0 0 2px var(--nav-avatar-ring-hover);
+}
+
+/* Close button: a proper square box centred on the same vertical line as the
+   sub-menu arrows (≈ 38px in from the drawer's right edge), round hover like the items */
+nav.navigation-panel > div:first-child {
+    padding-block: var(--nav-close-top) .25rem;
+    padding-inline-end: var(--nav-close-inset);
+}
+
+nav.navigation-panel > div:first-child .menu-close {
+    display: grid;
+    place-items: center;
+    width: var(--nav-close-size);
+    height: var(--nav-close-size);
+    padding: 0;
+    aspect-ratio: auto;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    line-height: 1;
+    transition: background-color var(--duration-fast) var(--ease-out);
+
+    &::before {
+        line-height: 1;
+    }
+
+    &:hover {
+        background-color: var(--nav-item-hover);
+    }
+}
+
+nav.navigation-panel :is(a, button):focus-visible {
+    outline: 2px solid var(--clr-focus-on-dark);
+    outline-offset: 2px;
+    border-radius: var(--nav-item-radius);
+}
+
+/* ---------- Layer order
+   top bar (400) > breadcrumb (390) > all page content; above them only the mobile
+   bottom bar (800), the menu dimmer (840) and the drawer (850).
+   The content areas are isolated, so their internal z-indexes (panel text,
+   hovered cards, the header title) never compete with
+   the top bar or the breadcrumb. */
+.page-content,
+.gradient-bg {
+    isolation: isolate;
+}
+
+nav.bcrumb {
+    z-index: var(--index-bcrumb);
+}
+
+/* ---------- Top bar */
+@keyframes topbar-bg {
+    to { background-color: hsl(from var(--clr-base-strong) h s l / 92%); }
+}
+
+.topbar .phone-link:focus-visible,
+.topbar .menu-button:focus-visible {
+    outline: 2px solid var(--clr-text-inverse);
+    outline-offset: 2px;
+    border-radius: var(--border-radius-small);
+}
+
+/* ---------- Hero */
+.header_video_wrapper .header_video .header_video_overlay {
+    background: var(--hero-scrim);
+    opacity: 1;
+    backdrop-filter: none;
+}
+
+.header_video_wrapper .header_video .header_video_text_buttons {
+    padding: clamp(1.25rem, 4vi, 3rem);
+    max-width: calc(var(--content-width) + 2 * var(--space-normal));
+}
+
+/* Title is the largest thing on the page again (was 2rem, below h2) */
+.header_video_wrapper .header_video .header_video_text_buttons h1 {
+    font-size: clamp(1.75rem, 1.2rem + 3vi, var(--font-size-h1));
+    max-width: 20ch;
+    margin-block-end: var(--space-double);
+}
+
+.header_video_wrapper .header_video .header_video_text_buttons p {
+    color: hsl(from var(--clr-text-inverse) h s l / 88%);
+    font-size: var(--font-size-small);
+    line-height: 1.6;
+}
+
+/* ---------- Buttons */
+.btn a {
+    font-weight: var(--font-weight-ui);
+    color: var(--clr-base);
+    background-color: var(--clr-surface-raised);
+    border-radius: var(--radius-pill);
+    padding-block: .875rem;
+    padding-inline: 1.5rem;
+    transition: background-color var(--duration-fast) var(--ease-out),
+                color var(--duration-fast) var(--ease-out);
+}
+
+.btn a:hover {
+    background-color: var(--clr-base-strong);
+    color: var(--clr-text-inverse);
+}
+
+/* Booking is the one emphasised action (C uses teal's complementary coral) */
+.btn__booksy a {
+    background-color: var(--btn-emph-bg);
+    color: var(--btn-emph-fg);
+}
+
+.btn__booksy a:hover {
+    background-color: var(--btn-emph-hover-bg);
+    color: var(--btn-emph-hover-fg);
+}
+
+.btn a:focus-visible,
+.calltoaction > div a:focus-visible {
+    outline: 3px solid var(--clr-focus-on-dark);
+    outline-offset: 3px;
+}
+
+ul.services li .service:focus-visible {
+    outline: 3px solid var(--clr-focus);
+    outline-offset: 3px;
+}
+
+/* ---------- Service cards */
+ul.services {
+    margin-block: var(--space-double) var(--space-section);
+}
+
+ul.services li .service {
+    border-radius: var(--radius-card);
+    border: 1px solid var(--clr-border);
+    box-shadow: var(--shadow-1);
+    color: var(--clr-text);
+    font-family: var(--font-regular);
+    font-size: var(--font-size-h5);
+    font-weight: var(--font-weight-card);
+    line-height: 1.3;
+    overflow: hidden; /* clips the fill layer to the rounded corners */
+    transition: transform var(--duration-base) var(--ease-out),
+                scale var(--duration-base) var(--ease-out),
+                box-shadow var(--duration-base) var(--ease-out),
+                background-color var(--duration-base) var(--ease-out),
+                border-color var(--duration-fast) var(--ease-out),
+                color var(--duration-fast) var(--ease-out);
+}
+
+/* Fill layer (C): a coral plane that travels THROUGH the card: in at the entry
+   edge, rests covering the card, and on leave keeps going and exits the far edge.
+   Position = translate (P) + transform (T), both in % of the plane itself:
+     rest  P = exit  (parked past the far edge)    T = 0
+     hover P = entry (parked before the near edge) T = travel (entry → covering)
+   On hover P snaps (0s) while the plane is out of view, T animates in.
+   On leave P and T animate together; their sum only ever moves forward. */
+ul.services li .service::before,
+div.filters button::before,
+.knowledge-base > div article::before,
+.calltoaction > div a::before {
+    content: "";
+    position: absolute;
+    z-index: -1; /* above the card ground, below text and icon */
+    left: 0;
+    top: 0;
+    width: var(--card-fill-w);
+    height: var(--card-fill-h);
+    aspect-ratio: 1; /* used by the sweep plane (height: auto) */
+    /* colour resolves per element (override --card-fill-final locally);
+       the shape (solid / diagonal stripe) comes from the mask */
+    background-color: var(--card-fill-final);
+    -webkit-mask-image: var(--card-fill-mask);
+    mask-image: var(--card-fill-mask);
+    translate: calc(var(--card-fill-dx) * var(--card-fill-exit)) var(--card-fill-exit);
+    transform: translate(0, 0);
+    transition: translate var(--card-fill-duration) var(--ease-in-out),
+                transform var(--card-fill-duration) var(--ease-in-out);
+    pointer-events: none;
+}
+
+ul.services li .service:hover::before,
+ul.services li .service:focus-visible::before,
+div.filters button:not(.active):is(:hover, :focus-visible)::before,
+.knowledge-base > div article:is(:hover, :has(a:focus-visible))::before,
+.calltoaction > div a:is(:hover, :focus-visible)::before {
+    translate: calc(var(--card-fill-dx) * var(--card-fill-entry)) var(--card-fill-entry);
+    transform: translate(calc(var(--card-fill-dx) * var(--card-fill-travel)), var(--card-fill-travel));
+    transition: translate 0s,
+                transform var(--card-fill-duration) var(--ease-in-out);
+}
+
+/* Hover / keyboard focus: A & B lift the card; C pops it out and fills it */
+ul.services li .service:hover,
+ul.services li .service:focus-visible {
+    background-color: var(--card-hover-bg);
+    color: var(--card-hover-fg);
+    border-color: var(--card-hover-border);
+    box-shadow: var(--shadow-2);
+    scale: var(--card-hover-scale);
+    transform: var(--card-hover-transform);
+    z-index: 2;
+}
+
+/* Audience label + segmented bar (C): who the service is for, in text AND colour,
+   echoing the team page's bars. Per-card --aud-label / --aud-bar are generated
+   from audiences.json (build.py), matched on each card's href. */
+ul.services li .service {
+    padding-block-end: var(--card-pad-bottom);
+}
+
+/* Give back the height the label takes, so 3-line titles don't crowd it */
+ul.services li .service .icon {
+    margin-block-start: var(--card-icon-offset);
+}
+
+ul.services li .service::after {
+    content: var(--aud-label, "");
+    display: var(--aud-display);
+    position: absolute;
+    inset-inline: 0;
+    bottom: var(--aud-bottom);
+    padding-block-end: calc(var(--aud-bar-h) + .5rem + 2px);
+    font-family: var(--font-regular);
+    font-size: var(--aud-size);
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: .02em;
+    color: var(--clr-text-muted);
+    background: var(--aud-bar, none) 50% calc(100% - 2px) / var(--aud-bar-w) var(--aud-bar-h) no-repeat;
+    pointer-events: none;
+    transition: color var(--duration-fast) var(--ease-out);
+}
+
+/* On the coral fill, seat the bar on a white track so the segments stay distinct */
+ul.services li .service:is(:hover, :focus-visible)::after {
+    color: var(--card-hover-fg);
+    background:
+        var(--aud-bar, none) 50% calc(100% - 2px) / var(--aud-bar-w) var(--aud-bar-h) no-repeat,
+        linear-gradient(var(--clr-surface-raised), var(--clr-surface-raised)) 50% 100% / calc(var(--aud-bar-w) + 6px) calc(var(--aud-bar-h) + 4px) no-repeat;
+}
+
+/* Audience label as a pill — two presets, chosen with data-aud-style on <html>:
+   "pill"     : the colour code IS the pill ground (single tint, or a soft blend)
+   "pill-bar" : neutral pill with a small segmented colour key at its start
+   (no attribute = plain label + bar, above) */
+:root[data-aud-style] ul.services li .service::after {
+    inset-inline: auto;
+    left: 50%;
+    translate: -50% 0;
+    width: max-content;
+    max-width: calc(100% - 2rem);
+    padding: .3125rem .75rem;
+    border-radius: 999px;
+    white-space: nowrap;
+    letter-spacing: .01em;
+}
+
+:root[data-aud-style="pill"] ul.services li .service::after,
+:root[data-aud-style="pill"] ul.services li .service:is(:hover, :focus-visible)::after {
+    background: var(--aud-pill, none);
+    color: var(--clr-text);
+}
+
+:root[data-aud-style="pill-bar"] ul.services li .service::after,
+:root[data-aud-style="pill-bar"] ul.services li .service:is(:hover, :focus-visible)::after {
+    padding-inline-start: calc(.75rem + var(--aud-key-w) + .4375rem);
+    background:
+        var(--aud-bar, none) .75rem 50% / var(--aud-key-w) var(--aud-key-h) no-repeat,
+        var(--aud-pill-neutral);
+    color: var(--clr-text-2);
+}
+
+:root[data-aud-style="pill-bar"] ul.services li .service:is(:hover, :focus-visible)::after {
+    background:
+        var(--aud-bar, none) .75rem 50% / var(--aud-key-w) var(--aud-key-h) no-repeat,
+        var(--clr-surface-raised);
+    color: var(--clr-text);
+}
+
+/* Icons sit on white JPEG/WebP grounds; multiply lets the fill show through.
+   In C it stays on at rest too, so the exiting fill never reveals a white box. */
+ul.services li .service .icon {
+    mix-blend-mode: var(--card-icon-blend);
+}
+
+ul.services li .service:hover .icon,
+ul.services li .service:focus-visible .icon {
+    mix-blend-mode: var(--card-hover-icon-blend);
+}
+
+/* ---------- Knowledge base */
+.knowledge-base {
+    background-color: var(--clr-tint);
+    padding-block: var(--space-section);
+}
+
+.knowledge-base h2 {
+    color: var(--clr-on-tint);
+    font-weight: var(--font-weight-h2);
+    margin-block: 0 var(--space-double);
+}
+
+.knowledge-base > div article {
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--clr-border);
+    background-color: var(--clr-surface-raised);
+    padding-inline: 1.125rem;
+    transition: background-color var(--duration-fast) var(--ease-out),
+                border-color var(--duration-fast) var(--ease-out),
+                box-shadow var(--duration-base) var(--ease-out),
+                scale var(--duration-base) var(--ease-out),
+                transform var(--duration-base) var(--ease-out);
+}
+
+.knowledge-base > div article h3 {
+    font-family: var(--font-regular);
+    font-variation-settings: normal;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.4;
+    color: var(--clr-text);
+    transition: color var(--duration-fast) var(--ease-out);
+}
+
+/* Same hover as the service cards and filter buttons: the shared fill plane
+   passes through (::before), text turns ink, coral outline, pop-out. */
+.knowledge-base > div article:is(:hover, :has(a:focus-visible)) {
+    z-index: 5; /* articles.css sets 4; lift the hovered chip over its neighbours */
+    background-color: var(--card-hover-bg);
+    border-color: var(--card-hover-border);
+    box-shadow: var(--shadow-2);
+    scale: var(--filter-hover-scale);
+    transform: var(--card-hover-transform);
+}
+
+.knowledge-base > div article:is(:hover, :has(a:focus-visible)) h3 {
+    color: var(--card-hover-fg);
+}
+
+.knowledge-base > div article a:focus-visible {
+    outline: none; /* the whole chip shows the focus state */
+}
+
+.knowledge-base > div article:has(a:focus-visible) {
+    outline: 3px solid var(--clr-focus);
+    outline-offset: 3px;
+}
+
+/* ---------- CTA bar */
+.calltoaction {
+    background-color: var(--clr-base-strong);
+}
+
+.calltoaction > div a {
+    position: relative;
+    overflow: hidden;
+    z-index: 0; /* own stacking context for the fill plane */
+    border-width: 2px;
+    border-radius: var(--radius-pill);
+    font-size: var(--font-size-h5);
+    font-weight: var(--font-weight-ui);
+    letter-spacing: .06em;
+    padding-block: .75rem;
+    transition: background-color var(--duration-fast) var(--ease-out),
+                color var(--duration-fast) var(--ease-out),
+                border-color var(--duration-fast) var(--ease-out),
+                box-shadow var(--duration-base) var(--ease-out),
+                scale var(--duration-base) var(--ease-out),
+                transform var(--duration-base) var(--ease-out);
+}
+
+/* Same hover as cards, filters and chips: the shared fill plane passes through,
+   label turns ink, coral outline, pop-out */
+.calltoaction > div a:is(:hover, :focus-visible) {
+    z-index: 1;
+    background-color: var(--cta-hover-bg); /* C: transparent — the fill supplies the colour */
+    color: var(--card-hover-fg);
+    border-color: var(--card-hover-border);
+    box-shadow: var(--shadow-2);
+    scale: var(--filter-hover-scale);
+    transform: var(--card-hover-transform);
+}
+
+/* the booking link is already coral: its fill is the soft coral instead */
+.calltoaction > div a[href*="booksy"] {
+    --card-fill-final: var(--cta-emph-fill);
+}
+
+.calltoaction > div a[href*="booksy"] {
+    background-color: var(--cta-emph-bg);
+    color: var(--cta-emph-fg);
+    border-color: var(--cta-emph-border);
+}
+
+.calltoaction > div a[href*="booksy"]:is(:hover, :focus-visible) {
+    background-color: var(--cta-emph-hover-bg); /* C: stays coral under the soft-coral fill */
+}
+
+/* ---------- Footer */
+.footer_content {
+    background-color: var(--clr-footer-bg);
+}
+
+.footer_content > div {
+    line-height: 1.6;
+}
+
+.footer_content h5 {
+    font-family: var(--font-regular);
+    font-variation-settings: normal;
+    font-weight: var(--font-weight-ui);
+    letter-spacing: 0;
+}
+
+.footer_content a {
+    color: var(--clr-footer-link);
+}
+
+/* ---------- Team filters (sub-page): tertiary palette instead of named colours */
+.filters button[data-category="kids"]   { --clr: var(--clr-cat-kids); }
+.filters button[data-category="youth"]  { --clr: var(--clr-cat-youth); }
+.filters button[data-category="adult"]  { --clr: var(--clr-cat-adult); }
+.filters button[data-category="online"] { --clr: var(--clr-cat-online); }
+
+/* ---------- Filter buttons (Zespół page + homepage services — same markup)
+   Replaces the neumorphic pills with the card language: raised white pill,
+   hairline, category key as a short bar, active = brand fill. */
+/* Wrapping row sized by the labels: a button is never narrower than its text
+   (labels never break), and buttons grow to fill each line evenly */
+div.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-half);
+    margin-block: var(--space-double) var(--space-normal);
+}
+
+div.filters button {
+    /* equal block padding around the text; the category bar lives inside
+       the bottom padding, so it never pushes the label off-centre */
+    padding-block: var(--filter-pad-block);
+    padding-inline: var(--filter-pad-inline);
+    line-height: 1.2;
+    white-space: nowrap;
+    flex: 1 0 auto;
+    width: auto;
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-pill);
+    background: var(--clr-surface-raised);
+    box-shadow: var(--shadow-1);
+    color: var(--clr-base-strong);
+    font-family: var(--font-regular);
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-ui);
+    letter-spacing: .05em;
+    z-index: 0; /* own stacking context, so the fill layer sits under the label */
+    transition: background-color var(--duration-fast) var(--ease-out),
+                color var(--duration-fast) var(--ease-out),
+                box-shadow var(--duration-base) var(--ease-out),
+                border-color var(--duration-fast) var(--ease-out),
+                scale var(--duration-base) var(--ease-out),
+                transform var(--duration-base) var(--ease-out);
+
+    /* Same hover as the service cards: the shared fill plane (::before, see the
+       service-card rules) passes through, label turns ink, coral outline, pop-out.
+       The active button keeps its state. */
+    &:not(.active):is(:hover, :focus-visible) {
+        z-index: 1;
+        background: var(--card-hover-bg);
+        color: var(--card-hover-fg);
+        border-color: var(--card-hover-border);
+        box-shadow: var(--shadow-2);
+        scale: var(--filter-hover-scale);
+        transform: var(--card-hover-transform);
+    }
+
+    &.active::before {
+        display: none;
+    }
+
+    /* on the coral fill, seat the category bar on a white track (as on the cards) */
+    &:not(.active):is(:hover, :focus-visible)::after {
+        box-shadow: 0 0 0 2px var(--clr-surface-raised);
+    }
+
+    &:focus-visible {
+        outline: 3px solid var(--clr-focus);
+        outline-offset: 3px;
+    }
+
+    /* category key: a short centred bar instead of a full-width underline */
+    &::after {
+        width: var(--aud-bar-w, 3.5rem);
+        height: var(--aud-bar-h, 4px);
+        left: 50%;
+        bottom: var(--filter-bar-offset);
+        translate: -50% 0;
+        border-radius: 2px;
+    }
+
+    &.active,
+    &.active:hover {
+        background: var(--clr-base);
+        border-color: var(--clr-base);
+        color: var(--clr-text-inverse);
+    }
+}
+
+/* Screen-reader status for the service filter ("Pokazano 8 usług") */
+.filter-status {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+/* Filter animation (View Transitions): team.css sets .75s; respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    ::view-transition-group(*),
+    ::view-transition-old(*),
+    ::view-transition-new(*) {
+        animation: none !important;
+    }
+}
+
+/* ---------- FAQ accordions (service pages; markup from build_faq.py)
+   Native <details>/<summary>; items share a name → one open at a time.
+   Reading content, so no pop-out/fill: subtle hover, teal open state, +/− icon. */
+section.faq {
+    margin-block: var(--space-section);
+}
+
+section.faq > h2 {
+    margin-block-end: var(--space-double);
+}
+
+.faq-list {
+    display: grid;
+    gap: var(--space-half);
+}
+
+details.faq-item {
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-card);
+    background-color: var(--clr-surface-raised);
+    box-shadow: var(--shadow-1);
+    transition: border-color var(--duration-fast) var(--ease-out),
+                box-shadow var(--duration-base) var(--ease-out);
+
+    &:hover {
+        border-color: var(--card-hover-border);
+        box-shadow: var(--shadow-2);
+    }
+
+    &[open] {
+        border-color: var(--clr-base);
+    }
+
+    > summary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-normal);
+        padding: var(--faq-pad-block) var(--faq-pad-inline);
+        list-style: none;
+        cursor: pointer;
+        border-radius: inherit;
+        font-family: var(--font-regular);
+        font-size: var(--font-size-h5);
+        font-weight: var(--font-weight-ui);
+        line-height: 1.35;
+        color: var(--clr-text);
+        text-wrap: balance;
+
+        &::-webkit-details-marker {
+            display: none;
+        }
+
+        /* +/− icon in a soft circle */
+        &::after {
+            content: "";
+            flex: none;
+            width: 2rem;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background:
+                linear-gradient(currentColor, currentColor) center / 12px 2px no-repeat,
+                linear-gradient(currentColor, currentColor) center / 2px 12px no-repeat,
+                var(--clr-tint);
+            color: var(--clr-base-strong);
+            transition: background-size var(--duration-base) var(--ease-out),
+                        rotate var(--duration-base) var(--ease-out);
+        }
+
+        &:focus-visible {
+            outline: 3px solid var(--clr-focus);
+            outline-offset: 3px;
+        }
+    }
+
+    &[open] > summary {
+        color: var(--clr-base-strong);
+
+        &::after {
+            background-size: 12px 2px, 2px 0, auto;
+            rotate: 180deg;
+        }
+    }
+
+    .faq-answer {
+        padding: 0 var(--faq-pad-inline) var(--faq-pad-block);
+
+        > p {
+            max-inline-size: var(--measure);
+            color: var(--clr-text-2);
+        }
+
+        > p + p {
+            margin-block-start: var(--space-half);
+        }
+
+        .faq-sources {
+            margin-block-start: var(--space-normal);
+            font-family: var(--font-regular);
+            font-size: var(--font-size-small);
+            color: var(--clr-text-muted);
+
+            a {
+                color: inherit;
+                text-underline-offset: 2px;
+            }
+        }
+    }
+}
+
+/* Smooth open/close where supported (Chromium 131+); instant elsewhere */
+@supports selector(::details-content) {
+    :root {
+        interpolate-size: allow-keywords;
+    }
+
+    details.faq-item::details-content {
+        block-size: 0;
+        overflow-y: clip;
+        transition: block-size var(--duration-base) var(--ease-out),
+                    content-visibility var(--duration-base) allow-discrete;
+    }
+
+    details.faq-item[open]::details-content {
+        block-size: auto;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    details.faq-item::details-content,
+    details.faq-item > summary::after {
+        transition: none;
+    }
+}
+
+/* ---------- Sub-page header (page-header.css): tokens recolour the aurora blobs;
+   in C the band is lower and its title is an eyebrow label */
+.gradient-bg {
+    min-height: var(--ph-height);
+
+    .header_image_box_title {
+        font-family: var(--font-regular);
+        font-size: var(--ph-title-size);
+        font-weight: var(--ph-title-weight);
+        letter-spacing: var(--ph-title-tracking);
+        text-shadow: none;
+        /* long service names wrap onto balanced lines instead of being cut off;
+           the explicit width is needed because the title is centred with left: 50% */
+        width: calc(100% - 2rem);
+        text-wrap: balance;
+        margin-block-start: var(--ph-title-offset);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .gradient-bg .gradients-container > * {
+        animation: none;
+    }
+}
+
+/* ---------- Service sub-pages (/oferta/<slug>/) */
+
+/* Team cards (service pages + Zespół): card language + the shared hover.
+   Audience colours come from the tertiary palette; the bar itself is generated
+   per attribute combination (equal segments — see build.py, --member-bar). */
+.member[kids]   { --clr-kids: var(--clr-cat-kids); }
+.member[youth]  { --clr-youth: var(--clr-cat-youth); }
+.member[adult]  { --clr-adult: var(--clr-cat-adult); }
+.member[online] { --clr-online: var(--clr-cat-online); }
+
+.member {
+    transition: scale var(--duration-base) var(--ease-out),
+                transform var(--duration-base) var(--ease-out);
+
+    .bg {
+        z-index: 0; /* own stacking context for the fill plane */
+        border-radius: var(--radius-card);
+        border: 1px solid var(--clr-border);
+        background-color: var(--clr-surface-raised);
+        box-shadow: var(--shadow-1);
+        transition: box-shadow var(--duration-base) var(--ease-out),
+                    border-color var(--duration-fast) var(--ease-out),
+                    background-color var(--duration-base) var(--ease-out);
+
+        /* audience bar: short, centred, equal segments */
+        &::after {
+            width: var(--aud-bar-w);
+            height: var(--aud-bar-h);
+            left: 50%;
+            bottom: .875rem;
+            translate: -50% 0;
+            border-radius: 2px;
+            background-image: var(--member-bar, none);
+        }
+    }
+
+    /* Height-driven so the reveal animates: aspect-ratio can't transition, height can.
+       The member box is 2:3, the photo 90% wide → circle = 60% tall, 2:3 portrait = 90%. */
+    img {
+        aspect-ratio: auto;
+        height: 60%;
+        border: 3px solid var(--clr-surface-raised);
+        box-shadow: var(--shadow-1);
+        transition: height var(--member-reveal) var(--ease-in-out),
+                    border-radius var(--member-reveal) var(--ease-in-out),
+                    border-color var(--duration-fast) var(--ease-out),
+                    box-shadow var(--duration-base) var(--ease-out);
+    }
+
+    .name {
+        font-family: var(--font-regular);
+        font-variation-settings: normal;
+        font-weight: var(--font-weight-ui);
+        letter-spacing: .04em;
+        color: var(--clr-base-strong);
+        /* keep ≥ 20px between the text and the card edge; long names wrap, balanced */
+        max-width: calc(80% - 2 * var(--member-name-gap));
+        padding-inline: var(--member-name-pad);
+        text-wrap: balance;
+        border: 1px solid transparent;
+        transition: bottom var(--member-reveal) var(--ease-in-out),
+                    color var(--duration-fast) var(--ease-out),
+                    background-color var(--duration-base) var(--ease-out),
+                    border-color var(--duration-base) var(--ease-out);
+
+        /* the audience bar travels into the name pill on hover */
+        &::after {
+            content: "";
+            display: block;
+            width: var(--aud-bar-w);
+            height: 0;
+            margin-inline: auto;
+            border-radius: 2px;
+            background-image: var(--member-bar, none);
+            opacity: 0;
+            transition: opacity var(--duration-base) var(--ease-out),
+                        height var(--duration-base) var(--ease-out),
+                        margin var(--duration-base) var(--ease-out);
+        }
+    }
+}
+
+/* Location cards: photo cards — full-strength photo, bottom scrim, address
+   bottom-left (street in the heading face via ::first-line, city smaller);
+   hover like the team cards: pop-out, coral ring, slow photo zoom */
+ul.locations {
+    gap: var(--space-normal);
+    margin-block: var(--space-double) var(--space-section);
+}
+
+ul.locations li .location {
+    justify-content: flex-end;
+    align-items: flex-start;
+    text-align: left;
+    padding: var(--space-double);
+    overflow: hidden;
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-card);
+    background-color: var(--clr-text);
+    box-shadow: var(--shadow-1);
+    color: var(--clr-text-inverse);
+    font-family: var(--font-regular);
+    font-variation-settings: normal;
+    font-size: var(--font-size-paragraph);
+    font-weight: 500;
+    letter-spacing: .02em;
+    text-transform: none;
+    line-height: 1.35;
+    transition: scale var(--duration-base) var(--ease-out),
+                box-shadow var(--duration-base) var(--ease-out);
+
+    > div:first-child {
+        z-index: 3;
+    }
+
+    > div:first-child::first-line {
+        font-family: var(--font-display);
+        font-variation-settings: var(--display-variation);
+        font-size: var(--font-size-h4);
+        font-weight: 500;
+        letter-spacing: -.01em;
+    }
+
+    .cover {
+        opacity: 1;
+        mix-blend-mode: normal;
+        transition: scale var(--member-reveal) var(--ease-out);
+    }
+
+    /* legibility scrim over the photo, under the text */
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        background: var(--location-scrim);
+        transition: opacity var(--duration-base) var(--ease-out);
+    }
+
+    &:is(:hover, :focus-visible) {
+        z-index: 2;
+        scale: var(--filter-hover-scale);
+        background-color: var(--clr-text);
+        color: var(--clr-text-inverse);
+        box-shadow: 0 0 0 3px var(--member-ring), var(--shadow-2);
+
+        .cover {
+            opacity: 1;
+            mix-blend-mode: normal;
+            scale: 1.06;
+        }
+    }
+
+    &:focus-visible {
+        outline: 3px solid var(--clr-focus);
+        outline-offset: 5px;
+    }
+}
+
+/* Price table: a quiet card — light header labels, hairline rows, tabular prices */
+.table.prices {
+    --padding-inline: 1.25rem;
+    --padding-block: .875rem;
+    --border-color: var(--clr-border);
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-card);
+    background-color: var(--clr-surface-raised);
+    box-shadow: var(--shadow-1);
+    font-variant-numeric: tabular-nums lining-nums;
+    margin-block-end: var(--space-section);
+
+    thead th {
+        white-space: nowrap;
+        background-color: var(--table-head-bg);
+        color: var(--clr-text-muted);
+        font-family: var(--font-regular);
+        font-size: var(--font-size-small);
+        font-weight: var(--font-weight-ui);
+        letter-spacing: .08em;
+        text-transform: uppercase;
+    }
+
+    tbody td {
+        font-family: var(--font-regular);
+        color: var(--clr-text-2);
+        line-height: 1.4;
+        vertical-align: middle;
+        transition: background-color var(--duration-fast) var(--ease-out);
+
+        &:first-of-type {
+            font-weight: 500;
+            color: var(--clr-text);
+        }
+
+        &.right {
+            font-weight: var(--font-weight-ui);
+            color: var(--clr-text);
+            white-space: nowrap;
+        }
+    }
+
+    tbody tr:last-child td {
+        border-block-end: 0;
+    }
+
+    tbody tr:hover td {
+        background-color: var(--table-row-hover);
+    }
+
+    @media screen and (max-width: 37.5rem) {
+        tbody tr {
+            padding-block: var(--space-half);
+            border-block-end: 1px solid var(--clr-border);
+            gap: 0;
+        }
+
+        tbody tr:last-child {
+            border-block-end: 0;
+        }
+
+        tbody td {
+            padding-block: .25rem;
+            border: 0;
+        }
+
+        tbody td.right {
+            text-align: left;
+        }
+    }
+}
+
+/* Hover / focus: the full-photo reveal, updated — the circle grows into a rounded
+   2:3 portrait with a coral ring, the name moves into a frosted pill over the photo
+   (drawer glass) carrying the audience bar. Pop-out as elsewhere. */
+.member:is(:hover, :focus, :focus-visible) {
+    z-index: 2;
+    scale: var(--filter-hover-scale);
+    transform: var(--card-hover-transform);
+
+    .bg {
+        box-shadow: var(--shadow-2);
+    }
+
+    img {
+        aspect-ratio: auto;
+        height: 90%;
+        border-radius: var(--radius-card);
+        border-color: var(--member-ring);
+        box-shadow: var(--shadow-2);
+    }
+
+    .name {
+        bottom: 15%;
+        color: var(--clr-text-inverse);
+        background-color: var(--member-pill-bg);
+        -webkit-backdrop-filter: var(--member-pill-backdrop);
+        backdrop-filter: var(--member-pill-backdrop);
+        border-color: var(--nav-border);
+
+        &::after {
+            height: var(--aud-bar-h);
+            margin-block-start: .375rem;
+            opacity: 1;
+        }
+    }
+}
+
+.member:focus-visible {
+    outline: 3px solid var(--clr-focus);
+    outline-offset: 4px;
+    border-radius: var(--radius-card);
+}
+
+/* Text panels don't move while you read them; comfortable line length */
+.panel:hover {
+    scale: none;
+}
+
+.panel .content > :is(p, ul, ol, h2, h3) {
+    max-inline-size: var(--measure);
+}
+
+/* Text-only panels: editorial two columns so the card is filled by design —
+   headings in a left rail, reading text in a right column at the comfortable
+   measure. Each heading shares a row with the start of its section; panels
+   without a heading put their text in the right column too, so body copy keeps
+   one left edge down the page. Single column below 56rem. */
+@media (min-width: 56rem) {
+    .panel:not(:has(picture)) .content {
+        display: grid;
+        grid-template-columns: minmax(12rem, 1fr) minmax(0, var(--measure));
+        column-gap: var(--panel-rail-gap);
+        align-items: start;
+        width: 100%;
+
+        > * {
+            grid-column: 2;
+            margin-block-start: 0;
+        }
+
+        > * + * {
+            margin-block-start: var(--space-normal);
+        }
+
+        > :is(h2, h3) {
+            grid-column: 1;
+            font-size: var(--font-size-h3);
+            margin-block: 0;
+            text-wrap: balance;
+        }
+
+        /* CMS leaves empty <p></p>s; they'd take the cell beside a heading */
+        > p:empty {
+            display: none;
+        }
+
+        /* text beside a heading starts level with it */
+        > :is(h2, h3) + *,
+        > :is(h2, h3) + :empty + * {
+            margin-block-start: 0;
+        }
+
+        /* a new section (and the text beside it) gets breathing room */
+        > :is(h2, h3):not(:first-child),
+        > :is(h2, h3):not(:first-child) + *,
+        > :is(h2, h3):not(:first-child) + :empty + * {
+            margin-block-start: var(--space-double);
+        }
+    }
+}
+
+/* Booking panel follows the booking colour (C: coral) */
+.panel.action {
+    background-color: var(--action-panel-bg);
+
+    a {
+        color: var(--action-panel-fg);
+    }
+}
+
+/* ---------- Shared cards used on sub-pages (same CSS files) */
+.panel,
+:is(.article, .article-single) {
+    box-shadow: var(--shadow-1);
+    border-radius: var(--radius-panel);
+}
+
+/* Mobile bottom bar — C: detached, rounded, frosted anthracite like the drawer.
+   A & B: full-width bar (tokens reproduce it). Only shown ≤ 37.5rem (site CSS). */
+.mobile_nav {
+    width: auto;
+    left: var(--mnav-gap);
+    right: var(--mnav-gap);
+    padding-block: var(--mnav-pad-block);
+    padding-inline: var(--mnav-pad-inline);
+    border: 1px solid var(--mnav-border);
+    border-radius: var(--mnav-radius);
+    background-color: var(--mnav-bg);
+    -webkit-backdrop-filter: var(--mnav-backdrop);
+    backdrop-filter: var(--mnav-backdrop);
+    box-shadow: var(--mnav-shadow);
+    font-family: var(--font-regular);
+
+    @media screen and (max-width: 37.5rem) {
+        bottom: calc(var(--mnav-gap) + env(safe-area-inset-bottom, 0px));
+    }
+
+    a {
+        padding: .375rem .25rem; /* five labels must fit 320px-wide phones */
+        border-radius: var(--nav-item-radius);
+        transition: background-color var(--duration-fast) var(--ease-out);
+
+        &:hover {
+            background-color: var(--nav-item-hover);
+        }
+
+        &:focus-visible {
+            outline: 2px solid var(--clr-focus-on-dark);
+            outline-offset: 2px;
+        }
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    ul.services li .service,
+    ul.services li .service::before,
+    div.filters button,
+    div.filters button::before,
+    .knowledge-base > div article,
+    .knowledge-base > div article::before,
+    .calltoaction > div a,
+    .calltoaction > div a::before,
+    ul.locations li .location,
+    ul.locations li .location .cover,
+    .member,
+    .member img,
+    .member .name,
+    .member .name::after,
+    nav.navigation-panel,
+    .navigation-overlay,
+    .panel,
+    :is(.article, .article-single) {
+        transition: none;  /* the fill still appears, just without the movement */
+    }
+
+    ul.services li .service:hover,
+    ul.services li .service:focus-visible,
+    div.filters button:hover,
+    div.filters button:focus-visible,
+    .knowledge-base > div article:is(:hover, :has(a:focus-visible)),
+    .calltoaction > div a:is(:hover, :focus-visible),
+    .member:is(:hover, :focus, :focus-visible),
+    ul.locations li .location:is(:hover, :focus-visible),
+    ul.locations li .location:is(:hover, :focus-visible) .cover,
+    .member:is(:hover, :focus, :focus-visible) img,
+    .panel:hover,
+    :is(.article, .article-single):hover {
+        transform: none;
+        scale: none;
+    }
+}
+
+/* Generated — team-card audience bar, equal segments for each attribute combination */
+.member[kids]:not([youth]):not([adult]):not([online]) { --member-bar: linear-gradient(90deg, var(--clr-cat-kids) 0 100%); }
+.member[youth]:not([kids]):not([adult]):not([online]) { --member-bar: linear-gradient(90deg, var(--clr-cat-youth) 0 100%); }
+.member[adult]:not([kids]):not([youth]):not([online]) { --member-bar: linear-gradient(90deg, var(--clr-cat-adult) 0 100%); }
+.member[online]:not([kids]):not([youth]):not([adult]) { --member-bar: linear-gradient(90deg, var(--clr-cat-online) 0 100%); }
+.member[kids][youth]:not([adult]):not([online]) { --member-bar: linear-gradient(90deg, var(--clr-cat-kids) 0 calc((100% - 3px) / 2 * 1 + 0px), transparent calc((100% - 3px) / 2 * 1 + 0px) calc((100% - 3px) / 2 * 1 + 3px), var(--clr-cat-youth) calc((100% - 3px) / 2 * 1 + 3px) 100%); }
+.member[kids][adult]:not([youth]):not([online]) { --member-bar: linear-gradient(90deg, var(--clr-cat-kids) 0 calc((100% - 3px) / 2 * 1 + 0px), transparent calc((100% - 3px) / 2 * 1 + 0px) calc((100% - 3px) / 2 * 1 + 3px), var(--clr-cat-adult) calc((100% - 3px) / 2 * 1 + 3px) 100%); }
+.member[kids][online]:not([youth]):not([adult]) { --member-bar: linear-gradient(90deg, var(--clr-cat-kids) 0 calc((100% - 3px) / 2 * 1 + 0px), transparent calc((100% - 3px) / 2 * 1 + 0px) calc((100% - 3px) / 2 * 1 + 3px), var(--clr-cat-online) calc((100% - 3px) / 2 * 1 + 3px) 100%); }
+.member[youth][adult]:not([kids]):not([online]) { --member-bar: linear-gradient(90deg, var(--clr-cat-youth) 0 calc((100% - 3px) / 2 * 1 + 0px), transparent calc((100% - 3px) / 2 * 1 + 0px) calc((100% - 3px) / 2 * 1 + 3px), var(--clr-cat-adult) calc((100% - 3px) / 2 * 1 + 3px) 100%); }
+.member[youth][online]:not([kids]):not([adult]) { --member-bar: linear-gradient(90deg, var(--clr-cat-youth) 0 calc((100% - 3px) / 2 * 1 + 0px), transparent calc((100% - 3px) / 2 * 1 + 0px) calc((100% - 3px) / 2 * 1 + 3px), var(--clr-cat-online) calc((100% - 3px) / 2 * 1 + 3px) 100%); }
+.member[adult][online]:not([kids]):not([youth]) { --member-bar: linear-gradient(90deg, var(--clr-cat-adult) 0 calc((100% - 3px) / 2 * 1 + 0px), transparent calc((100% - 3px) / 2 * 1 + 0px) calc((100% - 3px) / 2 * 1 + 3px), var(--clr-cat-online) calc((100% - 3px) / 2 * 1 + 3px) 100%); }
+.member[kids][youth][adult]:not([online]) { --member-bar: linear-gradient(90deg, var(--clr-cat-kids) 0 calc((100% - 6px) / 3 * 1 + 0px), transparent calc((100% - 6px) / 3 * 1 + 0px) calc((100% - 6px) / 3 * 1 + 3px), var(--clr-cat-youth) calc((100% - 6px) / 3 * 1 + 3px) calc((100% - 6px) / 3 * 2 + 3px), transparent calc((100% - 6px) / 3 * 2 + 3px) calc((100% - 6px) / 3 * 2 + 6px), var(--clr-cat-adult) calc((100% - 6px) / 3 * 2 + 6px) 100%); }
+.member[kids][youth][online]:not([adult]) { --member-bar: linear-gradient(90deg, var(--clr-cat-kids) 0 calc((100% - 6px) / 3 * 1 + 0px), transparent calc((100% - 6px) / 3 * 1 + 0px) calc((100% - 6px) / 3 * 1 + 3px), var(--clr-cat-youth) calc((100% - 6px) / 3 * 1 + 3px) calc((100% - 6px) / 3 * 2 + 3px), transparent calc((100% - 6px) / 3 * 2 + 3px) calc((100% - 6px) / 3 * 2 + 6px), var(--clr-cat-online) calc((100% - 6px) / 3 * 2 + 6px) 100%); }
+.member[kids][adult][online]:not([youth]) { --member-bar: linear-gradient(90deg, var(--clr-cat-kids) 0 calc((100% - 6px) / 3 * 1 + 0px), transparent calc((100% - 6px) / 3 * 1 + 0px) calc((100% - 6px) / 3 * 1 + 3px), var(--clr-cat-adult) calc((100% - 6px) / 3 * 1 + 3px) calc((100% - 6px) / 3 * 2 + 3px), transparent calc((100% - 6px) / 3 * 2 + 3px) calc((100% - 6px) / 3 * 2 + 6px), var(--clr-cat-online) calc((100% - 6px) / 3 * 2 + 6px) 100%); }
+.member[youth][adult][online]:not([kids]) { --member-bar: linear-gradient(90deg, var(--clr-cat-youth) 0 calc((100% - 6px) / 3 * 1 + 0px), transparent calc((100% - 6px) / 3 * 1 + 0px) calc((100% - 6px) / 3 * 1 + 3px), var(--clr-cat-adult) calc((100% - 6px) / 3 * 1 + 3px) calc((100% - 6px) / 3 * 2 + 3px), transparent calc((100% - 6px) / 3 * 2 + 3px) calc((100% - 6px) / 3 * 2 + 6px), var(--clr-cat-online) calc((100% - 6px) / 3 * 2 + 6px) 100%); }
+.member[kids][youth][adult][online] { --member-bar: linear-gradient(90deg, var(--clr-cat-kids) 0 calc((100% - 9px) / 4 * 1 + 0px), transparent calc((100% - 9px) / 4 * 1 + 0px) calc((100% - 9px) / 4 * 1 + 3px), var(--clr-cat-youth) calc((100% - 9px) / 4 * 1 + 3px) calc((100% - 9px) / 4 * 2 + 3px), transparent calc((100% - 9px) / 4 * 2 + 3px) calc((100% - 9px) / 4 * 2 + 6px), var(--clr-cat-adult) calc((100% - 9px) / 4 * 2 + 6px) calc((100% - 9px) / 4 * 3 + 6px), transparent calc((100% - 9px) / 4 * 3 + 6px) calc((100% - 9px) / 4 * 3 + 9px), var(--clr-cat-online) calc((100% - 9px) / 4 * 3 + 9px) 100%); }
+
+/* Generated from avatars.json — one rule per specialist profile link */
+nav.navigation-panel.open a[href="/zespół/paulina-armatys/"] { --avatar: url("/media/avatars/paulina-armatys.jpg"); }
+nav.navigation-panel.open a[href="/zespół/krystyna-garncarz/"] { --avatar: url("/media/avatars/krystyna-garncarz.jpg"); }
+nav.navigation-panel.open a[href="/zespół/karolina-ulatowska-stajszczyk/"] { --avatar: url("/media/avatars/karolina-ulatowska-stajszczyk.jpg"); }
+nav.navigation-panel.open a[href="/zespół/jurij-romaniuk/"] { --avatar: url("/media/avatars/jurij-romaniuk.jpg"); }
+nav.navigation-panel.open a[href="/zespół/barbara-czuchta/"] { --avatar: url("/media/avatars/barbara-czuchta.jpg"); }
+nav.navigation-panel.open a[href="/zespół/natalia-orlowska-prosniak/"] { --avatar: url("/media/avatars/natalia-orlowska-prosniak.jpg"); }
+nav.navigation-panel.open a[href="/zespół/magdalena-andrzejewska/"] { --avatar: url("/media/avatars/magdalena-andrzejewska.jpg"); }
+nav.navigation-panel.open a[href="/zespół/krystyna-andrunewczyn/"] { --avatar: url("/media/avatars/krystyna-andrunewczyn.jpg"); }
+nav.navigation-panel.open a[href="/zespół/michalina-frosztega/"] { --avatar: url("/media/avatars/michalina-frosztega.jpg"); }
+nav.navigation-panel.open a[href="/zespół/ewa-korpak/"] { --avatar: url("/media/avatars/ewa-korpak.jpg"); }
+nav.navigation-panel.open a[href="/zespół/ewa-srodka/"] { --avatar: url("/media/avatars/ewa-srodka.jpg"); }
+nav.navigation-panel.open a[href="/zespół/sylwia-machelska/"] { --avatar: url("/media/avatars/sylwia-machelska.jpg"); }
+nav.navigation-panel.open a[href="/zespół/paulina-stacherska/"] { --avatar: url("/media/avatars/paulina-stacherska.jpg"); }
+nav.navigation-panel.open a[href="/zespół/monika-machowska/"] { --avatar: url("/media/avatars/monika-machowska.jpg"); }
+nav.navigation-panel.open a[href="/zespół/maja-chojnacka/"] { --avatar: url("/media/avatars/maja-chojnacka.jpg"); }
+nav.navigation-panel.open a[href="/zespół/karolina-debska/"] { --avatar: url("/media/avatars/karolina-debska.jpg"); }
+nav.navigation-panel.open a[href="/zespół/weronika-grzebieluch/"] { --avatar: url("/media/avatars/weronika-grzebieluch.jpg"); }
+nav.navigation-panel.open a[href="/zespół/anna-michalska/"] { --avatar: url("/media/avatars/anna-michalska.jpg"); }
+nav.navigation-panel.open a[href="/zespół/zuzanna-soberka/"] { --avatar: url("/media/avatars/zuzanna-soberka.jpg"); }
+nav.navigation-panel.open a[href="/zespół/dorota-rycak/"] { --avatar: url("/media/avatars/dorota-rycak.jpg"); }
+
+/* Generated from audiences.json — audience label + bar per service card */
+ul.services a.service[href="/oferta/psycholog-wroclaw/"] { --aud-label: "młodzież · dorośli"; --aud-bar: linear-gradient(90deg, var(--clr-cat-youth) 0 calc((100% - 3px) / 2 * 1 + 0px), transparent calc((100% - 3px) / 2 * 1 + 0px) calc((100% - 3px) / 2 * 1 + 3px), var(--clr-cat-adult) calc((100% - 3px) / 2 * 1 + 3px) 100%); --aud-pill: linear-gradient(90deg, var(--clr-cat-youth-tint) 0 calc(.75rem + 4.5798em), var(--clr-cat-adult-tint) calc(.75rem + 4.5798em) 100%); }
+ul.services a.service[href="/oferta/psychoterapeuta-wroclaw/"] { --aud-label: "młodzież · dorośli"; --aud-bar: linear-gradient(90deg, var(--clr-cat-youth) 0 calc((100% - 3px) / 2 * 1 + 0px), transparent calc((100% - 3px) / 2 * 1 + 0px) calc((100% - 3px) / 2 * 1 + 3px), var(--clr-cat-adult) calc((100% - 3px) / 2 * 1 + 3px) 100%); --aud-pill: linear-gradient(90deg, var(--clr-cat-youth-tint) 0 calc(.75rem + 4.5798em), var(--clr-cat-adult-tint) calc(.75rem + 4.5798em) 100%); }
+ul.services a.service[href="/oferta/psycholog-dzieciecy-wroclaw/"] { --aud-label: "dzieci · młodzież"; --aud-bar: linear-gradient(90deg, var(--clr-cat-kids) 0 calc((100% - 3px) / 2 * 1 + 0px), transparent calc((100% - 3px) / 2 * 1 + 0px) calc((100% - 3px) / 2 * 1 + 3px), var(--clr-cat-youth) calc((100% - 3px) / 2 * 1 + 3px) 100%); --aud-pill: linear-gradient(90deg, var(--clr-cat-kids-tint) 0 calc(.75rem + 3.043em), var(--clr-cat-youth-tint) calc(.75rem + 3.043em) 100%); }
+ul.services a.service[href="/oferta/terapia-par-wroclaw/"] { --aud-label: "dorośli"; --aud-bar: linear-gradient(90deg, var(--clr-cat-adult) 0 100%); --aud-pill: var(--clr-cat-adult-tint); }
+ul.services a.service[href="/oferta/terapia-rodzin-psychoterapia-rodzinna-wroclaw/"] { --aud-label: "dzieci · młodzież · dorośli"; --aud-bar: linear-gradient(90deg, var(--clr-cat-kids) 0 calc((100% - 6px) / 3 * 1 + 0px), transparent calc((100% - 6px) / 3 * 1 + 0px) calc((100% - 6px) / 3 * 1 + 3px), var(--clr-cat-youth) calc((100% - 6px) / 3 * 1 + 3px) calc((100% - 6px) / 3 * 2 + 3px), transparent calc((100% - 6px) / 3 * 2 + 3px) calc((100% - 6px) / 3 * 2 + 6px), var(--clr-cat-adult) calc((100% - 6px) / 3 * 2 + 6px) 100%); --aud-pill: linear-gradient(90deg, var(--clr-cat-kids-tint) 0 calc(.75rem + 3.043em), var(--clr-cat-youth-tint) calc(.75rem + 3.043em) calc(.75rem + 7.8965em), var(--clr-cat-adult-tint) calc(.75rem + 7.8965em) 100%); }
+ul.services a.service[href="/oferta/sesje-wsparcia-dla-rodzicow-wroclaw/"] { --aud-label: "dorośli"; --aud-bar: linear-gradient(90deg, var(--clr-cat-adult) 0 100%); --aud-pill: var(--clr-cat-adult-tint); }
+ul.services a.service[href="/oferta/logopeda-ze-specjalnoscia-kliniczna-wroclaw/"] { --aud-label: "dzieci · młodzież · dorośli"; --aud-bar: linear-gradient(90deg, var(--clr-cat-kids) 0 calc((100% - 6px) / 3 * 1 + 0px), transparent calc((100% - 6px) / 3 * 1 + 0px) calc((100% - 6px) / 3 * 1 + 3px), var(--clr-cat-youth) calc((100% - 6px) / 3 * 1 + 3px) calc((100% - 6px) / 3 * 2 + 3px), transparent calc((100% - 6px) / 3 * 2 + 3px) calc((100% - 6px) / 3 * 2 + 6px), var(--clr-cat-adult) calc((100% - 6px) / 3 * 2 + 6px) 100%); --aud-pill: linear-gradient(90deg, var(--clr-cat-kids-tint) 0 calc(.75rem + 3.043em), var(--clr-cat-youth-tint) calc(.75rem + 3.043em) calc(.75rem + 7.8965em), var(--clr-cat-adult-tint) calc(.75rem + 7.8965em) 100%); }
+ul.services a.service[href="/oferta/psychodietetyk-wroclaw/"] { --aud-label: "młodzież · dorośli"; --aud-bar: linear-gradient(90deg, var(--clr-cat-youth) 0 calc((100% - 3px) / 2 * 1 + 0px), transparent calc((100% - 3px) / 2 * 1 + 0px) calc((100% - 3px) / 2 * 1 + 3px), var(--clr-cat-adult) calc((100% - 3px) / 2 * 1 + 3px) 100%); --aud-pill: linear-gradient(90deg, var(--clr-cat-youth-tint) 0 calc(.75rem + 4.5798em), var(--clr-cat-adult-tint) calc(.75rem + 4.5798em) 100%); }
+ul.services a.service[href="/oferta/konsultacje-psychologiczne-on-line-wroclaw/"] { --aud-label: "młodzież · dorośli · on-line"; --aud-bar: linear-gradient(90deg, var(--clr-cat-youth) 0 calc((100% - 3px) / 2 * 1 + 0px), transparent calc((100% - 3px) / 2 * 1 + 0px) calc((100% - 3px) / 2 * 1 + 3px), var(--clr-cat-adult) calc((100% - 3px) / 2 * 1 + 3px) 100%); --aud-pill: linear-gradient(90deg, var(--clr-cat-youth-tint) 0 calc(.75rem + 4.5798em), var(--clr-cat-adult-tint) calc(.75rem + 4.5798em) calc(.75rem + 8.3548em), var(--clr-cat-online-tint) calc(.75rem + 8.3548em) 100%); }
+ul.services a.service[href="/oferta/qeeg-wroclaw/"] { --aud-label: "dzieci · młodzież · dorośli"; --aud-bar: linear-gradient(90deg, var(--clr-cat-kids) 0 calc((100% - 6px) / 3 * 1 + 0px), transparent calc((100% - 6px) / 3 * 1 + 0px) calc((100% - 6px) / 3 * 1 + 3px), var(--clr-cat-youth) calc((100% - 6px) / 3 * 1 + 3px) calc((100% - 6px) / 3 * 2 + 3px), transparent calc((100% - 6px) / 3 * 2 + 3px) calc((100% - 6px) / 3 * 2 + 6px), var(--clr-cat-adult) calc((100% - 6px) / 3 * 2 + 6px) 100%); --aud-pill: linear-gradient(90deg, var(--clr-cat-kids-tint) 0 calc(.75rem + 3.043em), var(--clr-cat-youth-tint) calc(.75rem + 3.043em) calc(.75rem + 7.8965em), var(--clr-cat-adult-tint) calc(.75rem + 7.8965em) 100%); }
+ul.services a.service[href="/oferta/eeg-biofeedback-wroclaw/"] { --aud-label: "dzieci · młodzież · dorośli"; --aud-bar: linear-gradient(90deg, var(--clr-cat-kids) 0 calc((100% - 6px) / 3 * 1 + 0px), transparent calc((100% - 6px) / 3 * 1 + 0px) calc((100% - 6px) / 3 * 1 + 3px), var(--clr-cat-youth) calc((100% - 6px) / 3 * 1 + 3px) calc((100% - 6px) / 3 * 2 + 3px), transparent calc((100% - 6px) / 3 * 2 + 3px) calc((100% - 6px) / 3 * 2 + 6px), var(--clr-cat-adult) calc((100% - 6px) / 3 * 2 + 6px) 100%); --aud-pill: linear-gradient(90deg, var(--clr-cat-kids-tint) 0 calc(.75rem + 3.043em), var(--clr-cat-youth-tint) calc(.75rem + 3.043em) calc(.75rem + 7.8965em), var(--clr-cat-adult-tint) calc(.75rem + 7.8965em) 100%); }
+ul.services a.service[href="/oferta/eeg-biofeedback-z-coachingiem-wroclaw/"] { --aud-label: "młodzież · dorośli"; --aud-bar: linear-gradient(90deg, var(--clr-cat-youth) 0 calc((100% - 3px) / 2 * 1 + 0px), transparent calc((100% - 3px) / 2 * 1 + 0px) calc((100% - 3px) / 2 * 1 + 3px), var(--clr-cat-adult) calc((100% - 3px) / 2 * 1 + 3px) 100%); --aud-pill: linear-gradient(90deg, var(--clr-cat-youth-tint) 0 calc(.75rem + 4.5798em), var(--clr-cat-adult-tint) calc(.75rem + 4.5798em) 100%); }
+ul.services a.service[href="/oferta/terapia-metoda-warnkego-wroclaw/"] { --aud-label: "dzieci · młodzież"; --aud-bar: linear-gradient(90deg, var(--clr-cat-kids) 0 calc((100% - 3px) / 2 * 1 + 0px), transparent calc((100% - 3px) / 2 * 1 + 0px) calc((100% - 3px) / 2 * 1 + 3px), var(--clr-cat-youth) calc((100% - 3px) / 2 * 1 + 3px) 100%); --aud-pill: linear-gradient(90deg, var(--clr-cat-kids-tint) 0 calc(.75rem + 3.043em), var(--clr-cat-youth-tint) calc(.75rem + 3.043em) 100%); }
+ul.services a.service[href="/oferta/terapia-dysleksji-i-afazji-wroclaw/"] { --aud-label: "dzieci · młodzież · dorośli"; --aud-bar: linear-gradient(90deg, var(--clr-cat-kids) 0 calc((100% - 6px) / 3 * 1 + 0px), transparent calc((100% - 6px) / 3 * 1 + 0px) calc((100% - 6px) / 3 * 1 + 3px), var(--clr-cat-youth) calc((100% - 6px) / 3 * 1 + 3px) calc((100% - 6px) / 3 * 2 + 3px), transparent calc((100% - 6px) / 3 * 2 + 3px) calc((100% - 6px) / 3 * 2 + 6px), var(--clr-cat-adult) calc((100% - 6px) / 3 * 2 + 6px) 100%); --aud-pill: linear-gradient(90deg, var(--clr-cat-kids-tint) 0 calc(.75rem + 3.043em), var(--clr-cat-youth-tint) calc(.75rem + 3.043em) calc(.75rem + 7.8965em), var(--clr-cat-adult-tint) calc(.75rem + 7.8965em) 100%); }
+ul.services a.service[href="/oferta/diagnoza-autyzmu-ados-2-wroclaw/"] { --aud-label: "dzieci · młodzież · dorośli"; --aud-bar: linear-gradient(90deg, var(--clr-cat-kids) 0 calc((100% - 6px) / 3 * 1 + 0px), transparent calc((100% - 6px) / 3 * 1 + 0px) calc((100% - 6px) / 3 * 1 + 3px), var(--clr-cat-youth) calc((100% - 6px) / 3 * 1 + 3px) calc((100% - 6px) / 3 * 2 + 3px), transparent calc((100% - 6px) / 3 * 2 + 3px) calc((100% - 6px) / 3 * 2 + 6px), var(--clr-cat-adult) calc((100% - 6px) / 3 * 2 + 6px) 100%); --aud-pill: linear-gradient(90deg, var(--clr-cat-kids-tint) 0 calc(.75rem + 3.043em), var(--clr-cat-youth-tint) calc(.75rem + 3.043em) calc(.75rem + 7.8965em), var(--clr-cat-adult-tint) calc(.75rem + 7.8965em) 100%); }
+ul.services a.service[href="/oferta/terapia-czaszkowo-krzyzowa-cst-wroclaw/"] { --aud-label: "dzieci · młodzież · dorośli"; --aud-bar: linear-gradient(90deg, var(--clr-cat-kids) 0 calc((100% - 6px) / 3 * 1 + 0px), transparent calc((100% - 6px) / 3 * 1 + 0px) calc((100% - 6px) / 3 * 1 + 3px), var(--clr-cat-youth) calc((100% - 6px) / 3 * 1 + 3px) calc((100% - 6px) / 3 * 2 + 3px), transparent calc((100% - 6px) / 3 * 2 + 3px) calc((100% - 6px) / 3 * 2 + 6px), var(--clr-cat-adult) calc((100% - 6px) / 3 * 2 + 6px) 100%); --aud-pill: linear-gradient(90deg, var(--clr-cat-kids-tint) 0 calc(.75rem + 3.043em), var(--clr-cat-youth-tint) calc(.75rem + 3.043em) calc(.75rem + 7.8965em), var(--clr-cat-adult-tint) calc(.75rem + 7.8965em) 100%); }
+ul.services a.service[href="/oferta/kompleksowa-diagnoza-rozwoju-dziecka-korp-koze-wroclaw/"] { --aud-label: "dzieci"; --aud-bar: linear-gradient(90deg, var(--clr-cat-kids) 0 100%); --aud-pill: var(--clr-cat-kids-tint); }
+ul.services a.service[href="/oferta/diagnoza-adhd-u-dzieci-wroclaw/"] { --aud-label: "dzieci · młodzież"; --aud-bar: linear-gradient(90deg, var(--clr-cat-kids) 0 calc((100% - 3px) / 2 * 1 + 0px), transparent calc((100% - 3px) / 2 * 1 + 0px) calc((100% - 3px) / 2 * 1 + 3px), var(--clr-cat-youth) calc((100% - 3px) / 2 * 1 + 3px) 100%); --aud-pill: linear-gradient(90deg, var(--clr-cat-kids-tint) 0 calc(.75rem + 3.043em), var(--clr-cat-youth-tint) calc(.75rem + 3.043em) 100%); }
+ul.services a.service[href="/oferta/mmpi-2-test-oceny-osobowosci-wroclaw/"] { --aud-label: "dorośli"; --aud-bar: linear-gradient(90deg, var(--clr-cat-adult) 0 100%); --aud-pill: var(--clr-cat-adult-tint); }
+ul.services a.service[href="/oferta/diva-5-diagnoza-adhd-u-doroslych-wroclaw/"] { --aud-label: "dorośli"; --aud-bar: linear-gradient(90deg, var(--clr-cat-adult) 0 100%); --aud-pill: var(--clr-cat-adult-tint); }

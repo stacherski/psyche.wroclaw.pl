@@ -9,10 +9,28 @@
   {% set servicesToDisplay = servicesPublished %}
 {% endif %}
 
+{% if serviceFilter %}
+  <div class="filters" data-for="services" role="group" aria-label="Filtruj usługi">
+    <button type="button" class="filter-btn active" data-category="all" aria-pressed="true">Wszystkie</button>
+    <button type="button" class="filter-btn" data-category="kids" aria-pressed="false">Dla dzieci</button>
+    <button type="button" class="filter-btn" data-category="youth" aria-pressed="false">Dla młodzieży</button>
+    <button type="button" class="filter-btn" data-category="adult" aria-pressed="false">Dla dorosłych</button>
+    <button type="button" class="filter-btn" data-category="online" aria-pressed="false">On-line</button>
+  </div>
+  <p class="filter-status" aria-live="polite"></p>
+  <script src="/script/service-filter.js" defer></script>
+{% endif %}
+
 <ul class="services">
   {% for service in servicesToDisplay %}
     <li>
-      <a class="service" href="/oferta/{{ service.fullName | slugify }}/">
+      {% set slug = service.fullName | slugify %}
+      <a
+        all
+        {% for group in audiences[slug] %}{{ group }} {% endfor %}
+        class="service"
+        href="/oferta/{{ slug }}/"
+      >
         {% if service.icon %}
           <img
             eleventy:optional="placeholder"

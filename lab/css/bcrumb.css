@@ -1,0 +1,44 @@
+nav.bcrumb {
+    background-color: hsl(from var(--clr-text-inverse) h s l / 80%);
+    position: sticky;
+    top: 80px;
+    z-index: 5;
+    backdrop-filter: blur(5px);
+
+    @media screen and (max-width: 37.5rem) {
+        top: 48px;
+    }
+
+    >div {
+        --padding: var(--space-normal);
+        max-width: calc(2 * var(--padding) + var(--content-width));
+        margin-inline: auto;
+        padding-inline: var(--padding);
+        padding-block: calc(.25 * var(--padding));
+
+        ul.breadcrumb {
+            padding: 0;
+            margin: 0;
+            display: inline-flex;
+            gap: var(--space-half);
+
+            li {
+                list-style: none;
+                margin-block-start: 0;
+                font-size: 0.8rem;
+                font-weight: 700;
+
+                &:not(:last-child):after {
+                    content: '»';
+                    content: "/";
+                    margin-inline-start: var(--space-half);
+                }
+
+                a {
+                    color: var(--clr-base);
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}

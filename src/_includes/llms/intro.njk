@@ -1,0 +1,20 @@
+# Centrum PSYCHE Wrocław
+
+> Centrum PSYCHE to prywatna poradnia zdrowia psychicznego i centrum psychoterapii we Wrocławiu, oferujące kompleksową pomoc psychologiczną i terapeutyczną dla dzieci, młodzieży i dorosłych. Placówka działa wyłącznie prywatnie (poza NFZ).
+
+## O centrum
+
+Centrum PSYCHE świadczy holistyczną pomoc psychologiczną dla pacjentów indywidualnych, par i rodzin. Zespół tworzą wykwalifikowani specjaliści z zakresu psychologii klinicznej, psychologii dziecięcej, psychoterapii, logopedii oraz diagnostyki. Placówka stawia na indywidualne podejście, empatię i bezpieczeństwo pacjenta.
+
+## Gabinety
+
+{% for location in locations | byPublished -%}
+- **{{ location.address }}**, {{ location.postalcode }} {{ location.city }}{% if location.fullName == "Białowieska" %} (róg Legnicka / Białowieska) – gabinet główny{% elif location.fullName == "Małopanewska" %} – Psyche KIDS (dla dzieci){% endif %}: {{ site }}/gabinety/{{ location.fullName | slugify }}/
+{% endfor %}
+## Godziny otwarcia i rejestracja
+
+- Godziny otwarcia gabinetu: poniedziałek–piątek 9:00–21:00, sobota 9:00–15:00
+- Rejestracja telefoniczna: poniedziałek–piątek 9:00–18:00, tel. +48 668 093 234
+- Rejestracja online (Booksy): https://booksy.com/pl-pl/36093_psycholog-centrum-psyche-gabinety-psychologiczne_zdrowie_13750_wroclaw
+- E-mail: info@psyche.wroclaw.pl
+- Facebook: https://fb.me/centrumpsyche

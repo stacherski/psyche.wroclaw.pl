@@ -151,6 +151,8 @@ isHomepage: false
   </article>
 {% endif %}
 
+{% include "partials/faq.njk" %}
+
 <article class="_panel" style="display: grid; gap: var(--space-normal);">
   <h2>Usługa <b>{{ title }}</b> dostępna jest w gabinetach:</h2>
   {% include "partials/locations.njk" %}

@@ -1,0 +1,17 @@
+---
+permalink: /llms.txt
+eleventyExcludeFromCollections: true
+site: https://psyche.wroclaw.pl
+---
+{% include "llms/intro.njk" %}
+## Usługi
+
+{% for service in services | byPublished -%}
+- [{{ service.fullName }}]({{ site }}/oferta/{{ service.fullName | slugify }}/): {{ service.metaDescription | striptags | truncate(220) | safe }}
+{% endfor %}
+## Najczęstsze pytania
+
+- [Najczęstsze pytania]({{ site }}/najczestsze-pytania/): pytania i odpowiedzi o usługach Centrum PSYCHE ({{ faq.length }}), pogrupowane według usług.
+- Pełne odpowiedzi, cennik i zespół w jednym pliku tekstowym: {{ site }}/llms-full.txt
+
+{% include "llms/pages.njk" %}

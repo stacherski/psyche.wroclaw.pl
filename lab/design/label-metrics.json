@@ -1,0 +1,12 @@
+{
+ "_note": "Centre of each '·' separator, in em from the start of the label text, measured in the browser (2026-09-24) with Instrument Sans 500, 12px, letter-spacing .01em — the audience pill's exact style. Used by build.py to put the Pill preset's colour cuts on the dots. Re-measure if the label font, weight, letter-spacing or wording changes (snippet in HANDOVER.md).",
+ "font": "Instrument Sans 500 / 0.75rem / letter-spacing .01em",
+ "labels": {
+  "dorośli": {"cutsEm": [], "widthEm": 3.2285},
+  "dzieci": {"cutsEm": [], "widthEm": 2.7702},
+  "dzieci · młodzież": {"cutsEm": [3.043], "widthEm": 7.623},
+  "dzieci · młodzież · dorośli": {"cutsEm": [3.043, 7.8965], "widthEm": 11.3984},
+  "młodzież · dorośli": {"cutsEm": [4.5798], "widthEm": 8.0814},
+  "młodzież · dorośli · on-line": {"cutsEm": [4.5798, 8.3548], "widthEm": 12.0247}
+ }
+}
