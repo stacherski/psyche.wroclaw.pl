@@ -833,10 +833,10 @@ details.faq-item {
         font-weight: var(--ph-title-weight);
         letter-spacing: var(--ph-title-tracking);
         text-shadow: none;
-        white-space: nowrap;
-        max-width: calc(100% - 2rem);
-        overflow: hidden;
-        text-overflow: ellipsis;
+        /* long service names wrap onto balanced lines instead of being cut off;
+           the explicit width is needed because the title is centred with left: 50% */
+        width: calc(100% - 2rem);
+        text-wrap: balance;
         margin-block-start: var(--ph-title-offset);
     }
 }
