@@ -196,7 +196,7 @@
  },
  {
   "service": "eeg-biofeedback-wroclaw",
-  "question": "Jak przygotować się do badania QEEG?",
+  "question": "Jak przygotować się do pierwszej wizyty na EEG Biofeedback?",
   "answer": "Przed badaniami EEG zwykle zaleca się umycie włosów samym szamponem, bez nakładania odżywek, pianek, żeli czy lakieru, ponieważ elektrody lub czepek umieszcza się na skórze głowy. Często zaleca się też unikanie kofeiny przed badaniem, a stale przyjmowane leki warto omówić z lekarzem. Szczegóły warto potwierdzić przy rejestracji.",
   "origin": "web",
   "sources": [
