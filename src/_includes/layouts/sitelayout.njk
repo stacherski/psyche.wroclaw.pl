@@ -50,9 +50,21 @@
     {# Main JS file #}
     <script src="/script/main.js"></script>
 
-    <script type="application/ld+json">{{ locations | clinicJsonLd | safe }}</script>
-    {% if not isHomepage %}
+    <script type="application/ld+json">{{ locations | clinicJsonLd(services, prices) | safe }}</script>
+    {% if isHomepage %}
+      <script type="application/ld+json">{% websiteJsonLd %}</script>
+    {% else %}
       <script type="application/ld+json">{{ page.url | breadcrumbJsonLd(title) | safe }}</script>
+    {% endif %}
+
+    {% if service %}
+      <script type="application/ld+json">{{ service | serviceJsonLd(prices) | safe }}</script>
+    {% endif %}
+    {% if member %}
+      <script type="application/ld+json">{{ member | personJsonLd(services) | safe }}</script>
+    {% endif %}
+    {% if article %}
+      <script type="application/ld+json">{{ article | articleJsonLd(page.url, team) | safe }}</script>
     {% endif %}
 
     {% if service %}
