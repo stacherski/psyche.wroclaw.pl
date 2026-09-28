@@ -43,5 +43,147 @@
     "from": "/o-nas/artykuly/@253/adhd-czy-problemy-z-koncentracja-jak-je-odroznic/",
     "to": "/o-nas/artykuly/@285/adhd-czy-problemy-z-koncentracja-jak-je-odroznic/",
     "note": "article renumbered (duplicate id)"
+  },
+  {
+    "from": "/start",
+    "to": "/",
+    "note": "old homepage"
+  },
+  {
+    "from": "/psyche",
+    "to": "/",
+    "note": "old homepage"
+  },
+  {
+    "from": "/opinie",
+    "to": "/",
+    "note": "old reviews page"
+  },
+  {
+    "from": "/baza-wiedzy",
+    "to": "/o-nas/artykuly/",
+    "note": "old knowledge base"
+  },
+  {
+    "from": "/baza-wiedzy.402/co-to-jest-schizofrenia-.95.aspx",
+    "to": "/o-nas/artykuly/@43/co-to-jest-schizofrenia/",
+    "note": "old CMS address"
+  },
+  {
+    "from": "/cennik.392.aspx",
+    "to": "/cennik/",
+    "note": "old CMS address"
+  },
+  {
+    "from": "/ref.aspx",
+    "query": "id=1346",
+    "to": "/media/badanie-qeeg-informacja.pdf",
+    "note": "old CMS download: Co to jest badanie QEEG"
+  },
+  {
+    "from": "/ref.aspx",
+    "query": "id=1347",
+    "to": "/media/badanie-qeeg-przygotowanie-do-badania.pdf",
+    "note": "old CMS download: Przygotowanie do badania QEEG"
+  },
+  {
+    "from": "/ref.aspx",
+    "to": "/oferta/qeeg-wroclaw/",
+    "note": "old CMS downloads (QEEG PDFs)"
+  },
+  {
+    "from": "/o-nas/polecamy",
+    "to": "/o-nas/",
+    "note": "old page"
+  },
+  {
+    "from": "/kontakt/rejestracja",
+    "to": "/kontakt/",
+    "note": "old registration form"
+  },
+  {
+    "from": "/gabinety/białowieska",
+    "to": "/gabinety/bialowieska/",
+    "note": "old location address"
+  },
+  {
+    "from": "/gabinety/małopanewska",
+    "to": "/gabinety/malopanewska/",
+    "note": "old location address"
+  },
+  {
+    "from": "/oferta/diva-5-wroclaw",
+    "to": "/oferta/diva-5-diagnoza-adhd-u-doroslych-wroclaw/",
+    "note": "renamed service"
+  },
+  {
+    "from": "/oferta/mmpi-2-wroclaw",
+    "to": "/oferta/mmpi-2-test-oceny-osobowosci-wroclaw/",
+    "note": "renamed service"
+  },
+  {
+    "from": "/o-nas/artykuly/@202/*",
+    "to": "/o-nas/artykuly/@203/spektrum-autyzmu/",
+    "note": "article removed, same topic"
+  },
+  {
+    "from": "/baza-wiedzy/@202/*",
+    "to": "/o-nas/artykuly/@203/spektrum-autyzmu/",
+    "note": "article removed, same topic"
+  },
+  {
+    "from": "/zespół/karolina-ulatowska--stajszczyk-",
+    "to": "/zespół/karolina-ulatowska-stajszczyk/",
+    "note": "old team address"
+  },
+  {
+    "from": "/zespol/karolina-ulatowska-(stajszczyk)",
+    "to": "/zespół/karolina-ulatowska-stajszczyk/",
+    "note": "old team address"
+  },
+  {
+    "from": "/zespół/@26/jurij-romaniuk",
+    "to": "/zespół/jurij-romaniuk/",
+    "note": "old team address"
+  },
+  {
+    "from": "/zespol/@44/barbara-czuchta",
+    "to": "/zespół/barbara-czuchta/",
+    "note": "old team address"
+  },
+  {
+    "from": "/oferta/terapia-uzaleznien-terapeuta-wroclaw/",
+    "to": "/oferta/psychoterapeuta-wroclaw/",
+    "note": "service no longer offered"
+  },
+  {
+    "from": "/oferta/leczenie-alkoholizmu-wroclaw/",
+    "to": "/oferta/psychoterapeuta-wroclaw/",
+    "note": "service no longer offered"
+  },
+  {
+    "from": "/oferta/pomoc-dzieciom-z-trudnosciami-w-uczeniu-sie/",
+    "to": "/oferta/psycholog-dzieciecy-wroclaw/",
+    "note": "service no longer offered"
+  },
+  {
+    "from": "/oferta/tutoring-rodzinny-wroclaw/",
+    "to": "/oferta/sesje-wsparcia-dla-rodzicow-wroclaw/",
+    "note": "service no longer offered"
+  },
+  {
+    "from": "/oferta/edukacyjny-trening-personalny-wroclaw/",
+    "to": "/oferta/psycholog-dzieciecy-wroclaw/",
+    "note": "service no longer offered"
+  },
+  {
+    "from": "/oferta/trening-personalny-dla-dzieci-i-mlodziezy-wroclaw/",
+    "to": "/oferta/psycholog-dzieciecy-wroclaw/",
+    "note": "service no longer offered"
+  },
+  {
+    "from": "/oferta/diagnoza-rozwoju-dziecka-korp-wroclaw/",
+    "to": "/oferta/kompleksowa-diagnoza-rozwoju-dziecka-korp-koze-wroclaw/",
+    "note": "service no longer offered"
   }
 ]

@@ -3,18 +3,40 @@ permalink: /_redirects
 eleventyExcludeFromCollections: true
 ---
 {#- Netlify redirects (https://docs.netlify.com/routing/redirects/), all permanent (301).
+    Netlify uses the first rule that matches, and never redirects an address that has
+    a page, so the catch-all rules at the end only affect addresses that don't exist.
+    An entry's optional "query" (e.g. "id=1346") only matches that query parameter.
     Addresses with Polish characters are written both as-is and percent-encoded. -#}
-{%- macro rule(from, to) %}
-{{ from }} {{ to }} 301
+{%- macro rule(from, to, query) %}
+{{ from }}{% if query %} {{ query }}{% endif %} {{ to }} 301
 {%- if from | encodeURI != from %}
-{{ from | encodeURI }} {{ to }} 301
+{{ from | encodeURI }}{% if query %} {{ query }}{% endif %} {{ to }} 301
 {%- endif %}
 {%- endmacro %}
 
 # Moved or removed pages (src/_data/redirects.json)
-{%- for redirect in redirects %}{{ rule(redirect.from, redirect.to) }}{% endfor %}
+{%- for redirect in redirects %}{{ rule(redirect.from, redirect.to, redirect.query) }}{% endfor %}
 
 # Former team members (team.json "published": "No")
 {%- for member in team %}
   {%- if member.published | lower != "yes" %}{{ rule("/zespół/" + (member.fullName | slugify) + "/", member.redirectTo or "/zespół/") }}{% endif %}
 {%- endfor %}
+
+# Team pages under the old address without Polish characters
+{%- for member in publishedTeam %}{{ rule("/zespol/" + (member.fullName | slugify) + "/", "/zespół/" + (member.fullName | slugify) + "/") }}{% endfor %}
+
+# Articles under an old title or the old /baza-wiedzy/ address: the id decides
+{%- for article in articles %}
+  {%- set to = ("/o-nas/artykuly/@" + article.id + "/" + (article.urlTitle | slugify) + "/") if article.published else "/o-nas/artykuly/" %}
+  {{- rule("/o-nas/artykuly/@" + article.id + "/*", to) }}
+  {{- rule("/baza-wiedzy/@" + article.id + "/*", to) }}
+{%- endfor %}
+
+# Anything else that no longer exists: the section's main page
+{{- rule("/baza-wiedzy/*", "/o-nas/artykuly/") }}
+{{- rule("/o-nas/artykuly/*", "/o-nas/artykuly/") }}
+{{- rule("/zespol/*", "/zespół/") }}
+{{- rule("/zespol", "/zespół/") }}
+{{- rule("/zespół/*", "/zespół/") }}
+{{- rule("/oferta/*", "/oferta/") }}
+{{- rule("/gabinety/*", "/gabinety/") }}
