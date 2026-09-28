@@ -8,20 +8,20 @@
 </div>
 
 {% if isHomepage %}
-  {% set articlesToDisplay = articles | firstBatch %}
-  <div class="knowledge-base">
+  <div class="knowledge-base" data-pagefind-ignore>
     <h2>Artykuły i Baza Wiedzy</h2>
     <div>
-      {% include "partials/articles.njk" %}
-      <article class="article">
-        <a
-          href="/o-nas/artykuly/"
-          role="button"
-          aria-label="Przeczytaj więcej artykułów"
-        >
-          <h3>Wszystkie artykuły</h3>
-        </a>
-      </article>
+      <ol class="article-list">
+        {% for article in articles | byPublished | byDateDesc | head(15) %}
+          <li>
+            <a href="/o-nas/artykuly/@{{ article.id }}/{{ article.urlTitle | slugify }}/">
+              <time datetime="{{ article.date }}">{{ article.date | dateDisplay }}</time>
+              <span>{{ article.title }}</span>
+            </a>
+          </li>
+        {% endfor %}
+      </ol>
+      <a class="article-list-more" href="/o-nas/artykuly/">Wszystkie artykuły</a>
     </div>
   </div>
 {% endif %}

@@ -62,5 +62,9 @@
         &.marker:before {
             --icon: var(--icon-marker);
         }
+
+        &.search:before {
+            --icon: var(--icon-search);
+        }
     }
 }

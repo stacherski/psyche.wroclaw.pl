@@ -85,21 +85,45 @@ nav.pagination {
         max-width: calc(2 * var(--padding) + var(--content-width));
         margin-inline: auto;
         padding: var(--padding);
+    }
+}
 
-        display: flex;
-        flex-wrap: wrap;
+/* Homepage: the newest articles, one per row — date, then title */
+ol.article-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+        margin: 0;
+    }
+
+    a {
+        display: grid;
+        grid-template-columns: 11rem 1fr;
         gap: var(--space-normal);
+        align-items: baseline;
+        padding-block: var(--space-normal);
+        padding-inline: var(--space-double);
+        text-decoration: none;
 
-        article {
-            width: fit-content;
-            padding-block: var(--space-half);
-            margin: 0;
-            box-shadow: unset;
-
-            h3 {
-                font-size: var(--font-size-paragraph);
-                margin: 0;
-            }
+        @media screen and (max-width: 37.5rem) {
+            grid-template-columns: 1fr;
+            gap: var(--space-quarter);
+            padding-inline: var(--space-normal);
         }
     }
+}
+
+.article-list-more {
+    display: block;
+    width: fit-content;
+    margin-block-start: var(--space-double);
+    margin-inline: auto;
+}
+
+/* Artykuły list: the date sits between the title and the lead */
+.article time {
+    display: block;
+    margin-block-end: var(--space-half);
 }

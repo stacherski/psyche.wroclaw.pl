@@ -1,4 +1,4 @@
-<nav class="bcrumb" aria-label="Breadcrumb">
+<nav class="bcrumb" aria-label="Breadcrumb" data-pagefind-ignore>
   <div>
     <ul class="breadcrumb">
       <li>
@@ -51,6 +51,11 @@
  %}
         <li>
           <a href="/cennik">Cennik</a>
+        </li>
+      {% endif %}
+      {% if page.url and page.url.startsWith('/szukaj') %}
+        <li>
+          <a href="/szukaj">Szukaj</a>
         </li>
       {% endif %}
       {% if page.url and page.url.startsWith('/najczestsze-pytania') %}

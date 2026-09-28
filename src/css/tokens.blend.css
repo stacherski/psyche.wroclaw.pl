@@ -452,6 +452,7 @@ nav.bcrumb {
 }
 
 .topbar .phone-link:focus-visible,
+.topbar .search-link:focus-visible,
 .topbar .menu-button:focus-visible {
     outline: 2px solid var(--clr-text-inverse);
     outline-offset: 2px;
@@ -554,7 +555,6 @@ ul.services li .service {
    On leave P and T animate together; their sum only ever moves forward. */
 ul.services li .service::before,
 div.filters button::before,
-.knowledge-base > div article::before,
 .calltoaction > div a::before {
     content: "";
     position: absolute;
@@ -579,7 +579,6 @@ div.filters button::before,
 ul.services li .service:hover::before,
 ul.services li .service:focus-visible::before,
 div.filters button:not(.active):is(:hover, :focus-visible)::before,
-.knowledge-base > div article:is(:hover, :has(a:focus-visible))::before,
 .calltoaction > div a:is(:hover, :focus-visible)::before {
     translate: calc(var(--card-fill-dx) * var(--card-fill-entry)) var(--card-fill-entry);
     transform: translate(calc(var(--card-fill-dx) * var(--card-fill-travel)), var(--card-fill-travel));
@@ -698,50 +697,79 @@ ul.services li .service:focus-visible .icon {
     margin-block: 0 var(--space-double);
 }
 
-.knowledge-base > div article {
-    border-radius: var(--radius-pill);
-    border: 1px solid var(--clr-border);
+.knowledge-base ol.article-list {
     background-color: var(--clr-surface-raised);
-    padding-inline: 1.125rem;
-    transition: background-color var(--duration-fast) var(--ease-out),
-                border-color var(--duration-fast) var(--ease-out),
-                box-shadow var(--duration-base) var(--ease-out),
-                scale var(--duration-base) var(--ease-out),
-                transform var(--duration-base) var(--ease-out);
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-panel);
+    box-shadow: var(--shadow-1);
+    overflow: hidden; /* clips the row hover to the rounded corners */
 }
 
-.knowledge-base > div article h3 {
-    font-family: var(--font-regular);
-    font-variation-settings: normal;
-    font-weight: 500;
-    letter-spacing: 0;
-    line-height: 1.4;
+.knowledge-base ol.article-list li + li {
+    border-block-start: 1px solid var(--clr-border);
+}
+
+.knowledge-base ol.article-list a {
     color: var(--clr-text);
+    font-family: var(--font-regular);
+    transition: background-color var(--duration-fast) var(--ease-out),
+                box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.knowledge-base ol.article-list time {
+    color: var(--clr-text-muted);
+    font-size: var(--font-size-small);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.knowledge-base ol.article-list span {
+    font-weight: 500;
+    line-height: 1.4;
     transition: color var(--duration-fast) var(--ease-out);
 }
 
-/* Same hover as the service cards and filter buttons: the shared fill plane
-   passes through (::before), text turns ink, coral outline, pop-out. */
-.knowledge-base > div article:is(:hover, :has(a:focus-visible)) {
-    z-index: 5; /* articles.css sets 4; lift the hovered chip over its neighbours */
-    background-color: var(--card-hover-bg);
-    border-color: var(--card-hover-border);
-    box-shadow: var(--shadow-2);
-    scale: var(--filter-hover-scale);
-    transform: var(--card-hover-transform);
+/* Hover / keyboard focus: tinted row with a coral edge, title in teal */
+.knowledge-base ol.article-list a:is(:hover, :focus-visible) {
+    background-color: var(--clr-tint);
+    box-shadow: inset 4px 0 0 var(--clr-accent);
 }
 
-.knowledge-base > div article:is(:hover, :has(a:focus-visible)) h3 {
-    color: var(--card-hover-fg);
+.knowledge-base ol.article-list a:is(:hover, :focus-visible) span {
+    color: var(--clr-base-strong);
 }
 
-.knowledge-base > div article a:focus-visible {
-    outline: none; /* the whole chip shows the focus state */
-}
-
-.knowledge-base > div article:has(a:focus-visible) {
+.knowledge-base ol.article-list a:focus-visible {
     outline: 3px solid var(--clr-focus);
-    outline-offset: 3px;
+    outline-offset: -3px;
+}
+
+.knowledge-base .article-list-more {
+    font-family: var(--font-regular);
+    font-weight: var(--font-weight-ui);
+    color: var(--clr-on-tint);
+    text-underline-offset: .25em;
+
+    &::after {
+        content: " →";
+    }
+
+    &:hover {
+        color: var(--clr-accent-strong);
+    }
+
+    &:focus-visible {
+        outline: 3px solid var(--clr-focus);
+        outline-offset: 3px;
+        border-radius: var(--border-radius-small);
+    }
+}
+
+/* Artykuły list: date above the lead */
+.article time {
+    color: var(--clr-text-muted);
+    font-family: var(--font-regular);
+    font-size: var(--font-size-small);
 }
 
 /* ---------- CTA bar */
@@ -1473,8 +1501,7 @@ ul.locations li .location {
     ul.services li .service::before,
     div.filters button,
     div.filters button::before,
-    .knowledge-base > div article,
-    .knowledge-base > div article::before,
+    .knowledge-base ol.article-list a,
     .calltoaction > div a,
     .calltoaction > div a::before,
     ul.locations li .location,
@@ -1494,7 +1521,6 @@ ul.locations li .location {
     ul.services li .service:focus-visible,
     div.filters button:hover,
     div.filters button:focus-visible,
-    .knowledge-base > div article:is(:hover, :has(a:focus-visible)),
     .calltoaction > div a:is(:hover, :focus-visible),
     .member:is(:hover, :focus, :focus-visible),
     ul.locations li .location:is(:hover, :focus-visible),
