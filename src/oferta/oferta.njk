@@ -162,6 +162,27 @@ isHomepage: false
 
 {% include "partials/faq.njk" %}
 
+{# articles about this service (src/_data/articleServices.json), at most 3 #}
+{% set serviceArticles = articles | articlesForService(articleServices, service.fullName | slugify) %}
+{% if serviceArticles.length %}
+  <article class="_panel service-articles" data-pagefind-ignore>
+    <h2>Artykuły na ten temat</h2>
+    <ol class="article-list">
+      {% for article in serviceArticles | head(3) %}
+        <li>
+          <a href="/o-nas/artykuly/@{{ article.id }}/{{ article.urlTitle | slugify }}/">
+            <time datetime="{{ article.date }}">{{ article.date | dateDisplay }}</time>
+            <span>{{ article.title }}</span>
+          </a>
+        </li>
+      {% endfor %}
+    </ol>
+    {% if serviceArticles.length > 3 %}
+      <p class="article-list-more-wrap"><a class="article-list-more" href="/o-nas/artykuly/">Więcej artykułów</a></p>
+    {% endif %}
+  </article>
+{% endif %}
+
 <article class="_panel" style="display: grid; gap: var(--space-normal);">
   <h2>Usługa <b>{{ title }}</b> dostępna jest w gabinetach:</h2>
   {% include "partials/locations.njk" %}

@@ -697,7 +697,7 @@ ul.services li .service:focus-visible .icon {
     margin-block: 0 var(--space-double);
 }
 
-.knowledge-base ol.article-list {
+:is(.knowledge-base, .service-articles) ol.article-list {
     background-color: var(--clr-surface-raised);
     border: 1px solid var(--clr-border);
     border-radius: var(--radius-panel);
@@ -705,46 +705,46 @@ ul.services li .service:focus-visible .icon {
     overflow: hidden; /* clips the row hover to the rounded corners */
 }
 
-.knowledge-base ol.article-list li + li {
+:is(.knowledge-base, .service-articles) ol.article-list li + li {
     border-block-start: 1px solid var(--clr-border);
 }
 
-.knowledge-base ol.article-list a {
+:is(.knowledge-base, .service-articles) ol.article-list a {
     color: var(--clr-text);
     font-family: var(--font-regular);
     transition: background-color var(--duration-fast) var(--ease-out),
                 box-shadow var(--duration-fast) var(--ease-out);
 }
 
-.knowledge-base ol.article-list time {
+:is(.knowledge-base, .service-articles) ol.article-list time {
     color: var(--clr-text-muted);
     font-size: var(--font-size-small);
     font-variant-numeric: tabular-nums;
     white-space: nowrap;
 }
 
-.knowledge-base ol.article-list span {
+:is(.knowledge-base, .service-articles) ol.article-list span {
     font-weight: 500;
     line-height: 1.4;
     transition: color var(--duration-fast) var(--ease-out);
 }
 
 /* Hover / keyboard focus: tinted row with a coral edge, title in teal */
-.knowledge-base ol.article-list a:is(:hover, :focus-visible) {
+:is(.knowledge-base, .service-articles) ol.article-list a:is(:hover, :focus-visible) {
     background-color: var(--clr-tint);
     box-shadow: inset 4px 0 0 var(--clr-accent);
 }
 
-.knowledge-base ol.article-list a:is(:hover, :focus-visible) span {
+:is(.knowledge-base, .service-articles) ol.article-list a:is(:hover, :focus-visible) span {
     color: var(--clr-base-strong);
 }
 
-.knowledge-base ol.article-list a:focus-visible {
+:is(.knowledge-base, .service-articles) ol.article-list a:focus-visible {
     outline: 3px solid var(--clr-focus);
     outline-offset: -3px;
 }
 
-.knowledge-base .article-list-more {
+:is(.knowledge-base, .service-articles) .article-list-more {
     font-family: var(--font-regular);
     font-weight: var(--font-weight-ui);
     color: var(--clr-on-tint);
@@ -1497,7 +1497,7 @@ ul.locations li .location {
     ul.services li .service::before,
     div.filters button,
     div.filters button::before,
-    .knowledge-base ol.article-list a,
+    :is(.knowledge-base, .service-articles) ol.article-list a,
     .calltoaction > div a,
     .calltoaction > div a::before,
     ul.locations li .location,

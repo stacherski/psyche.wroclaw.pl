@@ -125,6 +125,16 @@ module.exports = function (eleventyConfig) {
       .filter(Boolean),
   );
 
+  // published articles about a service (articleServices.json read the other way round):
+  // those with the service as their main topic first, then newest first
+  eleventyConfig.addFilter("articlesForService", (articles, articleServices, slug) =>
+    articles
+      .filter((article) => article.published && (articleServices[article.id] || []).includes(slug))
+      .map((article) => ({ article, rank: articleServices[article.id].indexOf(slug) === 0 ? 0 : 1 }))
+      .sort((a, b) => a.rank - b.rank || new Date(b.article.date) - new Date(a.article.date))
+      .map(({ article }) => article),
+  );
+
   // filter used on service detail page to show only prices applicable to that service
   eleventyConfig.addFilter("byServicePrices", (collection, priceNames) => {
     if (!priceNames) return collection;
