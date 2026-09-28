@@ -180,5 +180,10 @@
     "from": "/oferta/diagnoza-rozwoju-dziecka-korp-wroclaw/",
     "to": "/oferta/kompleksowa-diagnoza-rozwoju-dziecka-korp-koze-wroclaw/",
     "note": "service no longer offered"
+  },
+  {
+    "from": "/o-nas/artykuly/@193/aoreksja/",
+    "to": "/o-nas/artykuly/@193/anoreksja/",
+    "note": "typo fixed in the article address"
   }
 ]
