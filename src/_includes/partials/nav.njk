@@ -119,7 +119,7 @@
     </div>
     <div>
       <ul>
-        {% for member in team %}
+        {% for member in publishedTeam %}
           <li
             level="2"
             {% if page.url and page.url.includes(member.fullName | slugify) %}

@@ -73,7 +73,7 @@ Aktualny cennik: {{ site }}/cennik/
 
 ## Zespół specjalistów
 
-{% for member in team -%}
+{% for member in publishedTeam -%}
 {%- if member.published == "Yes" -%}
 - {{ member.fullName }} – {{ member.specialization }} – {{ site }}/zespół/{{ member.fullName | slugify }}/
 {% endif -%}

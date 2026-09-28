@@ -154,6 +154,9 @@ module.exports = function (eleventyConfig) {
     });
   });
 
+  // a site path as it travels over the wire ("/zespół/" → "/zesp%C3%B3%C5%82/"), for _redirects
+  eleventyConfig.addFilter("encodeURI", (path) => encodeURI(path));
+
   // "2026-09-03" → "3 września 2026"
   const DATE_FORMAT = new Intl.DateTimeFormat("pl-PL", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
   eleventyConfig.addFilter("dateDisplay", (date) => DATE_FORMAT.format(new Date(date)));

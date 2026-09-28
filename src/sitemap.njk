@@ -79,7 +79,7 @@ eleventyExcludeFromCollections: true
   {%- endfor %}
 
   {# ── Team members ──────────────────────────────────────────────────────── #}
-  {%- for member in team %}
+  {%- for member in publishedTeam %}
     {%- if member.published == 'Yes' %}
   <url>
     <loc>https://psyche.wroclaw.pl/zesp%C3%B3%C5%82/{{ member.fullName | slugify }}/</loc>
