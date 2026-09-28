@@ -33,6 +33,18 @@
     --cc-overlay-bg: rgb(18 48 46 / .5);
 }
 
+/* --cc-btn-border-radius also rounds the category blocks in the settings; keep the
+   pill for buttons only and give the blocks the card radius */
+#cc-main .pm__section,
+#cc-main .pm__section--toggle,
+#cc-main .pm__section-title {
+    border-radius: var(--radius-card);
+}
+
+#cc-main .pm__section--toggle .pm__section-desc-wrapper {
+    border-radius: 0 0 var(--radius-card) var(--radius-card);
+}
+
 /* above the mobile bottom bar (z-index 800) */
 #cc-main {
     z-index: 900;
