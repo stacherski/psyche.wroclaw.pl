@@ -1,8 +1,9 @@
 ---
 title: Artykuły
-pageTitle: Artykuły
 postfix: Centrum PSYCHE Wrocław
-description: Psychologia w mediach, media w psychologii
+eleventyComputed:
+  pageTitle: "Artykuły{% if pagination.pageNumber %} – strona {{ pagination.pageNumber + 1 }}{% endif %}"
+  description: "Artykuły psychologów Centrum PSYCHE Wrocław: ADHD, autyzm, depresja, lęk, terapia dzieci i dorosłych.{% if pagination.pageNumber %} Strona {{ pagination.pageNumber + 1 }}.{% endif %}"
 pagination:
   data: publishedArticles
   size: 15

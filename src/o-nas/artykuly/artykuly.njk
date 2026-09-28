@@ -17,6 +17,19 @@ isHomepage: false
 
 <h1>{{ pageTitle }}</h1>
 
+<p class="article-date">
+  <time datetime="{{ article.date }}">{{ article.date | dateDisplay }}</time>
+</p>
+
 <article class="article-single">
   {{ article.textLong | safe }}
 </article>
+
+{# services this article relates to (src/_data/articleServices.json: article id → service slugs) #}
+{% set relatedServiceSlugs = (articleServices or {})[article.id] %}
+{% if relatedServiceSlugs and relatedServiceSlugs.length %}
+  <aside class="article-services" data-pagefind-ignore>
+    <h2>Jak możemy pomóc</h2>
+    {% include "partials/services.njk" %}
+  </aside>
+{% endif %}

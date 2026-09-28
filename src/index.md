@@ -1,7 +1,7 @@
 ---
 layout: layouts/sitelayout.njk
 title: Centrum Psychoterapii, Poradnia Psychologiczna, Psycholog i Psychoterapeuta Wrocław
-pageTitle: Centrum Psychoterapii we Wrocławiu, Poradnia Psychologiczna i Zdrowia Psychicznego
+pageTitle: Psycholog i psychoterapeuta Wrocław – Centrum PSYCHE
 postfix: Centrum PSYCHE Wrocław
 description: Centrum PSYCHE - centrum psychoterapii we Wrocławiu. Poradnia psychologiczna i zdrowia psychicznego dla osób poszukujących pomocy. Psycholog i Psychoterapeuta Wrocław.
 isHomepage: true

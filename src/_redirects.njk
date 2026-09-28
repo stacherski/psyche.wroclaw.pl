@@ -25,9 +25,12 @@ eleventyExcludeFromCollections: true
 # Team pages under the old address without Polish characters
 {%- for member in publishedTeam %}{{ rule("/zespol/" + (member.fullName | slugify) + "/", "/zespół/" + (member.fullName | slugify) + "/") }}{% endfor %}
 
-# Articles under an old title or the old /baza-wiedzy/ address: the id decides
+# Articles under an old title or the old /baza-wiedzy/ address: the id decides.
+# An unpublished article goes where articleRedirects.json says (its closest own
+# article or service), else to the article list.
+{%- set articleTargets = articleRedirects or {} %}
 {%- for article in articles %}
-  {%- set to = ("/o-nas/artykuly/@" + article.id + "/" + (article.urlTitle | slugify) + "/") if article.published else "/o-nas/artykuly/" %}
+  {%- set to = ("/o-nas/artykuly/@" + article.id + "/" + (article.urlTitle | slugify) + "/") if article.published else (articleTargets[article.id] or "/o-nas/artykuly/") %}
   {{- rule("/o-nas/artykuly/@" + article.id + "/*", to) }}
   {{- rule("/baza-wiedzy/@" + article.id + "/*", to) }}
 {%- endfor %}

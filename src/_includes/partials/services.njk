@@ -5,6 +5,8 @@
   %}
 {% elif teamMember %}
   {% set servicesToDisplay = servicesPublished | byTeamMember(teamMember) %}
+{% elif relatedServiceSlugs %}
+  {% set servicesToDisplay = servicesPublished | bySlugs(relatedServiceSlugs) %}
 {% else %}
   {% set servicesToDisplay = servicesPublished %}
 {% endif %}
@@ -36,7 +38,7 @@
             eleventy:optional="placeholder"
             eleventy:widths="100, 200"
             src="/media/{{service.icon}}"
-            alt="{{service.icon}}"
+            alt=""
             width="100"
             height="100"
             class="icon"

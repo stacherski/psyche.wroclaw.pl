@@ -127,3 +127,20 @@ ol.article-list {
     display: block;
     margin-block-end: var(--space-half);
 }
+
+/* Article pages: the related services under the text (partials/services.njk) */
+.article-services {
+    margin-block: var(--space-double);
+
+    h2 {
+        text-align: center;
+    }
+}
+
+/* Article pages: publication date under the title */
+.article-date {
+    margin-block: calc(-1 * var(--space-half)) var(--space-double);
+    font-family: var(--font-regular);
+    font-size: var(--font-size-small);
+    color: var(--clr-text-muted);
+}

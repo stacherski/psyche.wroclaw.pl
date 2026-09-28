@@ -37,6 +37,21 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/robots.txt");
 
 
+  // ─── CSS BUNDLE ───────────────────────────────────────────────────────────
+
+  // every page loads one stylesheet, /css/site.css (src/css-bundle.njk), made of
+  // these files in this order; tokens.blend.css and what follows it must stay last
+  const CSS_FILES = [
+    "main.css", "page-header.css", "mobile-nav-bottom.css", "typographies.css",
+    "bcrumb.css", "nav.css", "team.css", "services.css", "articles.css",
+    "locations.css", "icons.css", "tables.css",
+    "tokens.blend.css", "faq.css", "search.css", "reviews.css",
+  ];
+  eleventyConfig.addShortcode("cssBundle", () =>
+    CSS_FILES.map((file) => `/* ${file} */\n` + fs.readFileSync(`src/css/${file}`, "utf8")).join("\n\n"),
+  );
+
+
   // ─── FILTERS ──────────────────────────────────────────────────────────────
 
   // first n items (homepage article list, llms-full.txt article list)
@@ -91,6 +106,13 @@ module.exports = function (eleventyConfig) {
       return itemTeamMembers.some((member) => locationMembers.includes(member));
     });
   });
+
+  // services by slug, in the given order (article pages: articleServices.json)
+  eleventyConfig.addFilter("bySlugs", (collection, slugs) =>
+    slugs
+      .map((slug) => collection.find((service) => eleventyConfig.getFilter("slugify")(service.fullName) === slug))
+      .filter(Boolean),
+  );
 
   // filter used on service detail page to show only prices applicable to that service
   eleventyConfig.addFilter("byServicePrices", (collection, priceNames) => {
@@ -259,6 +281,18 @@ module.exports = function (eleventyConfig) {
       .replace(/&(\w+);/g, (entity, name) => ENTITIES[name] ?? entity)
       .replace(/\s+/g, " ")
       .trim();
+
+  // <meta name="description">: plain text, at most ~155 characters (what Google shows),
+  // cut after the last full sentence that fits, else at a word, with an ellipsis
+  const DESCRIPTION_MAX = 155;
+  eleventyConfig.addFilter("metaDescription", (html) => {
+    const text = plain(plain(html)); // twice: some leads are entity-encoded HTML
+    if (text.length <= DESCRIPTION_MAX) return text;
+    const cut = text.slice(0, DESCRIPTION_MAX);
+    const sentence = cut.match(/^.*[.!?…](?=\s)/s)?.[0];
+    if (sentence && sentence.length >= 80) return sentence;
+    return cut.replace(/[\s,;:–-]+\S*$/, "") + "…";
+  });
 
   // escape "<" so a value can never close the surrounding <script> tag
   const ld = (data) => JSON.stringify({ "@context": "https://schema.org", ...data }).replace(/</g, "\\u003c");
