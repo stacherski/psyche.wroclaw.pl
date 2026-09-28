@@ -149,6 +149,28 @@ em strong {
         }
     }
 
+    .search-link {
+        display: grid;
+        place-items: center;
+        padding: var(--space-small);
+        color: var(--clr-text-inverse);
+
+        /* the mobile bottom bar has its own "Szukaj" */
+        @media screen and (max-width: 37.5rem) {
+            display: none;
+        }
+
+        /* icon on a pseudo-element, so the focus outline isn't masked away */
+        &:before {
+            content: '';
+            display: block;
+            aspect-ratio: 1/1;
+            width: calc(1.5 * var(--size-normal));
+            background-color: currentColor;
+            mask: var(--icon-search) center / contain no-repeat;
+        }
+    }
+
     .menu-button {
         appearance: none;
         background-color: transparent;

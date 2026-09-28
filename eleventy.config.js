@@ -2,7 +2,7 @@ const { EleventyHtmlBasePlugin } = require("@11ty/eleventy");
 const eleventyNavigationPlugin = require("@11ty/eleventy-navigation");
 const { eleventyImageTransformPlugin } = require("@11ty/eleventy-img");
 const fs = require("fs");
-// const path = require('path')
+const path = require("path");
 // const esbuild = require('esbuild')
 
 module.exports = function (eleventyConfig) {
@@ -39,12 +39,7 @@ module.exports = function (eleventyConfig) {
 
   // ─── FILTERS ──────────────────────────────────────────────────────────────
 
-  // limit reversed array to 15 records only
-  eleventyConfig.addFilter("firstBatch", (collection) => {
-    return collection.reverse().slice(0, 15);
-  });
-
-  // first n items (llms-full.txt article list)
+  // first n items (homepage article list, llms-full.txt article list)
   eleventyConfig.addFilter("head", (collection, n) => collection.slice(0, n));
 
   eleventyConfig.addFilter("reverse", (collection) => {
@@ -157,6 +152,23 @@ module.exports = function (eleventyConfig) {
     return collection.sort((a, b) => {
       return new Date(b.date) - new Date(a.date) || (b.id || 0) - (a.id || 0);
     });
+  });
+
+  // "2026-09-03" → "3 września 2026"
+  const DATE_FORMAT = new Intl.DateTimeFormat("pl-PL", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
+  eleventyConfig.addFilter("dateDisplay", (date) => DATE_FORMAT.format(new Date(date)));
+
+  // section a page is listed under in the search filters (/szukaj/); no section → no filter
+  const SEARCH_SECTIONS = [
+    ["/o-nas/artykuly/@", "Artykuły"],
+    ["/oferta/", "Oferta"],
+    ["/zespół/", "Zespół"],
+    ["/gabinety/", "Gabinety"],
+    ["/najczestsze-pytania/", "Najczęstsze pytania"],
+  ];
+  eleventyConfig.addFilter("searchSection", (url) => {
+    const match = SEARCH_SECTIONS.find(([prefix]) => (url || "").startsWith(prefix));
+    return match ? match[1] : "";
   });
 
   // FAQ entries for one service page (partials/faq.njk), with the answer split into
@@ -442,6 +454,7 @@ module.exports = function (eleventyConfig) {
     regulamin: "Regulamin",
     "polityka-ochrony-małoletnich": "Polityka Ochrony Małoletnich",
     "najczestsze-pytania": "Najczęstsze pytania",
+    szukaj: "Szukaj",
   };
 
   eleventyConfig.addFilter("breadcrumbJsonLd", (url, title) => {
@@ -513,6 +526,24 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addCollection("articlesPages", (collectionApi) => {
     const articles = require("./src/_data/articles.json").reverse();
     return articles
+  });
+
+
+  // ─── PAGEFIND INDEX ───────────────────────────────────────────────────────
+
+  // site-wide search (/szukaj/): index the built pages into _site/pagefind/
+  eleventyConfig.on("eleventy.after", async ({ dir }) => {
+    const outputPath = path.join(dir.output, "pagefind");
+
+    // delete the stale index so removed pages don't linger
+    fs.rmSync(outputPath, { recursive: true, force: true });
+
+    const pagefind = await import("pagefind");
+    const { index } = await pagefind.createIndex();
+    const { page_count } = await index.addDirectory({ path: dir.output });
+    await index.writeFiles({ outputPath });
+    await pagefind.close();
+    console.log("[pagefind] Indexed %i page(s) → %s", page_count, outputPath);
   });
 
 

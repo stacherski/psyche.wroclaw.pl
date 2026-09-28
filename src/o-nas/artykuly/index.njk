@@ -10,6 +10,8 @@ pagination:
   addAllPagesToCollections: true
 permalink: /o-nas/artykuly/{% if pagination.pageNumber %}{{ pagination.pageNumber + 1 }}/{% endif %}index.html
 isHomepage: false
+# the list pages would only repeat the leads; the articles themselves are indexed
+searchIndex: false
 
 ---
 
@@ -18,6 +20,21 @@ isHomepage: false
 {% block content %}
   <div class="page-content">
     <h1>{{ pageTitle }}</h1>
+
+    <form class="search-form" action="/szukaj/" method="get" role="search">
+      <input type="hidden" name="sekcja" value="Artykuły">
+      <label for="article-search">Szukaj w artykułach</label>
+      <div>
+        <input
+          type="search"
+          id="article-search"
+          name="q"
+          placeholder="np. ADHD, depresja, terapia par"
+          required
+        >
+        <button type="submit">Szukaj</button>
+      </div>
+    </form>
 
     {% set articlesToDisplay = pagination.items %}
     {% include "partials/articles.njk" %}

@@ -1,0 +1,81 @@
+/* Site-wide search: the Pagefind UI on /szukaj/ and the search form on the Artykuły page */
+
+/* Pagefind UI themed with the design tokens */
+.site-search {
+    --pagefind-ui-scale: 0.9;
+    --pagefind-ui-primary: var(--clr-base);
+    --pagefind-ui-text: var(--clr-text);
+    --pagefind-ui-background: var(--clr-surface-raised);
+    --pagefind-ui-border: var(--clr-border);
+    --pagefind-ui-tag: var(--clr-tint);
+    --pagefind-ui-border-width: 1px;
+    --pagefind-ui-border-radius: var(--radius-card);
+    --pagefind-ui-font: var(--font-regular);
+
+    margin-block: var(--space-double) var(--space-section);
+
+    .pagefind-ui__result-link {
+        color: var(--clr-base-strong);
+    }
+
+    .pagefind-ui__result-excerpt mark {
+        background-color: var(--clr-tint);
+        color: var(--clr-text);
+    }
+
+    .pagefind-ui__search-input:focus-visible {
+        outline: 3px solid var(--clr-focus);
+        outline-offset: 2px;
+    }
+}
+
+/* Artykuły: a query box that opens /szukaj/ filtered to articles */
+.search-form {
+    display: grid;
+    gap: var(--space-half);
+    max-width: 40rem;
+    margin-block: var(--space-double);
+    font-family: var(--font-regular);
+
+    label {
+        font-weight: var(--font-weight-ui);
+        color: var(--clr-text-2);
+    }
+
+    > div {
+        display: flex;
+        gap: var(--space-half);
+    }
+
+    input {
+        flex: 1;
+        min-width: 0;
+        padding: .75rem 1rem;
+        font: inherit;
+        color: var(--clr-text);
+        background-color: var(--clr-surface-raised);
+        border: 1px solid var(--clr-border);
+        border-radius: var(--radius-card);
+    }
+
+    button {
+        padding: .75rem 1.5rem;
+        font: inherit;
+        font-weight: var(--font-weight-ui);
+        color: var(--clr-text-inverse);
+        background-color: var(--clr-base);
+        border: none;
+        border-radius: var(--radius-card);
+        cursor: pointer;
+        transition: background-color var(--duration-fast) var(--ease-out);
+
+        &:hover {
+            background-color: var(--clr-base-strong);
+        }
+    }
+
+    :is(input, button):focus-visible {
+        outline: 3px solid var(--clr-focus);
+        outline-offset: 2px;
+    }
+}

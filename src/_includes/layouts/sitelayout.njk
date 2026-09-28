@@ -11,6 +11,9 @@
     >
     <title>{{ pageTitle }} | {{ postfix }}</title>
     <link rel="canonical" href="https://psyche.wroclaw.pl{{ page.url }}">
+    {% if noindex %}
+      <meta name="robots" content="noindex, follow">
+    {% endif %}
     {# Google Site Verification #}
     <meta
       name="google-site-verification"
@@ -46,6 +49,7 @@
     {# Design tokens + component layer (redesign, direction C "Blend"); must load last #}
     <link rel="stylesheet" href="/css/tokens.blend.css">
     <link rel="stylesheet" href="/css/faq.css">
+    <link rel="stylesheet" href="/css/search.css">
 
     {# Main JS file #}
     <script src="/script/main.js"></script>
@@ -104,7 +108,15 @@
 
   <body>
     {% include "partials/topbar.njk" %}
-    <main>
+    {# Pagefind indexes <main> of every page except those with searchIndex: false (/szukaj/) #}
+    {% set searchSection = page.url | searchSection %}
+    <main
+      {% if searchIndex !== false %}
+        data-pagefind-body
+        data-pagefind-meta="title:{{ title | escape }}"
+        {% if searchSection %}data-pagefind-filter="Sekcja:{{ searchSection }}"{% endif %}
+      {% endif %}
+    >
       {# homepage video #}
       {% if isHomepage %}
         {% include "partials/homepage-video.njk" %}
