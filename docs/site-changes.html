@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>psyche.wroclaw.pl – how the site works and what changed</title>
+<style>
+  :root {
+    --bg: #f6f8f7; --surface: #ffffff; --text: #1b2b2a; --muted: #5c6b6a;
+    --border: #d9e2e1; --accent: #007a74; --accent-soft: #e3f1ef; --warn: #b34a36; --warn-soft: #fbede6;
+    --code-bg: #eef3f2;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #111a19; --surface: #182423; --text: #e4ecea; --muted: #9db0ad;
+      --border: #2c3d3b; --accent: #4fc2b8; --accent-soft: #1d3432; --warn: #f0a08b; --warn-soft: #3a2621;
+      --code-bg: #20302e;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  main { max-width: 52rem; margin: 0 auto; padding: 2.5rem 1rem 4rem; }
+  h1 { font-size: 2rem; line-height: 1.2; margin: 0 0 .5rem; }
+  h2 { font-size: 1.45rem; margin: 3rem 0 .75rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+  h3 { font-size: 1.1rem; margin: 2rem 0 .5rem; }
+  p, li { max-width: 46rem; }
+  a { color: var(--accent); }
+  code { background: var(--code-bg); padding: .1em .35em; border-radius: 4px; font-size: .9em; overflow-wrap: anywhere; }
+  .lead { color: var(--muted); font-size: 1.1rem; }
+  .meta { color: var(--muted); font-size: .9rem; }
+  nav.toc { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.25rem; margin: 2rem 0; }
+  nav.toc ol { margin: .25rem 0 0; padding-left: 1.25rem; }
+  .box { background: var(--accent-soft); border-radius: 12px; padding: 1rem 1.25rem; margin: 1.25rem 0; }
+  .box.warn { background: var(--warn-soft); }
+  .box p:first-child { margin-top: 0; } .box p:last-child { margin-bottom: 0; }
+  .box strong:first-child { color: var(--accent); }
+  .box.warn strong:first-child { color: var(--warn); }
+  .table-wrap { overflow-x: auto; margin: 1rem 0; }
+  table { border-collapse: collapse; width: 100%; background: var(--surface); border-radius: 12px; overflow: hidden; font-size: .95rem; }
+  th, td { text-align: left; vertical-align: top; padding: .55rem .75rem; border-bottom: 1px solid var(--border); }
+  th { background: var(--accent-soft); font-weight: 600; }
+  tr:last-child td { border-bottom: 0; }
+  .flow { display: grid; gap: .5rem; counter-reset: step; padding: 0; list-style: none; }
+  .flow li { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: .6rem .9rem .6rem 3rem; position: relative; max-width: none; }
+  .flow li::before { counter-increment: step; content: counter(step); position: absolute; left: .9rem; top: .6rem; width: 1.5rem; height: 1.5rem; border-radius: 50%; background: var(--accent); color: var(--surface); font-weight: 700; font-size: .85rem; display: grid; place-items: center; }
+  .how dt { font-weight: 600; margin-top: 1rem; }
+  .how dd { margin: .25rem 0 0; }
+  @media print { body { background: #fff; } h2 { break-before: auto; } nav.toc, .box { break-inside: avoid; } }
+</style>
+</head>
+<body>
+<main>
+
+<h1>psyche.wroclaw.pl: how the site works and what changed</h1>
+<p class="lead">A plain-English guide to the Centrum PSYCHE website: how it's built, every larger change made so far, how to do the common jobs yourself, and what's still waiting for a decision.</p>
+<p class="meta">Covers the git history from April 2026 to 28 September 2026, up to and including the cookie banner.</p>
+
+<nav class="toc" aria-label="Contents">
+  <strong>Contents</strong>
+  <ol>
+    <li><a href="#basics">How the site works, in one page</a></li>
+    <li><a href="#history">What happened before 28 September</a></li>
+    <li><a href="#articles">Articles: new ones, publishing, the homepage list</a></li>
+    <li><a href="#search">Site search</a></li>
+    <li><a href="#redirects">Redirects: old addresses that keep working</a></li>
+    <li><a href="#reviews">Google reviews on the site</a></li>
+    <li><a href="#seo">The SEO pass</a></li>
+    <li><a href="#cookies">Cookie banner and consent</a></li>
+    <li><a href="#howto">How to do common jobs</a></li>
+    <li><a href="#open">Open decisions and next steps</a></li>
+    <li><a href="#files">Where things live</a></li>
+  </ol>
+</nav>
+
+<h2 id="basics">1. How the site works, in one page</h2>
+
+<p>The site is a <strong>static site</strong>. There's no database and no admin panel on the server. Instead, a program called <strong>Eleventy</strong> reads the content from a handful of data files, pours it into page templates, and writes out finished HTML pages. Those finished pages are what visitors get.</p>
+
+<ol class="flow">
+  <li><strong>Content lives in data files</strong> in <code>src/_data/</code>: <code>articles.json</code>, <code>team.json</code>, <code>services.json</code>, <code>prices.json</code>, <code>locations.json</code>, <code>faq.json</code>, <code>reviews.json</code> and a few smaller ones.</li>
+  <li><strong>Templates decide how it looks</strong>: the files in <code>src/</code> ending in <code>.njk</code> and the styles in <code>src/css/</code>. One template, for example, makes a page for every specialist in <code>team.json</code>.</li>
+  <li><strong>The build</strong> (<code>npm run build</code>) turns data and templates into the finished site in the <code>_site/</code> folder: about 150 pages plus the sitemap, the search index and the redirect list.</li>
+  <li><strong>Netlify</strong> hosts the site. Every push to the <code>main</code> branch on GitHub makes Netlify run the build and publish the result, usually within a minute or two.</li>
+</ol>
+
+<p>Two consequences worth remembering:</p>
+<ul>
+  <li><strong>Changing content means editing a data file</strong> and pushing it. The pages update themselves at the next build.</li>
+  <li><strong>Most things switch on and off with a "published" field.</strong> Articles, specialists and services each have one. Set it to false and the page disappears from the site, menus, sitemap and search at the next build. The data stays in the file, so it can be switched back on.</li>
+</ul>
+
+<h2 id="history">2. What happened before 28 September</h2>
+
+<h3>April–May 2026: the site is built</h3>
+<ul>
+  <li>The content from the old website (team, services, locations, prices, articles) was converted into the JSON data files, and the page templates were built around them: team overview and profiles, service pages, locations, prices, articles, contact and the other static pages.</li>
+  <li>The pages link to each other automatically. A service page lists the specialists who offer it and the locations where it's available; a specialist's page lists their services and locations.</li>
+  <li>Images are resized and converted to modern formats (AVIF, WebP) during the build.</li>
+  <li>Generated files for search engines and AI tools: <code>sitemap.xml</code>, a geo-sitemap and <code>locations.kml</code> for the map locations, <code>llms.txt</code> and <code>llms-full.txt</code> (summaries of the site written for AI assistants), and a canonical address on every page.</li>
+</ul>
+
+<h3>May–September: content updates</h3>
+<ul>
+  <li>New specialists: Zuzanna Soberka (with Booksy booking) and Dorota Rycak. New service: <em>Sesje wsparcia dla rodziców</em> at Białowieska, with its price.</li>
+  <li><code>team.json</code> lost 23 fields that nothing on the site used (left over from the old database). The site built byte-for-byte the same afterwards; the file halved in size.</li>
+  <li>The Netlify branding badge is hidden.</li>
+</ul>
+
+<h3>26–27 September: the redesign</h3>
+<ul>
+  <li><strong>New look ("Blend"):</strong> teal as the main colour with coral for booking buttons, new fonts (Fraunces for headings, Newsreader for text, Instrument Sans for menus and buttons), a frosted menu drawer and a rounded mobile bottom bar. It was designed in the <code>lab/</code> folder first (notes in <code>lab/HANDOVER.md</code>) and then moved to the real site. The page structure didn't change, only the styling.</li>
+  <li><strong>Service filter</strong> on the homepage and the Oferta page ("dla dzieci / młodzieży / dorosłych / on-line"), with audience labels on each service card.</li>
+  <li><strong>FAQ:</strong> 134 questions and answers shown as fold-out sections on each service page, plus a new page <em>Najczęstsze pytania</em> that collects them all. Each service's answers show "Odpowiedzi sprawdzone przez" with the reviewer (Paulina Stacherska).</li>
+  <li><strong>Structured data:</strong> hidden descriptions that search engines read, covering the clinic with both locations, opening hours and phone hours, each service with its prices, each specialist, each article, the breadcrumb trail and the FAQ. An older, broken business description in the footer was removed.</li>
+  <li>Small fixes: the page language is declared as Polish, long titles and breadcrumbs wrap on phones instead of being cut off, and raster logos were added for search engines.</li>
+</ul>
+
+<h2 id="articles">3. Articles: new ones, publishing, the homepage list</h2>
+
+<h3>Four new ADHD articles</h3>
+<p>Four articles about ADHD, from the <code>articles/</code> folder, were added, dated three days apart after the newest existing article: 25 and 28 August, 31 August and 3 September 2026. Two more (on QEEG in ADHD and autism diagnostics) that had been written but never switched on were published too.</p>
+
+<h3>The homepage article list</h3>
+<p>The homepage shows the 15 newest articles as a list, one per row, with the date first and the title after it. This replaced the wrapped "pill" buttons. A link to all articles sits under the list.</p>
+
+<h3>Articles that shouldn't have been visible</h3>
+<p>The Artykuły pages were meant to skip unpublished articles, but the setting that should have done it never worked. Every article got a page and the list ran oldest-first. That's fixed. The list now runs newest-first and only published articles get pages.</p>
+
+<h3>Article numbers</h3>
+<p>Each article's address contains its number, e.g. <code>/o-nas/artykuly/@273/…</code>. Nine numbers (245–253) were each used by two different articles. The nine later ones were renumbered to 277–285, and their old addresses redirect to the new ones.</p>
+
+<h3>Dates on article pages</h3>
+<p>Every article page now shows its publication date under the title. Before, the date only appeared on the list pages.</p>
+
+<h2 id="search">4. Site search</h2>
+<ul>
+  <li>A <strong>Szukaj</strong> page (<code>/szukaj/</code>) searches the whole site: articles, services, specialists, locations and FAQ. Results can be narrowed to one section.</li>
+  <li>It's reachable from the menu, from the magnifier icon in the top bar (on computers), from the mobile bottom bar (where it replaced "Przyjedź"), and from a search box at the top of the Artykuły page, which searches articles only.</li>
+  <li>It uses <strong>Pagefind</strong>, the same tool as on stacherski.online. At every build Pagefind reads the finished pages and writes a small search index next to them. The search then runs entirely in the visitor's browser, with no server.</li>
+  <li>The search page itself is hidden from Google (<code>noindex</code>), so result pages never show up as thin duplicate pages. Search doesn't affect Google rankings either way; it's there for visitors.</li>
+</ul>
+
+<h2 id="redirects">5. Redirects: old addresses that keep working</h2>
+
+<h3>Why they matter</h3>
+<p>Google, other websites and people's bookmarks still know addresses from the old site and from pages that have since moved. Without redirects those lead to "page not found". The ranking and links that old page earned are lost, and the visitor leaves. A <strong>redirect</strong> tells the browser and Google "this moved permanently, go here instead" (HTTP status <em>301</em>). Google then passes the old page's standing to the new one.</p>
+
+<h3>How a static site can redirect at all</h3>
+<p>A static page can't redirect itself; the hosting server does it before any page is involved:</p>
+<ol class="flow">
+  <li>The build writes a plain text file, <code>_redirects</code>, next to the pages. Each line is a rule: <code>old-address new-address 301</code>.</li>
+  <li>When Netlify publishes the site, it reads that file into its servers.</li>
+  <li>When someone asks for an address, Netlify checks the rules first. On a match it doesn't send a page; it answers "moved permanently" with the new address, and the browser goes there automatically.</li>
+</ol>
+<p>Two rules decide which redirect applies:</p>
+<ul>
+  <li><strong>An existing page always wins.</strong> If a real page exists at the address, Netlify shows it and ignores the rules, so the broad "catch-all" rules can't hide a live page.</li>
+  <li><strong>The first matching rule wins,</strong> so specific rules come first and general ones last. A <code>*</code> at the end of a rule means "anything below this", e.g. every old title variant of article 147.</li>
+</ul>
+
+<h3>How our redirect list is built</h3>
+<p>Nobody edits <code>_redirects</code> by hand. The template <code>src/_redirects.njk</code> generates it at every build, in this order:</p>
+<div class="table-wrap"><table>
+  <tr><th>Order</th><th>Rules</th><th>Comes from</th></tr>
+  <tr><td>1</td><td>Hand-picked moves: renamed services, old CMS addresses, the QEEG PDF downloads, the <em>Anoreksja</em> address typo</td><td><code>src/_data/redirects.json</code></td></tr>
+  <tr><td>2</td><td>Specialists who left: their page → a chosen page, or the team page</td><td><code>team.json</code> (<code>"published": "No"</code> plus optional <code>"redirectTo"</code>)</td></tr>
+  <tr><td>3</td><td>Team addresses written without Polish letters (<code>/zespol/…</code>) → the right specialist</td><td>generated from <code>team.json</code></td></tr>
+  <tr><td>4</td><td>Any old address of an article (old titles, the old <code>/baza-wiedzy/</code> section) → its current page, or for an unpublished article → the closest own article or service</td><td><code>articles.json</code> + <code>articleRedirects.json</code></td></tr>
+  <tr><td>5</td><td>Catch-alls: anything else that no longer exists in a section → that section's main page</td><td>fixed in the template</td></tr>
+</table></div>
+
+<h3>What Search Console showed, and what was done about it</h3>
+<p>Google Search Console listed 149 addresses returning "not found". Nearly all of them follow a few patterns: old article titles, the old <code>/baza-wiedzy/</code> addresses, <code>/zespol/</code> without Polish letters, former specialists, and a handful of old pages. Each now redirects to the best current page. Tested with a script that imitates Netlify, 141 of the 145 distinct addresses lead to a live page in one step. The four that stay as "not found" really are junk (<code>/do-skasowania…</code>, <code>/showpicture.aspx</code>), and they now get a proper "page not found" page with a search box.</p>
+<p>Other items from that clean-up:</p>
+<ul>
+  <li>The site's own links now end with a slash (<code>/kontakt/</code>, not <code>/kontakt</code>), which removes an unnecessary redirect step. That was the cause of the 122 "page with redirect" entries.</li>
+  <li>The two QEEG leaflets ("Co to jest badanie QEEG", "Przygotowanie do badania QEEG") are back on the site as PDFs and linked from the QEEG page. Their old download addresses lead straight to them.</li>
+  <li>Seven services no longer offered (e.g. <em>Leczenie alkoholizmu</em>, <em>Tutoring rodzinny</em>) no longer have pages; their addresses go to the closest current service.</li>
+</ul>
+
+<div class="box"><p><strong>Keep in mind:</strong> redirects only work on Netlify. The local preview (<code>npm start</code>) ignores them. If the site ever moves to another host, the same rules have to be written in that host's format, but the data files stay the same.</p></div>
+
+<h2 id="reviews">6. Google reviews on the site</h2>
+
+<h3>Where the reviews came from</h3>
+<p>The reviews were read from the four Google Business profiles (Centrum Psyche, Diagnoza ADHD Wrocław, PSYCHE Kids, QEEG Wrocław), using Chrome with your Google account, reading only. The 11 that were new went into <code>src/_data/reviews.json</code>, next to the 21 already there. Each review is tagged with the specialist (only when the text names them) and the service.</p>
+
+<h3>Where they appear</h3>
+<ul>
+  <li><strong>Specialist page:</strong> reviews that name that specialist.</li>
+  <li><strong>Service page:</strong> every review about that service.</li>
+  <li><strong>Opinie page (new, <code>/opinie/</code>, in the menu under O nas):</strong> all reviews, newest first, each linked to its specialist and service.</li>
+  <li><strong>Homepage:</strong> a summary, "4,8 ★★★★★ · Średnia ocena z 32 opinii pacjentów w Google", linking to the Opinie page.</li>
+</ul>
+
+<h3>Rules chosen along the way</h3>
+<ul>
+  <li><strong>Only 4 and 5 star reviews are shown.</strong> The two 1-star reviews stay in the file and still count in the average. Deleting them would make the summary read 5,0 while it claims to be based on Google reviews, which would be misleading.</li>
+  <li><strong>Reviewers appear as first name and initial</strong> ("Karina H."), because these are visits to a mental-health clinic.</li>
+  <li>Reviews with stars but no text count in the average but don't get a card.</li>
+  <li>Star ratings won't appear in Google's results for these reviews. Google doesn't show them for reviews a business publishes about itself.</li>
+</ul>
+
+<h3>Repeating it later</h3>
+<p>The whole procedure is saved as a <strong>project skill</strong> for Claude Code, in <code>.claude/skills/update-google-reviews/</code>. Asking Claude to "update the Google reviews" in this project (or typing <code>/update-google-reviews</code>) follows the same steps, with helper scripts that read the review pages, skip reviews already in the file and convert Google's dates.</p>
+
+<h2 id="seo">7. The SEO pass</h2>
+<p>Changes aimed at ranking higher in Google, roughly in order of how much they're likely to matter:</p>
+
+<h3>Only your own articles are published</h3>
+<p>Of 259 published articles, 179 weren't written by Centrum PSYCHE; they had been republished from other websites. Google judges a site's quality as a whole, and a large share of copied health content can hold back the clinic's own pages. All 174 remaining borrowed articles, plus 5 duplicate articles, are now unpublished. They're still in <code>articles.json</code>, waiting for your decision. Each old address redirects to the closest own article, or to a service page where no own article covers the topic, e.g. news or celebrity stories. The choices are in <code>src/_data/articleRedirects.json</code>. The site now has 80 articles.</p>
+
+<h3>Every article links to services</h3>
+<ul>
+  <li>Every article ends with a <em>"Jak możemy pomóc"</em> block: one to three service cards chosen for its topic. The choices are in <code>src/_data/articleServices.json</code>.</li>
+  <li>115 articles also got one link inside the text, on a natural phrase such as "DIVA-5", "ADOS-2" or "terapia dla par".</li>
+  <li>Links like these help Google understand which service pages matter, and help readers find the next step.</li>
+</ul>
+
+<h3>What Google shows in results</h3>
+<ul>
+  <li><strong>Descriptions:</strong> the snippet under each result used to contain visible HTML code (<code>&lt;p&gt;</code>) on every article and ran far too long. It's now plain text of about 155 characters, cut at the end of a sentence.</li>
+  <li><strong>Titles:</strong> the homepage title is now "Psycholog i psychoterapeuta Wrocław – Centrum PSYCHE" instead of 109 characters. The brand appears only once per title, the list pages are numbered ("Artykuły – strona 2"), and no two pages share a title.</li>
+  <li><strong>Image descriptions:</strong> images no longer describe themselves with file names like <code>pexels-mikhail-nilov-8654221.jpg</code>.</li>
+</ul>
+
+<h3>Speed</h3>
+<ul>
+  <li>Each page used to load 17 separate style files; now it loads one (<code>/css/site.css</code>, combined at build time from the same files).</li>
+  <li>The fonts are served from the site itself, and the two used above the fold load first. The menu script no longer delays the first paint.</li>
+  <li>The site looks exactly the same; it just draws sooner, which counts for Google, especially on phones.</li>
+</ul>
+
+<h3>Smaller fixes</h3>
+<ul>
+  <li>The duplicate articles (e.g. two "Co to jest depresja?") were merged, and the <em>Anoreksja</em> article's address typo (<code>aoreksja</code>) was corrected, with a redirect from the old address.</li>
+  <li>Text panels on service pages and the article cards no longer grow when the mouse moves over them, so text stays still while it's being read.</li>
+  <li>An old link between the two parts of "Dlaczego mi nie wychodzi?" was repaired, and an article linking to a service page that no longer exists now points to the online consultations page.</li>
+</ul>
+
+<h2 id="cookies">8. Cookie banner and consent</h2>
+
+<h3>Why it was needed</h3>
+<p>Google Tag Manager on the site runs Google Analytics (two properties) and Google Ads conversion tracking. Until now they started as soon as a page opened and set cookies without asking, which isn't allowed in the EU for analytics and advertising cookies. Since March 2024 Google also expects <strong>Consent Mode v2</strong> in the EEA for Ads measurement to keep working properly.</p>
+
+<h3>How it works now</h3>
+<ol class="flow">
+  <li><strong>Before anything from Google loads,</strong> a small script in the page head tells Google "no consent yet". Google's tags then run without cookies. If the visitor already chose on an earlier visit, that choice applies straight away.</li>
+  <li><strong>The banner</strong> asks once, in Polish, with "Akceptuję wszystkie", "Odrzuć" (deliberately as prominent as accepting) and "Ustawienia". The settings split cookies into necessary (always on), analytics (Google Analytics) and marketing (Google Ads and Google Maps).</li>
+  <li><strong>On accepting,</strong> Google is told consent was given, and only then are its cookies set (<code>_ga</code>, <code>_gcl_au</code> and the like). On withdrawing, Google is told again and those cookies are deleted.</li>
+  <li><strong>Changing your mind:</strong> "Ustawienia cookies" in the footer reopens the settings at any time. The choice is remembered for six months in a cookie called <code>cc_cookie</code>.</li>
+</ol>
+<p>The banner is <a href="https://github.com/orestbida/cookieconsent">CookieConsent</a> (v3, free and open source), installed as an npm package and served from the site's own domain, with no outside service and no fee. Its texts and categories are in <code>src/script/consent.js</code>; its colours are in <code>src/css/consent.css</code>.</p>
+
+<h3>Related changes</h3>
+<ul>
+  <li><strong>The map on Kontakt</strong> loads only when someone clicks "Pokaż mapę", or once they've accepted marketing cookies, because Google Maps sets its own cookies. Until then a box shows both addresses and an "Otwórz w Mapach Google" link.</li>
+  <li><strong>Fonts are self-hosted:</strong> the files come from <code>src/fonts/</code> instead of Google Fonts, so a visit no longer sends anything to Google just to draw text. It's also slightly faster.</li>
+  <li><strong>Privacy page:</strong> <code>/polityka-prywatnosci/</code> exists as a <em>placeholder</em>. It lists the cookies and explains how to change consent, says the full policy is in preparation, and is hidden from Google (<code>noindex</code>) until the real text is in.</li>
+  <li>The hidden Tag Manager fallback for visitors without JavaScript was removed, since it would have tracked them without any way to ask.</li>
+</ul>
+
+<div class="box"><p><strong>Expect in Google Analytics and Ads:</strong> reported visits and conversions will drop somewhat, because visitors who refuse aren't counted with cookies. Google estimates part of the gap with its modelling. That's the expected effect of asking, not an error.</p></div>
+
+<h2 id="howto">9. How to do common jobs</h2>
+<dl class="how">
+  <dt>Publish a new article</dt>
+  <dd>Add an entry to <code>src/_data/articles.json</code> with the next free <code>id</code> (never reuse a number), <code>"published": true</code>, <code>"ownArticle": "Yes"</code> and today's date. Add a line to <code>src/_data/articleServices.json</code> with the services it should link to.</dd>
+
+  <dt>Take an article off the site</dt>
+  <dd>Set <code>"published": false</code>. Its address then goes to the article list, unless you add a better target to <code>articleRedirects.json</code>.</dd>
+
+  <dt>A specialist leaves</dt>
+  <dd>In <code>team.json</code>, set their <code>"published"</code> to <code>"No"</code> and keep the entry. They vanish from all lists and their page redirects to the team page. To send it somewhere more useful, add e.g. <code>"redirectTo": "/oferta/qeeg-wroclaw/"</code>.</dd>
+
+  <dt>A service is no longer offered</dt>
+  <dd>In <code>services.json</code>, set <code>"published": false</code>, then add a line to <code>redirects.json</code> pointing its address to the closest service. Without it, the address goes to the Oferta page.</dd>
+
+  <dt>Any other page moved</dt>
+  <dd>Add <code>{ "from": "/old-address/", "to": "/new-address/" }</code> to <code>src/_data/redirects.json</code>.</dd>
+
+  <dt>Update the Google reviews</dt>
+  <dd>Ask Claude Code in this project to "update the Google reviews". Chrome with the Claude extension needs to be connected.</dd>
+
+  <dt>Show or hide low ratings</dt>
+  <dd>Change <code>REVIEWS_MIN_STARS</code> in <code>eleventy.config.js</code>: <code>1</code> shows every review, <code>4</code> is the current setting.</dd>
+
+  <dt>Change the cookie banner</dt>
+  <dd>Texts, categories and the cookie list are in <code>src/script/consent.js</code>. If a new tracking tool is added in Tag Manager, add it to the right category there and on the privacy page. When the privacy policy link changes, update <code>POLICY_URL</code> at the top of that file.</dd>
+
+  <dt>Check changes before they go live</dt>
+  <dd>Run <code>npm start</code> and open <code>http://localhost:8080</code>. Everything works there except the redirects.</dd>
+</dl>
+
+<h2 id="open">10. Open decisions and next steps</h2>
+
+<div class="box warn">
+  <p><strong>Two Business Profiles carry keyword names.</strong> "Diagnoza ADHD Wrocław" and "QEEG Wrocław" are separate Google Business Profiles at the Białowieska address. Google's rules say a profile's name must be the real business name, and profiles like these risk suspension, which can affect the main profile too. It's worth deciding whether to merge them into Centrum Psyche or rename them within Google's rules.</p>
+</div>
+
+<ul>
+  <li><strong>Privacy policy text:</strong> <code>/polityka-prywatnosci/</code> is only a placeholder. The full policy (who processes data, for what, legal bases, rights, retention) needs writing and a legal check, especially for a clinic handling health data. When it's ready, remove <code>noindex</code> from the page.</li>
+  <li><strong>Tag Manager consent settings:</strong> open each tag in Tag Manager and check that the Google Analytics and Google Ads tags use their built-in consent checks (the default for Google's own tags). Any non-Google tag added later needs a consent condition.</li>
+  <li><strong>The borrowed articles:</strong> they're unpublished, not deleted. Decide whether to delete them for good, rewrite some as your own, or leave them as they are.</li>
+  <li><strong>Topics you don't cover yet:</strong> schizophrenia, psychosis, bipolar disorder and OCD have no own article; their old addresses currently go to a service page. These topics draw searches and would make good new articles.</li>
+  <li><strong>A few weaker redirect matches</strong> are worth checking in <code>articleRedirects.json</code>: OCD articles → "Zaburzenia lękowe", PTSD → the childhood trauma article, erectile dysfunction → "Seksualność człowieka".</li>
+  <li><strong>Authors on articles:</strong> for health content Google looks for who wrote and checked it. Adding the specialist, their qualifications and a "zweryfikowane przez … / aktualizacja" line to each article would help.</li>
+  <li><strong>More Google reviews:</strong> 23 reviews on the main profile is low for a clinic this size. A short request after a visit (the review link as a QR code at reception, or in the follow-up text message) usually makes the biggest difference.</li>
+  <li><strong>Search Console:</strong> after each deploy with redirect changes, click <em>"Sprawdź poprawkę"</em> (validate fix) on the "not found" report so Google re-checks sooner. Expect the number of indexed pages to drop for a few weeks as Google replaces the borrowed articles with the pages they redirect to. That's intended.</li>
+</ul>
+
+<h2 id="files">11. Where things live</h2>
+<div class="table-wrap"><table>
+  <tr><th>File or folder</th><th>What it holds</th></tr>
+  <tr><td><code>src/_data/articles.json</code></td><td>All articles (published or not), with title, date, text and the <code>ownArticle</code> marker</td></tr>
+  <tr><td><code>src/_data/articleServices.json</code></td><td>Which services each article links to at its end</td></tr>
+  <tr><td><code>src/_data/articleRedirects.json</code></td><td>Where each unpublished (borrowed) article's address leads</td></tr>
+  <tr><td><code>src/_data/redirects.json</code></td><td>Hand-picked redirects for anything else that moved</td></tr>
+  <tr><td><code>src/_data/team.json</code>, <code>services.json</code>, <code>prices.json</code>, <code>locations.json</code></td><td>Specialists, services, price list, locations</td></tr>
+  <tr><td><code>src/_data/faq.json</code>, <code>faqReview.json</code></td><td>FAQ answers per service, and who reviewed them</td></tr>
+  <tr><td><code>src/_data/reviews.json</code></td><td>Google reviews, tagged with specialist and service</td></tr>
+  <tr><td><code>src/_redirects.njk</code></td><td>Builds the Netlify redirect list from the files above</td></tr>
+  <tr><td><code>src/css/</code></td><td>The styles; combined into one <code>site.css</code> at build time (order set in <code>eleventy.config.js</code>)</td></tr>
+  <tr><td><code>src/media/</code></td><td>Photos, icons and the QEEG PDFs</td></tr>
+  <tr><td><code>src/fonts/</code>, <code>src/css/fonts.css</code></td><td>The self-hosted fonts and their definitions</td></tr>
+  <tr><td><code>src/script/consent.js</code>, <code>src/css/consent.css</code></td><td>The cookie banner: texts, categories, Google consent signals, the map loader, and its look</td></tr>
+  <tr><td><code>src/polityka-prywatnosci/</code></td><td>The privacy page (placeholder for now)</td></tr>
+  <tr><td><code>eleventy.config.js</code></td><td>Build settings and the helper rules (filters) the templates use, e.g. how reviews are chosen or how descriptions are shortened</td></tr>
+  <tr><td><code>.claude/skills/update-google-reviews/</code></td><td>The saved procedure for fetching new Google reviews</td></tr>
+  <tr><td><code>lab/</code></td><td>The redesign workshop and its notes (<code>HANDOVER.md</code>); not part of the live site</td></tr>
+  <tr><td><code>docs/</code></td><td>This document; not part of the live site</td></tr>
+</table></div>
+
+</main>
+</body>
+</html>

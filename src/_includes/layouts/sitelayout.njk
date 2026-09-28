@@ -26,19 +26,18 @@
     >
     <meta name="msvalidate.01" content="6A3F181E29D1D78CE723E40200A5F885">
 
-    {# fonts definition #}
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..700,0..100,0..1&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&family=Raleway:wght@300&display=swap"
-      rel="stylesheet"
-    >
+    {# Fonts are self-hosted (src/fonts, @font-face in src/css/fonts.css); preload the two above the fold #}
+    <link rel="preload" href="/fonts/fraunces-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/instrument-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 
     {# All site CSS in one file, built from src/css by src/css-bundle.njk (order: CSS_FILES in eleventy.config.js) #}
     <link rel="stylesheet" href="/css/site.css">
 
     {# Main JS file #}
     <script src="/script/main.js" defer></script>
+    {# Cookie banner: CookieConsent v3 (node_modules/vanilla-cookieconsent) + our settings #}
+    <script src="/script/cookieconsent.umd.js" defer></script>
+    <script src="/script/consent.js" defer></script>
 
     <script type="application/ld+json">{{ locations | clinicJsonLd(services, prices) | safe }}</script>
     {% if isHomepage %}
@@ -67,6 +66,33 @@
       <script src="/script/faq.js" defer></script>
     {% endif %}
 
+    {# Google Consent Mode v2: everything is denied until the visitor agrees in the cookie
+       banner (script/consent.js). A choice made on an earlier visit (cookie cc_cookie)
+       applies straight away, so returning visitors are measured from the first tag. #}
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      (function () {
+        var accepted = [];
+        try {
+          var match = document.cookie.match(/(?:^|;\s*)cc_cookie=([^;]*)/);
+          if (match) accepted = JSON.parse(decodeURIComponent(match[1])).categories || [];
+        } catch (e) {}
+        var analytics = accepted.indexOf("analytics") > -1 ? "granted" : "denied";
+        var marketing = accepted.indexOf("marketing") > -1 ? "granted" : "denied";
+        gtag("consent", "default", {
+          analytics_storage: analytics,
+          ad_storage: marketing,
+          ad_user_data: marketing,
+          ad_personalization: marketing,
+          functionality_storage: "granted",
+          security_storage: "granted",
+          wait_for_update: 500
+        });
+        gtag("set", "ads_data_redaction", marketing === "denied");
+      })();
+    </script>
+
     <!-- Google Tag Manager -->
     <script>
     (function(w, d, s, l, i) {
@@ -82,14 +108,6 @@
     </script>
     <!-- End Google Tag Manager -->
 
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe
-        src="https://www.googletagmanager.com/ns.html?id=GTM-KGCH6FT"
-        height="0"
-        width="0"
-        style="display:none;visibility:hidden"
-      ></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
   </head>
 
   <body>

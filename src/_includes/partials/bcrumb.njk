@@ -53,6 +53,11 @@
           <a href="/cennik/">Cennik</a>
         </li>
       {% endif %}
+      {% if page.url and page.url.startsWith('/polityka-prywatnosci') %}
+        <li>
+          <a href="/polityka-prywatnosci/">Polityka prywatności</a>
+        </li>
+      {% endif %}
       {% if page.url and page.url.startsWith('/opinie') %}
         <li>
           <a href="/opinie/">Opinie</a>

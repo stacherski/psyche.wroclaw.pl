@@ -35,20 +35,31 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/media");
   eleventyConfig.addPassthroughCopy("src/script");
   eleventyConfig.addPassthroughCopy("src/robots.txt");
+  eleventyConfig.addPassthroughCopy("src/fonts");
+  // cookie banner (CookieConsent v3, npm vanilla-cookieconsent); its CSS is in the bundle
+  eleventyConfig.addPassthroughCopy({
+    "node_modules/vanilla-cookieconsent/dist/cookieconsent.umd.js": "script/cookieconsent.umd.js",
+  });
 
 
   // ─── CSS BUNDLE ───────────────────────────────────────────────────────────
 
   // every page loads one stylesheet, /css/site.css (src/css-bundle.njk), made of
   // these files in this order; tokens.blend.css and what follows it must stay last
+  // (names are in src/css/ unless they start with node_modules/)
   const CSS_FILES = [
+    "fonts.css",
     "main.css", "page-header.css", "mobile-nav-bottom.css", "typographies.css",
     "bcrumb.css", "nav.css", "team.css", "services.css", "articles.css",
     "locations.css", "icons.css", "tables.css",
     "tokens.blend.css", "faq.css", "search.css", "reviews.css",
+    "node_modules/vanilla-cookieconsent/dist/cookieconsent.css", "consent.css",
   ];
   eleventyConfig.addShortcode("cssBundle", () =>
-    CSS_FILES.map((file) => `/* ${file} */\n` + fs.readFileSync(`src/css/${file}`, "utf8")).join("\n\n"),
+    CSS_FILES.map((file) => {
+      const path = file.startsWith("node_modules/") ? file : `src/css/${file}`;
+      return `/* ${file} */\n` + fs.readFileSync(path, "utf8");
+    }).join("\n\n"),
   );
 
 
@@ -523,6 +534,7 @@ module.exports = function (eleventyConfig) {
     "polityka-ochrony-małoletnich": "Polityka Ochrony Małoletnich",
     "najczestsze-pytania": "Najczęstsze pytania",
     opinie: "Opinie",
+    "polityka-prywatnosci": "Polityka prywatności",
     szukaj: "Szukaj",
   };
 

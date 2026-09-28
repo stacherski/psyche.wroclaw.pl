@@ -1,0 +1,103 @@
+/* Cookie banner (CookieConsent v3) in the site's colours and fonts, and the
+   click-to-load Google Maps placeholder (script/consent.js) */
+
+#cc-main {
+    --cc-font-family: var(--font-regular);
+    --cc-bg: var(--clr-surface-raised);
+    --cc-primary-color: var(--clr-text);
+    --cc-secondary-color: var(--clr-text-2);
+    --cc-link-color: var(--clr-base-strong);
+    --cc-modal-border-radius: var(--radius-panel);
+    --cc-btn-border-radius: var(--radius-pill);
+    /* both choices look the same weight: accepting is not the easier click */
+    --cc-btn-primary-bg: var(--clr-base);
+    --cc-btn-primary-border-color: var(--clr-base);
+    --cc-btn-primary-color: var(--clr-text-inverse);
+    --cc-btn-primary-hover-bg: var(--clr-base-strong);
+    --cc-btn-primary-hover-border-color: var(--clr-base-strong);
+    --cc-btn-primary-hover-color: var(--clr-text-inverse);
+    --cc-btn-secondary-bg: var(--clr-bg);
+    --cc-btn-secondary-border-color: var(--clr-border);
+    --cc-btn-secondary-color: var(--clr-text);
+    --cc-btn-secondary-hover-bg: var(--clr-tint);
+    --cc-btn-secondary-hover-border-color: var(--clr-accent);
+    --cc-btn-secondary-hover-color: var(--clr-text);
+    --cc-toggle-on-bg: var(--clr-base);
+    --cc-separator-border-color: var(--clr-border);
+    --cc-cookie-category-block-bg: var(--clr-bg);
+    --cc-cookie-category-block-border: var(--clr-border);
+    --cc-cookie-category-block-hover-bg: var(--clr-tint);
+    --cc-cookie-category-block-hover-border: var(--clr-border);
+    --cc-footer-bg: var(--clr-bg);
+    --cc-footer-border-color: var(--clr-border);
+    --cc-overlay-bg: rgb(18 48 46 / .5);
+}
+
+/* above the mobile bottom bar (z-index 800) */
+#cc-main {
+    z-index: 900;
+}
+
+.cookie-settings-link {
+    appearance: none;
+    border: 0;
+    padding: 0;
+    background: none;
+    font: inherit;
+    color: inherit;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* Kontakt: Google Maps loads only on click or after marketing consent */
+.map-embed {
+    display: grid;
+    place-items: center;
+    gap: var(--space-normal);
+    min-height: 360px;
+    padding: var(--space-double);
+    text-align: center;
+    background-color: var(--clr-tint);
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-panel);
+    font-family: var(--font-regular);
+
+    p {
+        margin: 0;
+        max-width: 36rem;
+        color: var(--clr-text-2);
+    }
+
+    &.loaded {
+        display: block;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    iframe {
+        display: block;
+        width: 100%;
+        height: 600px;
+        border: 0;
+    }
+}
+
+.map-embed-load {
+    padding: .75rem 1.5rem;
+    font: inherit;
+    font-weight: var(--font-weight-ui);
+    color: var(--clr-text-inverse);
+    background-color: var(--clr-base);
+    border: 0;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+
+    &:hover {
+        background-color: var(--clr-base-strong);
+    }
+
+    &:focus-visible {
+        outline: 3px solid var(--clr-focus);
+        outline-offset: 3px;
+    }
+}

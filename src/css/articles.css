@@ -13,8 +13,6 @@
     overflow: hidden;
     position: relative;
     z-index: 4;
-    scale: 1;
-    transition: all .3s ease;
 
     h3 {
         margin-block: 0;
@@ -23,11 +21,6 @@
 
     a {
         text-decoration: none;
-    }
-
-    &:HOVER,
-    &:has(a:FOCUS) {
-        scale: 1.05
     }
 }
 

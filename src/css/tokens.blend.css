@@ -1386,11 +1386,7 @@ ul.locations li .location {
     border-radius: var(--radius-card);
 }
 
-/* Text panels don't move while you read them; comfortable line length */
-.panel:hover {
-    scale: none;
-}
-
+/* Comfortable line length for panel text */
 .panel .content > :is(p, ul, ol, h2, h3) {
     max-inline-size: var(--measure);
 }
@@ -1511,9 +1507,7 @@ ul.locations li .location {
     .member .name,
     .member .name::after,
     nav.navigation-panel,
-    .navigation-overlay,
-    .panel,
-    :is(.article, .article-single) {
+    .navigation-overlay {
         transition: none;  /* the fill still appears, just without the movement */
     }
 
@@ -1525,9 +1519,7 @@ ul.locations li .location {
     .member:is(:hover, :focus, :focus-visible),
     ul.locations li .location:is(:hover, :focus-visible),
     ul.locations li .location:is(:hover, :focus-visible) .cover,
-    .member:is(:hover, :focus, :focus-visible) img,
-    .panel:hover,
-    :is(.article, .article-single):hover {
+    .member:is(:hover, :focus, :focus-visible) img {
         transform: none;
         scale: none;
     }

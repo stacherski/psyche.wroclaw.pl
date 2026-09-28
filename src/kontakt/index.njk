@@ -154,12 +154,16 @@ eleventyNavigation:
 </p>
 <h2>Znajdź nas na mapie</h2>
 
-<iframe
-  src="https://www.google.com/maps/d/embed?mid=1lrxJ4Ue8L9uSHznTAftcZCYnKuU6Vnbf&amp;hl=pl"
-  style="border: none;"
-  width="100%"
-  height="600"
-></iframe><br>
+{# loads on click or after marketing consent (script/consent.js): Google Maps sets cookies #}
+<div
+  class="map-embed"
+  data-src="https://www.google.com/maps/d/embed?mid=1lrxJ4Ue8L9uSHznTAftcZCYnKuU6Vnbf&amp;hl=pl"
+  data-title="Mapa gabinetów Centrum PSYCHE"
+>
+  <p>Mapa pokazuje oba nasze gabinety: Białowieska 3a/5d i Małopanewska 18/13 we Wrocławiu. Wyświetla ją Google, który ustawia przy tym własne pliki cookies.</p>
+  <button type="button" class="map-embed-load">Pokaż mapę</button>
+  <p><a href="https://www.google.com/maps/d/viewer?mid=1lrxJ4Ue8L9uSHznTAftcZCYnKuU6Vnbf&amp;hl=pl" target="_blank" rel="noopener">Otwórz w Mapach Google</a></p>
+</div>
 
 <h2>Płatności</h2>
 <p>Płatności możliwe gotówką, kartą lub przelewem na konto bankowe.</p>

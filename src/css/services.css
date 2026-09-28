@@ -73,8 +73,6 @@ ul.services {
     overflow: hidden;
     position: relative;
     z-index: 4;
-    scale: 1;
-    transition: all .3s ease;
 
     .content {
         position: relative;
@@ -112,10 +110,6 @@ ul.services {
 .panel .content {
     position: relative;
     z-index: 10
-}
-
-.panel:HOVER {
-    scale: 1.05
 }
 
 .panel:HOVER img.panel-image {
