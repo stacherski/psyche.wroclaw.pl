@@ -104,7 +104,18 @@ em strong {
     }
 }
 
+/* the sticky breadcrumb (bcrumb.css) sits exactly under the top bar: both use this height */
+:root {
+    --topbar-height: 80px;
+
+    @media screen and (max-width: 37.5rem) {
+        --topbar-height: 48px;
+    }
+}
+
 .topbar {
+    box-sizing: border-box;
+    height: var(--topbar-height);
     display: flex;
     gap: var(--space-normal);
     background-color: hsl(from var(--clr-text) h s l / 20%);

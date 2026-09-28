@@ -208,33 +208,6 @@ div.member-single {
     }
 }
 
-.booksy-btn {
-    display: block;
-    width: 100%;
-    padding: var(--space-double);
-    margin-block: var(--space-double);
-    border-radius: 50px;
-    background: linear-gradient(145deg, #e6e6e6, #ffffff);
-    box-shadow: 20px 20px 60px #d9d9d9, -20px -20px 60px #ffffff;
-    position: relative;
-    transition: all 300ms ease 0ms;
-    text-align: center;
-    text-transform: uppercase;
-    color: var(--clr-base);
-    text-decoration: none;
-    font-weight: 700;
-    font-size: var(--font-size-h5);
-
-    &:HOVER {
-        border-radius: 50px;
-        background: #ffffff;
-        box-shadow: -20px -20px 60px #d9d9d9, 20px 20px 60px #ffffff;
-        z-index: 3;
-        cursor: pointer;
-        text-decoration: none
-    }
-}
-
 div.filters {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(clamp(150px, 20%, 220px), 1fr));

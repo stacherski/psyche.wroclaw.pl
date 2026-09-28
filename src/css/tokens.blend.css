@@ -160,8 +160,6 @@
     --panel-rail-gap: clamp(2rem, 4vw, 4rem);
     --faq-pad-block: 1.125rem;
     --faq-pad-inline: 1.25rem;
-    --action-panel-bg: var(--clr-accent);
-    --action-panel-fg: #12302E;
     --card-fill-mask: none;
     --card-fill-final: var(--clr-accent);
     --card-fill-dx: 0;
@@ -499,6 +497,13 @@ nav.bcrumb {
 .btn a:hover {
     background-color: var(--clr-base-strong);
     color: var(--clr-text-inverse);
+}
+
+/* Specialist and service pages: the booking button, sized to its label and centred */
+.booksy-cta {
+    width: fit-content;
+    margin-block: var(--space-double);
+    margin-inline: auto;
 }
 
 /* Booking is the one emphasised action (C uses teal's complementary coral) */
@@ -1437,15 +1442,6 @@ ul.locations li .location {
         > :is(h2, h3):not(:first-child) + :empty + * {
             margin-block-start: var(--space-double);
         }
-    }
-}
-
-/* Booking panel follows the booking colour (C: coral) */
-.panel.action {
-    background-color: var(--action-panel-bg);
-
-    a {
-        color: var(--action-panel-fg);
     }
 }
 

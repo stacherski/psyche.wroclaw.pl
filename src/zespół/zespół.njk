@@ -49,9 +49,10 @@ isHomepage: false
     {{ member.bioPL | safe }}
 
     {% if member.onlineBooking == 'Yes' and member.booksyLink %}
-      <a href="{{ member.booksyLink }}" class="booksy-btn" target="_blank">
-        Zarejestruj w Booksy
-      </a>
+      {# same booking button as the homepage hero (.btn__booksy) #}
+      <div class="btn btn__booksy booksy-cta">
+        <a href="{{ member.booksyLink }}" target="_blank" rel="noopener">Zarejestruj w Booksy</a>
+      </div>
     {% endif %}
   </div>
 </div>

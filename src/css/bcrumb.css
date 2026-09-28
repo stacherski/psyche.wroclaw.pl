@@ -1,13 +1,9 @@
 nav.bcrumb {
     background-color: hsl(from var(--clr-text-inverse) h s l / 80%);
     position: sticky;
-    top: 80px;
+    top: var(--topbar-height); /* main.css */
     z-index: 5;
     backdrop-filter: blur(5px);
-
-    @media screen and (max-width: 37.5rem) {
-        top: 48px;
-    }
 
     >div {
         --padding: var(--space-normal);

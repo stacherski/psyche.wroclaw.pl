@@ -33,13 +33,14 @@ isHomepage: false
   </article>
 {% endif %}
 
-<div class="panel action">
+{# same booking button as the homepage hero and specialist pages (.btn__booksy) #}
+<div class="btn btn__booksy booksy-cta">
   <a
     href="https://booksy.com/pl-pl/36093_psycholog-centrum-psyche-gabinety-psychologiczne_zdrowie_13750_wroclaw"
     target="_blank"
-  >
-    Zarejestruj w Booksy do<br>{{ service.fullName }}
-  </a>
+    rel="noopener"
+    aria-label="Zarejestruj w Booksy: {{ service.fullName }}"
+  >Zarejestruj w Booksy</a>
 </div>
 
 <article class="_panel" style="display: grid; gap: var(--space-normal);">
