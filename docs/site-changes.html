@@ -56,7 +56,7 @@
 
 <h1>psyche.wroclaw.pl: how the site works and what changed</h1>
 <p class="lead">A plain-English guide to the Centrum PSYCHE website: how it's built, every larger change made so far, how to do the common jobs yourself, and what's still waiting for a decision.</p>
-<p class="meta">Covers the git history from April 2026 to 28 September 2026, up to and including the cookie banner.</p>
+<p class="meta">Covers the git history from April 2026 to 28 September 2026, up to and including related articles on service pages.</p>
 
 <nav class="toc" aria-label="Contents">
   <strong>Contents</strong>
@@ -269,7 +269,7 @@
 <h2 id="howto">9. How to do common jobs</h2>
 <dl class="how">
   <dt>Publish a new article</dt>
-  <dd>Add an entry to <code>src/_data/articles.json</code> with the next free <code>id</code> (never reuse a number), <code>"published": true</code>, <code>"ownArticle": "Yes"</code> and today's date. Add a line to <code>src/_data/articleServices.json</code> with the services it should link to.</dd>
+  <dd>Add an entry to <code>src/_data/articles.json</code> with the next free <code>id</code> (never reuse a number), <code>"published": true</code>, <code>"ownArticle": "Yes"</code> and today's date. Add a line to <code>src/_data/articleServices.json</code> with the services it relates to, main topic first: the article then links to those services at its end and appears in <em>"Artykuły na ten temat"</em> on their pages.</dd>
 
   <dt>Take an article off the site</dt>
   <dd>Set <code>"published": false</code>. Its address then goes to the article list, unless you add a better target to <code>articleRedirects.json</code>.</dd>
@@ -317,7 +317,7 @@
 <div class="table-wrap"><table>
   <tr><th>File or folder</th><th>What it holds</th></tr>
   <tr><td><code>src/_data/articles.json</code></td><td>All articles (published or not), with title, date, text and the <code>ownArticle</code> marker</td></tr>
-  <tr><td><code>src/_data/articleServices.json</code></td><td>Which services each article links to at its end</td></tr>
+  <tr><td><code>src/_data/articleServices.json</code></td><td>Which services each article relates to (main topic first): drives the block at the end of each article and the article list on each service page</td></tr>
   <tr><td><code>src/_data/articleRedirects.json</code></td><td>Where each unpublished (borrowed) article's address leads</td></tr>
   <tr><td><code>src/_data/redirects.json</code></td><td>Hand-picked redirects for anything else that moved</td></tr>
   <tr><td><code>src/_data/team.json</code>, <code>services.json</code>, <code>prices.json</code>, <code>locations.json</code></td><td>Specialists, services, price list, locations</td></tr>
