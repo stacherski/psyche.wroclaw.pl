@@ -62,28 +62,59 @@ ul.reviews {
     }
 }
 
-.reviews-summary {
+/* Average rating (partials/rating-summary.njk): homepage and /opinie/ */
+.rating-summary {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-half) var(--space-double);
+    width: fit-content;
+    max-width: 100%;
+    margin-block: var(--space-double);
+    margin-inline: auto;
+    padding: var(--space-normal) var(--space-double);
+    background-color: var(--clr-surface-raised);
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-panel);
+    box-shadow: var(--shadow-1);
     font-family: var(--font-regular);
 
-    .review-stars {
-        display: inline;
-        margin-inline-end: var(--space-half);
+    p {
+        margin: 0;
     }
 
-    strong {
-        font-size: var(--font-size-h4);
+    .rating-score {
+        display: flex;
+        align-items: baseline;
+        gap: var(--space-half);
+
+        strong {
+            font-family: var(--font-display);
+            font-size: var(--font-size-h2);
+            font-weight: var(--font-weight-h1);
+            line-height: 1;
+            color: var(--clr-text);
+        }
+
+        .review-stars {
+            font-size: var(--font-size-h4);
+        }
+    }
+
+    .rating-count {
+        color: var(--clr-text-2);
     }
 }
 
 .reviews-more {
     font-family: var(--font-regular);
     font-weight: var(--font-weight-ui);
+}
 
-    a {
-        color: var(--clr-base-strong);
-    }
+:is(.reviews-more a, a.reviews-more) {
+    color: var(--clr-base-strong);
 
-    a::after {
+    &::after {
         content: " →";
     }
 }

@@ -4,6 +4,9 @@
   {% if isHomepage %}
     <h2>Usługi w Centrum PSYCHE</h2>
     {% include "partials/services.njk" %}
+
+    {% set reviewsSummaryLink = true %}
+    {% include "partials/rating-summary.njk" %}
   {% endif %}
 </div>
 

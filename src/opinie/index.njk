@@ -11,10 +11,7 @@ isHomepage: false
 
 <h1>{{ pageTitle }}</h1>
 
-<p class="reviews-summary">
-  <span class="review-stars" aria-hidden="true">★★★★★</span>
-  <strong>{{ reviews | reviewsAverage }}</strong> na 5 na podstawie {{ reviews.length }} opinii z naszych profili w Google.
-</p>
+{% include "partials/rating-summary.njk" %}
 
 {% set reviewsContext = true %}
 {% include "partials/reviews.njk" %}

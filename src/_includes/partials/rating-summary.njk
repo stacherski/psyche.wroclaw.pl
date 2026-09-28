@@ -1,0 +1,11 @@
+{#- Average Google rating over all reviews (homepage, /opinie/). Set reviewsSummaryLink to link to /opinie/. -#}
+<div class="rating-summary">
+  <p class="rating-score">
+    <strong>{{ reviews | reviewsAverage }}</strong>
+    <span class="review-stars" aria-label="{{ reviews | reviewsAverage }} na 5 gwiazdek">★★★★★</span>
+  </p>
+  <p class="rating-count">Średnia ocena z {{ reviews.length }} opinii pacjentów w Google</p>
+  {% if reviewsSummaryLink %}
+    <a class="reviews-more" href="/opinie/">Przeczytaj opinie</a>
+  {% endif %}
+</div>
