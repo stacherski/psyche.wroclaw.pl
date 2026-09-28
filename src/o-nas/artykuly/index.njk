@@ -4,9 +4,8 @@ pageTitle: Artykuły
 postfix: Centrum PSYCHE Wrocław
 description: Psychologia w mediach, media w psychologii
 pagination:
-  data: articles
+  data: publishedArticles
   size: 15
-  filter: (item) => item.published === true
   addAllPagesToCollections: true
 permalink: /o-nas/artykuly/{% if pagination.pageNumber %}{{ pagination.pageNumber + 1 }}/{% endif %}index.html
 isHomepage: false

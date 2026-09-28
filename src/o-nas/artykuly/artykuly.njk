@@ -1,10 +1,9 @@
 ---
 pagination:
-  data: articles
+  data: publishedArticles
   size: 1
   alias: article
   addAllPagesToCollections: true
-  filter: (item) => item.published === true
 permalink: "/o-nas/artykuly/@{{ article.id }}/{{ article.urlTitle | slugify }}/index.html"
 layout: layouts/articles.njk
 eleventyComputed:
