@@ -176,14 +176,14 @@ module.exports = function (eleventyConfig) {
 
   // Google reviews (reviews.json) with text, newest first. A review naming a specialist
   // ("Team") shows on their page and on its service's page; one without only on the
-  // service's page; every one on /opinie/. Specialist and service pages show only
-  // the good ones (minStars).
+  // service's page; every one on /opinie/. Reviews below REVIEWS_MIN_STARS aren't
+  // shown anywhere, but still count in the average (reviewsAverage).
   const REVIEWS_MIN_STARS = 4;
   const same = (a, b) => (a || "").trim().toLowerCase() === (b || "").trim().toLowerCase();
   eleventyConfig.addFilter("reviewsFor", (reviews, { member, service } = {}) =>
     reviews
       .filter((review) => review.Review?.trim())
-      .filter((review) => !(member || service) || review.Stars >= REVIEWS_MIN_STARS)
+      .filter((review) => review.Stars >= REVIEWS_MIN_STARS)
       .filter((review) => !member || same(review.Team, member))
       .filter((review) => !service || same(review.service, service))
       .sort((a, b) => new Date(b.date) - new Date(a.date)),

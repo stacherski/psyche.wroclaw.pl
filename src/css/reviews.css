@@ -8,6 +8,11 @@ ul.reviews {
     column-gap: var(--space-normal);
 }
 
+/* as specific as main.css's ".page-content ul li" arrow bullet, and loaded later */
+ul.reviews > li {
+    list-style: none;
+}
+
 .review {
     break-inside: avoid;
     margin: 0 0 var(--space-normal);
