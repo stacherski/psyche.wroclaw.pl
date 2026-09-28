@@ -56,6 +56,15 @@ isHomepage: false
   </div>
 </div>
 
+{% set reviewsToDisplay = reviews | reviewsFor({ member: member.fullName }) %}
+{% if reviewsToDisplay.length %}
+  <article class="reviews-section">
+    <h3>Opinie pacjentów</h3>
+    {% set reviewsLimit = 6 %}
+    {% include "partials/reviews.njk" %}
+  </article>
+{% endif %}
+
 <article>
   <h3>Moje usługi w Centrum PSYCHE</h3>
   {% set teamMember = member.fullName %}

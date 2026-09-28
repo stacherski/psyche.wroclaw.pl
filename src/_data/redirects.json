@@ -55,11 +55,6 @@
     "note": "old homepage"
   },
   {
-    "from": "/opinie",
-    "to": "/",
-    "note": "old reviews page"
-  },
-  {
     "from": "/baza-wiedzy",
     "to": "/o-nas/artykuly/",
     "note": "old knowledge base"

@@ -1,0 +1,40 @@
+{#- Google reviews as cards. Set before including:
+    reviewsToDisplay – from the reviewsFor filter
+    reviewsLimit     – optional, show only the newest n and link to /opinie/
+    reviewsContext   – optional, name the specialist and service on each card (/opinie/) -#}
+{% set shown = reviewsToDisplay | head(reviewsLimit) if reviewsLimit else reviewsToDisplay %}
+<ul class="reviews">
+  {% for review in shown %}
+    <li class="review">
+      <p class="review-stars" aria-label="{{ review.Stars }} na 5 gwiazdek">
+        {%- for i in range(5) %}<span{% if i >= review.Stars %} class="off"{% endif %} aria-hidden="true">★</span>{% endfor -%}
+      </p>
+      <blockquote>
+        {% for paragraph in review.Review.split("\n") %}
+          {% if paragraph | trim %}<p>{{ paragraph | trim | escape }}</p>{% endif %}
+        {% endfor %}
+      </blockquote>
+      <p class="review-meta">
+        <span class="review-author">{{ review | reviewerName | escape }}</span>
+        <time datetime="{{ review.date }}">{{ review.date | dateDisplay }}</time>
+        {% if reviewsContext %}
+          {% set reviewMember = publishedTeam | byMember(review.Team | lower) | first %}
+          {% set reviewService = publishedServices | byServiceName(review.service) | first %}
+          {% if reviewMember or reviewService %}
+            <span class="review-about">
+              {%- if reviewMember %}<a href="/zespół/{{ reviewMember.fullName | slugify }}/">{{ reviewMember.fullName }}</a>{% endif -%}
+              {%- if reviewMember and reviewService %} · {% endif -%}
+              {%- if reviewService %}<a href="/oferta/{{ reviewService.fullName | slugify }}/">{{ reviewService.fullName }}</a>{% endif -%}
+            </span>
+          {% endif %}
+        {% endif %}
+        {% if review.Link %}
+          <a class="review-source" href="{{ review.Link }}" target="_blank" rel="noopener">Zobacz w Google</a>
+        {% endif %}
+      </p>
+    </li>
+  {% endfor %}
+</ul>
+{% if reviewsLimit and reviewsToDisplay.length > reviewsLimit %}
+  <p class="reviews-more"><a href="/opinie/">Wszystkie opinie o Centrum PSYCHE</a></p>
+{% endif %}

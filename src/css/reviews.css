@@ -1,0 +1,89 @@
+/* Google reviews (partials/reviews.njk): specialist pages, service pages and /opinie/ */
+
+ul.reviews {
+    list-style: none;
+    margin: var(--space-double) 0 0;
+    padding: 0;
+    columns: 20rem;
+    column-gap: var(--space-normal);
+}
+
+.review {
+    break-inside: avoid;
+    margin: 0 0 var(--space-normal);
+    padding: var(--space-normal) 1.25rem;
+    background-color: var(--clr-surface-raised);
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-1);
+
+    blockquote {
+        margin: var(--space-half) 0;
+        font-family: var(--font-text);
+        line-height: var(--line-height-body);
+        color: var(--clr-text);
+
+        p {
+            margin-block: 0 var(--space-half);
+        }
+    }
+}
+
+.review-stars {
+    margin: 0;
+    color: var(--clr-accent);
+    letter-spacing: .1em;
+
+    .off {
+        color: var(--clr-border);
+    }
+}
+
+.review-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-quarter) var(--space-half);
+    margin: 0;
+    font-family: var(--font-regular);
+    font-size: var(--font-size-small);
+    color: var(--clr-text-muted);
+
+    .review-author {
+        font-weight: var(--font-weight-ui);
+        color: var(--clr-text-2);
+    }
+
+    .review-about {
+        flex-basis: 100%;
+    }
+
+    a {
+        color: var(--clr-base-strong);
+    }
+}
+
+.reviews-summary {
+    font-family: var(--font-regular);
+
+    .review-stars {
+        display: inline;
+        margin-inline-end: var(--space-half);
+    }
+
+    strong {
+        font-size: var(--font-size-h4);
+    }
+}
+
+.reviews-more {
+    font-family: var(--font-regular);
+    font-weight: var(--font-weight-ui);
+
+    a {
+        color: var(--clr-base-strong);
+    }
+
+    a::after {
+        content: " →";
+    }
+}

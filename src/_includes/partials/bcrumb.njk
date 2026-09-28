@@ -53,6 +53,11 @@
           <a href="/cennik/">Cennik</a>
         </li>
       {% endif %}
+      {% if page.url and page.url.startsWith('/opinie') %}
+        <li>
+          <a href="/opinie/">Opinie</a>
+        </li>
+      {% endif %}
       {% if page.url and page.url.startsWith('/szukaj') %}
         <li>
           <a href="/szukaj/">Szukaj</a>

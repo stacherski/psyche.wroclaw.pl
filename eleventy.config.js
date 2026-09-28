@@ -174,6 +174,37 @@ module.exports = function (eleventyConfig) {
     return match ? match[1] : "";
   });
 
+  // Google reviews (reviews.json) with text, newest first. A review naming a specialist
+  // ("Team") shows on their page and on its service's page; one without only on the
+  // service's page; every one on /opinie/. Specialist and service pages show only
+  // the good ones (minStars).
+  const REVIEWS_MIN_STARS = 4;
+  const same = (a, b) => (a || "").trim().toLowerCase() === (b || "").trim().toLowerCase();
+  eleventyConfig.addFilter("reviewsFor", (reviews, { member, service } = {}) =>
+    reviews
+      .filter((review) => review.Review?.trim())
+      .filter((review) => !(member || service) || review.Stars >= REVIEWS_MIN_STARS)
+      .filter((review) => !member || same(review.Team, member))
+      .filter((review) => !service || same(review.service, service))
+      .sort((a, b) => new Date(b.date) - new Date(a.date)),
+  );
+
+  // "Karina Hoffmann-Zwolińska" → "Karina H."; a name without letters → "Pacjent"
+  eleventyConfig.addFilter("reviewerName", (review) => {
+    const [first, ...rest] = `${review.fullName} ${review.surname}`.trim().split(/\s+/);
+    if (!/\p{L}/u.test(first || "")) return "Pacjent";
+    const initial = rest.join(" ").match(/\p{L}/u)?.[0];
+    return first[0].toUpperCase() + first.slice(1) + (initial ? ` ${initial.toUpperCase()}.` : "");
+  });
+
+  // the service a review is about, by its full name
+  eleventyConfig.addFilter("byServiceName", (services, name) => services.filter((service) => same(service.fullName, name)));
+
+  // "4,8" average over all reviews, rating-only ones included
+  eleventyConfig.addFilter("reviewsAverage", (reviews) =>
+    (reviews.reduce((sum, review) => sum + review.Stars, 0) / reviews.length).toFixed(1).replace(".", ","),
+  );
+
   // FAQ entries for one service page (partials/faq.njk), with the answer split into
   // paragraphs and the sources of web-researched answers shortened to their domain
   eleventyConfig.addFilter("faqFor", (faq, slug) => {
@@ -457,6 +488,7 @@ module.exports = function (eleventyConfig) {
     regulamin: "Regulamin",
     "polityka-ochrony-małoletnich": "Polityka Ochrony Małoletnich",
     "najczestsze-pytania": "Najczęstsze pytania",
+    opinie: "Opinie",
     szukaj: "Szukaj",
   };
 

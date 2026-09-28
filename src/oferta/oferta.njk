@@ -151,6 +151,15 @@ isHomepage: false
   </article>
 {% endif %}
 
+{% set reviewsToDisplay = reviews | reviewsFor({ service: service.fullName }) %}
+{% if reviewsToDisplay.length %}
+  <article class="_panel reviews-section">
+    <h2>Opinie o usłudze <b>{{ title }}</b></h2>
+    {% set reviewsLimit = 6 %}
+    {% include "partials/reviews.njk" %}
+  </article>
+{% endif %}
+
 {% include "partials/faq.njk" %}
 
 <article class="_panel" style="display: grid; gap: var(--space-normal);">

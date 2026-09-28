@@ -37,6 +37,18 @@
             </a>
           </div>
         </li>
+        <li
+          level="2"
+          {% if page.url and page.url.startsWith('/opinie') %}
+            active
+          {% endif %}
+        >
+          <div class="l2 wrapper">
+            <a href="/opinie/">
+              <span>Opinie</span>
+            </a>
+          </div>
+        </li>
       </ul>
     </div>
   </li>

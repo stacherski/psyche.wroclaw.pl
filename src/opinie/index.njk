@@ -1,0 +1,20 @@
+---
+layout: layouts/sitelayout.njk
+title: Opinie
+pageTitle: Opinie pacjentów
+postfix: Centrum PSYCHE Wrocław
+description: Opinie pacjentów o Centrum PSYCHE we Wrocławiu – specjalistach, diagnozie, terapii i EEG Biofeedback – z naszych profili w Google.
+isHomepage: false
+---
+
+{% set reviewsToDisplay = reviews | reviewsFor %}
+
+<h1>{{ pageTitle }}</h1>
+
+<p class="reviews-summary">
+  <span class="review-stars" aria-hidden="true">★★★★★</span>
+  <strong>{{ reviews | reviewsAverage }}</strong> na 5 na podstawie {{ reviews.length }} opinii z naszych profili w Google.
+</p>
+
+{% set reviewsContext = true %}
+{% include "partials/reviews.njk" %}
