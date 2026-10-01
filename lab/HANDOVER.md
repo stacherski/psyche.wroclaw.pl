@@ -450,3 +450,17 @@ Tunables in `tokens.py`: `--card-fill-final` (colour), `--card-fill-duration`, `
 - Mirrored assets: all homepage images (AVIF/WebP/JPEG), the video poster, the MP4, the favicon, and the list-arrow SVG referenced from CSS.
 - External dependencies: Google Fonts (Raleway, plus Fraunces and Onest for B and C).
 - Direction A and B details, the full token table and every contrast ratio are in `design/proposal.html`.
+
+---
+
+## Concept B (2026-09-28): "umph" direction
+
+`lab/concepts/concept-b/` holds a standalone, responsive homepage concept (static HTML, not built by Eleventy, not wired to the site). Open `index.html` directly in a browser; the phone layout kicks in below 640px. `concept-b-desktop.png` and `concept-b-mobile.png` are renders of it.
+
+The idea: keep the site's order and one coral booking action, but let the brand's own assets carry the personality:
+- the logo's wings (psyche = soul and butterfly) as the hero's large gradient shape, with specialists' photos in blob masks and a 4,8 rating sticker;
+- Fraunces at poster size with the WONK axis on, one coral word per heading;
+- the four audience colours (ochre / sky / berry / sage) as the main navigation ("Dla kogo szukasz pomocy?") and as frames for the specialists' photos;
+- a tilted coral strip of real topics (ADHD, lęk, depresja, autyzm…).
+
+Copy lines ("Zacznijmy od rozmowy", "Ludzie, nie numerki", "Ja sam/a") are suggestions, not approved text. Photos and icons in `assets/` are copies from `src/media/` (portraits downscaled).
