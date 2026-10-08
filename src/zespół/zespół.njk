@@ -43,17 +43,19 @@ isHomepage: false
       >
       <div class="name">{{ member.fullName }}</div>
     </div>
-    <div class="spec"><h5>{{ member.specialization | safe }}</h5></div>
+    <div class="spec">
+      <h5>{{ member.specialization | safe }}</h5>
+      {% if member.onlineBooking == 'Yes' and member.booksyLink %}
+        {# same booking button as the homepage hero (.btn__booksy) #}
+        <div class="btn btn__booksy booksy-cta">
+          <a href="{{ member.booksyLink }}" target="_blank" rel="noopener"
+          >Zarejestruj w Booksy</a>
+        </div>
+      {% endif %}
+    </div>
   </div>
   <div>
     {{ member.bioPL | safe }}
-
-    {% if member.onlineBooking == 'Yes' and member.booksyLink %}
-      {# same booking button as the homepage hero (.btn__booksy) #}
-      <div class="btn btn__booksy booksy-cta">
-        <a href="{{ member.booksyLink }}" target="_blank" rel="noopener">Zarejestruj w Booksy</a>
-      </div>
-    {% endif %}
   </div>
 </div>
 
