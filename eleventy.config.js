@@ -222,6 +222,7 @@ module.exports = function (eleventyConfig) {
   // service's page; every one on /opinie/. Reviews below REVIEWS_MIN_STARS aren't
   // shown anywhere, but still count in the average (reviewsAverage).
   const REVIEWS_MIN_STARS = 4;
+  const REVIEWS_MIN_FOR_ENTITY = 3; // reviews a service or specialist needs for its own rating in JSON-LD
   const same = (a, b) => (a || "").trim().toLowerCase() === (b || "").trim().toLowerCase();
   eleventyConfig.addFilter("reviewsFor", (reviews, { member, service } = {}) =>
     reviews
@@ -247,6 +248,19 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter("reviewsAverage", (reviews) =>
     (reviews.reduce((sum, review) => sum + review.Stars, 0) / reviews.length).toFixed(1).replace(".", ","),
   );
+
+  // schema.org AggregateRating over reviews (rating-only ones included, as in reviewsAverage);
+  // nothing below `min` reviews, so a single review never stands in for a rating
+  const aggregateRating = (reviews, min = 1) =>
+    reviews.length >= min && {
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: (reviews.reduce((sum, review) => sum + review.Stars, 0) / reviews.length).toFixed(1),
+        bestRating: 5,
+        worstRating: 1,
+        ratingCount: reviews.length,
+      },
+    };
 
   // FAQ entries for one service page (partials/faq.njk), with the answer split into
   // paragraphs and the sources of web-researched answers shortened to their domain
@@ -354,7 +368,7 @@ module.exports = function (eleventyConfig) {
 
   // the clinic, both locations, opening hours, the phone registration hours
   // and the catalogue of services (each one described on its own page by serviceJsonLd)
-  eleventyConfig.addFilter("clinicJsonLd", (locations, services, prices) => {
+  eleventyConfig.addFilter("clinicJsonLd", (locations, services, prices, reviews) => {
     const day = (days, opens, closes) => ({
       "@type": "OpeningHoursSpecification",
       dayOfWeek: days,
@@ -394,6 +408,7 @@ module.exports = function (eleventyConfig) {
         "Prywatna poradnia zdrowia psychicznego i centrum psychoterapii we Wrocławiu: psycholog, psychoterapeuta, psycholog dziecięcy, logopeda, diagnoza (ADOS-2, DIVA-5, MMPI-2, QEEG) i EEG Biofeedback dla dzieci, młodzieży i dorosłych.",
       url: `${SITE}/`,
       logo: `${SITE}/media/psyche-logo-square.png`,
+      ...aggregateRating(reviews),
       telephone: "+48 668 093 234",
       email: "info@psyche.wroclaw.pl",
       sameAs: ["https://fb.me/centrumpsyche"],
@@ -460,7 +475,7 @@ module.exports = function (eleventyConfig) {
   );
 
   // one service (/oferta/…) with the prices listed in its Cennik table
-  eleventyConfig.addFilter("serviceJsonLd", (service, prices) => {
+  eleventyConfig.addFilter("serviceJsonLd", (service, prices, reviews) => {
     const url = serviceUrl(service);
     const names = splitList(service.prices);
     const offers = prices.filter((price) => names.includes(price.fullName.toLowerCase()));
@@ -474,6 +489,10 @@ module.exports = function (eleventyConfig) {
       ...(image && { image }),
       provider: ORG,
       areaServed: { "@type": "City", name: "Wrocław" },
+      ...aggregateRating(
+        reviews.filter((review) => same(review.service, service.fullName)),
+        REVIEWS_MIN_FOR_ENTITY,
+      ),
       ...(offers.length && {
         offers: offers.map((price) => ({
           "@type": "Offer",
@@ -487,7 +506,7 @@ module.exports = function (eleventyConfig) {
   });
 
   // one team member (/zespół/…) with the services listed under "Moje usługi"
-  eleventyConfig.addFilter("personJsonLd", (member, services) => {
+  eleventyConfig.addFilter("personJsonLd", (member, services, reviews) => {
     const url = memberUrl(member.fullName);
     const image = mediaUrl(member.photo);
     const offered = eleventyConfig.getFilter("byTeamMember")(services, member.fullName);
@@ -500,6 +519,10 @@ module.exports = function (eleventyConfig) {
       url,
       ...(image && { image }),
       worksFor: ORG,
+      ...aggregateRating(
+        reviews.filter((review) => same(review.Team, member.fullName)),
+        REVIEWS_MIN_FOR_ENTITY,
+      ),
       ...(offered.length && {
         knowsAbout: offered.map((service) => ({
           "@type": "Service",
@@ -527,6 +550,47 @@ module.exports = function (eleventyConfig) {
       author: article.author ? person(article.author, team) : clinic,
       publisher: { ...clinic, logo: `${SITE}/media/psyche-logo-square.png` },
       ...(article.sourceLink && { isBasedOn: article.sourceLink }),
+    });
+  });
+
+  // /najczestsze-pytania/: every FAQ entry of a published service in one FAQPage
+  eleventyConfig.addFilter("faqIndexJsonLd", (faq, services) => {
+    const slugs = services.map((service) => slugOf(service.fullName));
+    const items = faq.filter((item) => slugs.includes(item.service));
+    return ld({
+      "@type": "FAQPage",
+      mainEntity: items.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: { "@type": "Answer", text: item.answer.split(/\s+/).join(" ") },
+      })),
+    });
+  });
+
+  // a list page (/zespół/, /oferta/, /o-nas/artykuly/…) as a CollectionPage with an ItemList
+  // of what it lists; kind picks the items: team | services | articles
+  eleventyConfig.addFilter("collectionJsonLd", (kind, items, pageUrl, name, description) => {
+    const urlOf = {
+      team: (member) => memberUrl(member.fullName),
+      services: serviceUrl,
+      articles: (article) => abs(`/o-nas/artykuly/@${article.id}/${slugOf(article.urlTitle)}/`),
+    }[kind];
+    return ld({
+      "@type": "CollectionPage",
+      name,
+      ...(description && { description: plain(description) }),
+      url: abs(pageUrl),
+      inLanguage: "pl",
+      isPartOf: { "@id": `${SITE}/#website` },
+      mainEntity: {
+        "@type": "ItemList",
+        numberOfItems: items.length,
+        itemListElement: items.map((item, i) => ({
+          "@type": "ListItem",
+          position: i + 1,
+          url: urlOf(item),
+        })),
+      },
     });
   });
 

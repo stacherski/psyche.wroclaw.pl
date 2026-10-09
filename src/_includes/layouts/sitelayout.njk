@@ -39,7 +39,7 @@
     <script src="/script/cookieconsent.umd.js" defer></script>
     <script src="/script/consent.js" defer></script>
 
-    <script type="application/ld+json">{{ locations | clinicJsonLd(services, prices) | safe }}</script>
+    <script type="application/ld+json">{{ locations | clinicJsonLd(services, prices, reviews) | safe }}</script>
     {% if isHomepage %}
       <script type="application/ld+json">{% websiteJsonLd %}</script>
     {% else %}
@@ -47,10 +47,10 @@
     {% endif %}
 
     {% if service %}
-      <script type="application/ld+json">{{ service | serviceJsonLd(prices) | safe }}</script>
+      <script type="application/ld+json">{{ service | serviceJsonLd(prices, reviews) | safe }}</script>
     {% endif %}
     {% if member %}
-      <script type="application/ld+json">{{ member | personJsonLd(services) | safe }}</script>
+      <script type="application/ld+json">{{ member | personJsonLd(services, reviews) | safe }}</script>
     {% endif %}
     {% if article %}
       <script type="application/ld+json">{{ article | articleJsonLd(page.url, team) | safe }}</script>
@@ -61,6 +61,15 @@
       {% if faqs.length %}
         <script type="application/ld+json">{{ faqs | faqJsonLd(faqReview, service.fullName | slugify, team) | safe }}</script>
       {% endif %}
+    {% endif %}
+    {% if faqIndex %}
+      <script type="application/ld+json">{{ faq | faqIndexJsonLd(services | byPublished) | safe }}</script>
+    {% endif %}
+    {% if listing %}
+      {% if listing == "team" %}{% set listed = publishedTeam %}
+      {% elif listing == "services" %}{% set listed = services | bySorting | byPublished %}
+      {% else %}{% set listed = pagination.items %}{% endif %}
+      <script type="application/ld+json">{{ listing | collectionJsonLd(listed, page.url, pageTitle, description) | safe }}</script>
     {% endif %}
     {% if service or faqIndex %}
       <script src="/script/faq.js" defer></script>
