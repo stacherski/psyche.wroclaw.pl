@@ -222,7 +222,6 @@ module.exports = function (eleventyConfig) {
   // service's page; every one on /opinie/. Reviews below REVIEWS_MIN_STARS aren't
   // shown anywhere, but still count in the average (reviewsAverage).
   const REVIEWS_MIN_STARS = 4;
-  const REVIEWS_MIN_FOR_ENTITY = 3; // reviews a service or specialist needs for its own rating in JSON-LD
   const same = (a, b) => (a || "").trim().toLowerCase() === (b || "").trim().toLowerCase();
   eleventyConfig.addFilter("reviewsFor", (reviews, { member, service } = {}) =>
     reviews
@@ -249,10 +248,11 @@ module.exports = function (eleventyConfig) {
     (reviews.reduce((sum, review) => sum + review.Stars, 0) / reviews.length).toFixed(1).replace(".", ","),
   );
 
-  // schema.org AggregateRating over reviews (rating-only ones included, as in reviewsAverage);
-  // nothing below `min` reviews, so a single review never stands in for a rating
-  const aggregateRating = (reviews, min = 1) =>
-    reviews.length >= min && {
+  // schema.org AggregateRating over reviews (rating-only ones included, as in reviewsAverage).
+  // Only for the clinic: Search Console rejects it on Service and Person ("Invalid object
+  // type for field <parent_node>")
+  const aggregateRating = (reviews) =>
+    reviews.length > 0 && {
       aggregateRating: {
         "@type": "AggregateRating",
         ratingValue: (reviews.reduce((sum, review) => sum + review.Stars, 0) / reviews.length).toFixed(1),
@@ -475,7 +475,7 @@ module.exports = function (eleventyConfig) {
   );
 
   // one service (/oferta/…) with the prices listed in its Cennik table
-  eleventyConfig.addFilter("serviceJsonLd", (service, prices, reviews) => {
+  eleventyConfig.addFilter("serviceJsonLd", (service, prices) => {
     const url = serviceUrl(service);
     const names = splitList(service.prices);
     const offers = prices.filter((price) => names.includes(price.fullName.toLowerCase()));
@@ -489,10 +489,6 @@ module.exports = function (eleventyConfig) {
       ...(image && { image }),
       provider: ORG,
       areaServed: { "@type": "City", name: "Wrocław" },
-      ...aggregateRating(
-        reviews.filter((review) => same(review.service, service.fullName)),
-        REVIEWS_MIN_FOR_ENTITY,
-      ),
       ...(offers.length && {
         offers: offers.map((price) => ({
           "@type": "Offer",
@@ -506,7 +502,7 @@ module.exports = function (eleventyConfig) {
   });
 
   // one team member (/zespół/…) with the services listed under "Moje usługi"
-  eleventyConfig.addFilter("personJsonLd", (member, services, reviews) => {
+  eleventyConfig.addFilter("personJsonLd", (member, services) => {
     const url = memberUrl(member.fullName);
     const image = mediaUrl(member.photo);
     const offered = eleventyConfig.getFilter("byTeamMember")(services, member.fullName);
@@ -519,10 +515,6 @@ module.exports = function (eleventyConfig) {
       url,
       ...(image && { image }),
       worksFor: ORG,
-      ...aggregateRating(
-        reviews.filter((review) => same(review.Team, member.fullName)),
-        REVIEWS_MIN_FOR_ENTITY,
-      ),
       ...(offered.length && {
         knowsAbout: offered.map((service) => ({
           "@type": "Service",

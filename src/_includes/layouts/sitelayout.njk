@@ -47,10 +47,10 @@
     {% endif %}
 
     {% if service %}
-      <script type="application/ld+json">{{ service | serviceJsonLd(prices, reviews) | safe }}</script>
+      <script type="application/ld+json">{{ service | serviceJsonLd(prices) | safe }}</script>
     {% endif %}
     {% if member %}
-      <script type="application/ld+json">{{ member | personJsonLd(services, reviews) | safe }}</script>
+      <script type="application/ld+json">{{ member | personJsonLd(services) | safe }}</script>
     {% endif %}
     {% if article %}
       <script type="application/ld+json">{{ article | articleJsonLd(page.url, team) | safe }}</script>
